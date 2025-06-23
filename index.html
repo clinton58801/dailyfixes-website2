@@ -27,10 +27,8 @@
         .nav-link.active { color: #3b82f6; font-weight: bold; }
         .newsletter-section { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         .guide-content { max-height: none; }
-        .ai-thinking { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
         .print-friendly { page-break-inside: avoid; }
-         { .no-print { display: none !important; } }
+        @media print { .no-print { display: none !important; } }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -86,9 +84,6 @@
                     <button onclick="showCategorySelection()" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">
                         Start Fixing Now
                     </button>
-                    <button onclick="showAIHelp()" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700">
-                        Get AI Help <i class="fas fa-robot ml-2"></i>
-                    </button>
                 </div>
             </div>
 
@@ -118,41 +113,6 @@
                 </div>
             </div>
 
-            <!-- AI Help Interactive Section -->
-            <div id="ai-help-section" style="display: none;" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6 rounded-lg mb-8 shadow-lg no-print">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-robot text-3xl mr-4"></i>
-                    <div>
-                        <h3 class="text-2xl font-bold">🤖 AI DIY Assistant</h3>
-                        <p class="text-purple-200">Get instant AI-powered repair solutions</p>
-                    </div>
-                </div>
-                
-                <p class="mb-4">Describe your repair problem and get instant step-by-step solutions:</p>
-                
-                <textarea id="user-problem" 
-                          placeholder="Example: My kitchen faucet is dripping constantly and won't stop..." 
-                          class="w-full h-24 p-3 border border-purple-300 rounded-lg text-gray-800 mb-4 resize-none">
-                </textarea>
-                
-                <div class="flex gap-4 flex-wrap mb-4">
-                    <button onclick="getAIHelp()" 
-                            class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200">
-                        <i class="fas fa-magic mr-2"></i>Get AI Solution
-                    </button>
-                    
-                    <button onclick="closeAIHelp()" 
-                            class="bg-purple-700 text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition-all duration-200">
-                        <i class="fas fa-times mr-2"></i>Close
-                    </button>
-                </div>
-                
-                <div id="ai-response" style="display: none;" class="bg-white bg-opacity-20 p-4 rounded-lg backdrop-filter backdrop-blur-sm">
-                    <h4 class="text-lg font-bold mb-2">✨ AI Solution:</h4>
-                    <div id="ai-answer" class="text-purple-100"></div>
-                </div>
-            </div>
-
             <!-- AdSense Zone -->
             <div class="ad-zone mb-8 no-print">
                 <p class="text-gray-500">Google AdSense - Premium Ad Space</p>
@@ -164,28 +124,28 @@
                     <i class="fas fa-home text-4xl text-green-600 mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Home Fixes</h3>
                     <p class="text-gray-600">Plumbing, electrical, and household repairs</p>
-                    <p class="text-sm text-blue-600 mt-2">25+ Guides Available</p>
+                    <p class="text-sm text-blue-600 mt-2">50+ Guides Available</p>
                 </div>
                 
                 <div class="category-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showSection('auto-repairs')">
                     <i class="fas fa-car text-4xl text-red-600 mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Auto Repairs</h3>
                     <p class="text-gray-600">Car maintenance and basic repairs</p>
-                    <p class="text-sm text-blue-600 mt-2">25+ Guides Available</p>
+                    <p class="text-sm text-blue-600 mt-2">50+ Guides Available</p>
                 </div>
                 
                 <div class="category-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showSection('tech-help')">
                     <i class="fas fa-laptop text-4xl text-blue-600 mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Tech Help</h3>
                     <p class="text-gray-600">Computer, phone, and device fixes</p>
-                    <p class="text-sm text-blue-600 mt-2">25+ Guides Available</p>
+                    <p class="text-sm text-blue-600 mt-2">50+ Guides Available</p>
                 </div>
                 
                 <div class="category-card bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showSection('life-hacks')">
                     <i class="fas fa-lightbulb text-4xl text-yellow-600 mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">Life Hacks</h3>
                     <p class="text-gray-600">Cleaning, organizing, and daily tips</p>
-                    <p class="text-sm text-blue-600 mt-2">25+ Guides Available</p>
+                    <p class="text-sm text-blue-600 mt-2">50+ Guides Available</p>
                 </div>
             </div>
 
@@ -220,7 +180,7 @@
         <!-- Home Fixes Section -->
         <section id="home-fixes" class="section">
             <div class="flex justify-between items-center mb-8 no-print">
-                <h2 class="text-3xl font-bold">Home Fixes - 25 Essential Guides</h2>
+                <h2 class="text-3xl font-bold">Home Fixes - 50 Essential Guides</h2>
                 <div class="flex gap-4">
                     <button onclick="downloadCategoryPDF('home-fixes')" class="bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700">
                         <i class="fas fa-download mr-2"></i>Download All PDFs
@@ -243,7 +203,7 @@
         <!-- Auto Repairs Section -->
         <section id="auto-repairs" class="section">
             <div class="flex justify-between items-center mb-8 no-print">
-                <h2 class="text-3xl font-bold">Auto Repairs - 25 Essential Guides</h2>
+                <h2 class="text-3xl font-bold">Auto Repairs - 50 Essential Guides</h2>
                 <div class="flex gap-4">
                     <button onclick="downloadCategoryPDF('auto-repairs')" class="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700">
                         <i class="fas fa-download mr-2"></i>Download All PDFs
@@ -266,7 +226,7 @@
         <!-- Tech Help Section -->
         <section id="tech-help" class="section">
             <div class="flex justify-between items-center mb-8 no-print">
-                <h2 class="text-3xl font-bold">Tech Help - 25 Essential Guides</h2>
+                <h2 class="text-3xl font-bold">Tech Help - 50 Essential Guides</h2>
                 <div class="flex gap-4">
                     <button onclick="downloadCategoryPDF('tech-help')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700">
                         <i class="fas fa-download mr-2"></i>Download All PDFs
@@ -289,7 +249,7 @@
         <!-- Life Hacks Section -->
         <section id="life-hacks" class="section">
             <div class="flex justify-between items-center mb-8 no-print">
-                <h2 class="text-3xl font-bold">Life Hacks - 25 Essential Guides</h2>
+                <h2 class="text-3xl font-bold">Life Hacks - 50 Essential Guides</h2>
                 <div class="flex gap-4">
                     <button onclick="downloadCategoryPDF('life-hacks')" class="bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700">
                         <i class="fas fa-download mr-2"></i>Download All PDFs
@@ -327,15 +287,14 @@
 
             <div class="bg-white p-8 rounded-lg shadow-lg mb-8 print-friendly">
                 <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                <p class="text-gray-600 mb-6">DailyFixes.com is dedicated to empowering DIY enthusiasts with comprehensive, easy-to-follow repair guides. We provide 100 detailed repair guides across 4 categories, each with downloadable PDF versions for offline access.</p>
+                <p class="text-gray-600 mb-6">DailyFixes.com is dedicated to empowering DIY enthusiasts with comprehensive, easy-to-follow repair guides. We provide 200 detailed repair guides across 4 categories, each with downloadable PDF versions for offline access.</p>
                 
                 <h3 class="text-2xl font-bold mb-4">What We Offer</h3>
                 <ul class="text-gray-600 mb-6 space-y-2">
-                    <li><i class="fas fa-check text-green-600 mr-2"></i>25 Home Repair Guides</li>
-                    <li><i class="fas fa-check text-green-600 mr-2"></i>25 Auto Repair Guides</li>
-                    <li><i class="fas fa-check text-green-600 mr-2"></i>25 Tech Help Guides</li>
-                    <li><i class="fas fa-check text-green-600 mr-2"></i>25 Life Hack Guides</li>
-                    <li><i class="fas fa-check text-green-600 mr-2"></i>AI-Powered Interactive Help</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i>50 Home Repair Guides</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i>50 Auto Repair Guides</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i>50 Tech Help Guides</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i>50 Life Hack Guides</li>
                     <li><i class="fas fa-check text-green-600 mr-2"></i>PDF Downloads for All Guides</li>
                 </ul>
                 
@@ -373,15 +332,15 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">DailyFixes.com</h3>
-                    <p class="text-gray-300">Your trusted source for DIY repair guides with 100+ comprehensive guides.</p>
+                    <p class="text-gray-300">Your trusted source for DIY repair guides with 200+ comprehensive guides.</p>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Categories</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="#" onclick="showSection('home-fixes')" class="hover:text-white">Home Fixes (25)</a></li>
-                        <li><a href="#" onclick="showSection('auto-repairs')" class="hover:text-white">Auto Repairs (25)</a></li>
-                        <li><a href="#" onclick="showSection('tech-help')" class="hover:text-white">Tech Help (25)</a></li>
-                        <li><a href="#" onclick="showSection('life-hacks')" class="hover:text-white">Life Hacks (25)</a></li>
+                        <li><a href="#" onclick="showSection('home-fixes')" class="hover:text-white">Home Fixes (50)</a></li>
+                        <li><a href="#" onclick="showSection('auto-repairs')" class="hover:text-white">Auto Repairs (50)</a></li>
+                        <li><a href="#" onclick="showSection('tech-help')" class="hover:text-white">Tech Help (50)</a></li>
+                        <li><a href="#" onclick="showSection('life-hacks')" class="hover:text-white">Life Hacks (50)</a></li>
                     </ul>
                 </div>
                 <div>
@@ -389,7 +348,6 @@
                     <ul class="space-y-2 text-gray-300">
                         <li><a href="#" onclick="showSection('about')" class="hover:text-white">About Us</a></li>
                         <li><a href="https://genspark.ai/signup?ref=clinton" target="_blank" class="hover:text-white">AI Tools</a></li>
-                        <li><a href="#" onclick="showAIHelp()" class="hover:text-white">AI Assistant</a></li>
                     </ul>
                 </div>
                 <div>
@@ -409,1188 +367,100 @@
     </footer>
 
     <script>
-        // Guide Database - 25 guides per category
+        // Guide Database - 50 guides per category
         const guideDatabase = {
             'home-fixes': [
-                {id: 'leaky-faucet', title: 'Fix a Leaky Faucet', icon: 'fas fa-faucet', difficulty: 'Easy', time: '30 min', description: 'Stop that annoying drip and save water', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Adjustable wrench</li><li>Screwdriver</li><li>Replacement washers/O-rings</li><li>Plumber's grease</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off water supply:</strong> Locate shutoff valves under the sink and turn clockwise</li>
-                        <li><strong>Remove faucet handle:</strong> Unscrew the handle using appropriate screwdriver</li>
-                        <li><strong>Remove packing nut:</strong> Use adjustable wrench to remove the large nut</li>
-                        <li><strong>Remove stem:</strong> Pull out the valve stem assembly</li>
-                        <li><strong>Replace washers:</strong> Remove old washer and O-ring, replace with new ones</li>
-                        <li><strong>Apply grease:</strong> Coat new parts with plumber's grease</li>
-                        <li><strong>Reassemble:</strong> Reverse the disassembly process</li>
-                        <li><strong>Test:</strong> Turn water back on and check for leaks</li>
-                    </ol>
-                    <h3>Pro Tips:</h3>
-                    <p>Take photos during disassembly to remember the order. Bring old parts to hardware store for exact matches.</p>
-                `},
-                {id: 'patch-drywall', title: 'Patch Drywall Holes', icon: 'fas fa-hammer', difficulty: 'Medium', time: '2 hours', description: 'Professional-looking wall repairs made simple', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Drywall patch kit</li><li>Putty knife</li><li>Sandpaper</li><li>Paint</li><li>Primer</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean the area:</strong> Remove loose debris around the hole</li>
-                        <li><strong>Apply patch:</strong> Place self-adhesive patch over hole</li>
-                        <li><strong>First coat:</strong> Apply thin layer of compound with putty knife</li>
-                        <li><strong>Let dry:</strong> Allow 24 hours for complete drying</li>
-                        <li><strong>Sand smooth:</strong> Use fine sandpaper to smooth surface</li>
-                        <li><strong>Second coat:</strong> Apply another thin layer if needed</li>
-                        <li><strong>Prime and paint:</strong> Apply primer then matching paint</li>
-                    </ol>
-                    <h3>Pro Tips:</h3>
-                    <p>Feather edges of compound to blend with wall. Use light coats to avoid visible seams.</p>
-                `},
-                {id: 'unclog-toilet', title: 'Unclog a Toilet', icon: 'fas fa-toilet', difficulty: 'Easy', time: '15 min', description: 'Multiple methods to handle any clog situation', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Toilet plunger</li><li>Rubber gloves</li><li>Bucket</li><li>Toilet auger (if needed)</li></ul>
-                    <h3>Method 1 - Plunging:</h3>
-                    <ol>
-                        <li><strong>Use right plunger:</strong> Ensure you have a toilet plunger (flange bottom)</li>
-                        <li><strong>Create seal:</strong> Place plunger over drain hole, ensure good seal</li>
-                        <li><strong>Plunge vigorously:</strong> Push and pull forcefully 15-20 times</li>
-                        <li><strong>Test flush:</strong> Try flushing to see if clog is cleared</li>
-                    </ol>
-                    <h3>Method 2 - Hot Water and Dish Soap:</h3>
-                    <ol>
-                        <li><strong>Add soap:</strong> Squirt generous amount of dish soap into bowl</li>
-                        <li><strong>Add hot water:</strong> Pour hot (not boiling) water from waist height</li>
-                        <li><strong>Wait:</strong> Let sit for 20 minutes</li>
-                        <li><strong>Flush:</strong> Try flushing the toilet</li>
-                    </ol>
-                `},
-                {id: 'replace-light-switch', title: 'Replace Light Switch', icon: 'fas fa-lightbulb', difficulty: 'Medium', time: '45 min', description: 'Safe electrical work for beginners', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Turn off power at circuit breaker before starting. Test with voltage tester.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Screwdriver set</li><li>Voltage tester</li><li>Wire nuts</li><li>New switch</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off power:</strong> Switch off circuit breaker, test with voltage tester</li>
-                        <li><strong>Remove old switch:</strong> Unscrew and carefully pull out old switch</li>
-                        <li><strong>Identify wires:</strong> Note which wire goes where (take photo)</li>
-                        <li><strong>Disconnect wires:</strong> Remove wires from old switch terminals</li>
-                        <li><strong>Connect new switch:</strong> Attach wires to corresponding terminals</li>
-                        <li><strong>Secure switch:</strong> Push switch into box and screw in place</li>
-                        <li><strong>Test:</strong> Turn power back on and test switch</li>
-                    </ol>
-                `},
-                {id: 'running-toilet', title: 'Fix Running Toilet', icon: 'fas fa-toilet-paper', difficulty: 'Easy', time: '20 min', description: 'Stop water waste and noise', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Adjustable wrench</li><li>Replacement flapper (if needed)</li><li>Chain</li></ul>
-                    <h3>Common Causes and Fixes:</h3>
-                    <h4>1. Flapper Issues:</h4>
-                    <ul>
-                        <li>Check if flapper seals properly</li>
-                        <li>Clean rim of flush valve seat</li>
-                        <li>Replace warped or cracked flapper</li>
-                    </ul>
-                    <h4>2. Chain Problems:</h4>
-                    <ul>
-                        <li>Adjust chain length - should have slight slack</li>
-                        <li>Ensure chain doesn't catch under flapper</li>
-                    </ul>
-                    <h4>3. Water Level:</h4>
-                    <ul>
-                        <li>Bend float arm to adjust water level</li>
-                        <li>Water should be 1 inch below rim</li>
-                    </ul>
-                `},
-                {id: 'caulk-bathtub', title: 'Caulk a Bathtub', icon: 'fas fa-bath', difficulty: 'Medium', time: '1 hour', description: 'Professional-looking seal job', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Caulk gun</li><li>Silicone caulk</li><li>Utility knife</li><li>Caulk smoothing tool</li><li>Painter's tape</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Remove old caulk:</strong> Use utility knife to cut and remove all old caulk</li>
-                        <li><strong>Clean area:</strong> Thoroughly clean with rubbing alcohol</li>
-                        <li><strong>Apply tape:</strong> Place painter's tape 1/8" from joint on both sides</li>
-                        <li><strong>Apply caulk:</strong> Cut tip at 45-degree angle, apply steady bead</li>
-                        <li><strong>Smooth joint:</strong> Use finger or smoothing tool to create even seal</li>
-                        <li><strong>Remove tape:</strong> Pull tape away while caulk is still wet</li>
-                        <li><strong>Let cure:</strong> Allow 24 hours before using shower</li>
-                    </ol>
-                `},
-                {id: 'squeaky-door', title: 'Fix Squeaky Door Hinges', icon: 'fas fa-door-open', difficulty: 'Easy', time: '10 min', description: 'Eliminate annoying door squeaks', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>3-in-1 oil or WD-40</li><li>Clean cloth</li><li>Cotton swabs</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean hinges:</strong> Wipe away dirt and debris</li>
-                        <li><strong>Apply lubricant:</strong> Spray or drop oil on hinge pins and pivot points</li>
-                        <li><strong>Work the door:</strong> Open and close door several times</li>
-                        <li><strong>Wipe excess:</strong> Clean off any excess oil with cloth</li>
-                    </ol>
-                `},
-                {id: 'garbage-disposal', title: 'Unclog Garbage Disposal', icon: 'fas fa-trash', difficulty: 'Medium', time: '30 min', description: 'Safely clear disposal blockages', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Never put hands in disposal. Always turn off power first.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Flashlight</li><li>Tongs or pliers</li><li>Hex wrench (usually included with disposal)</li><li>Ice cubes</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off power:</strong> Switch off at wall and circuit breaker</li>
-                        <li><strong>Look for objects:</strong> Use flashlight to check for visible blockages</li>
-                        <li><strong>Remove debris:</strong> Use tongs to remove any visible objects</li>
-                        <li><strong>Manual crank:</strong> Use hex wrench to manually turn disposal from bottom</li>
-                        <li><strong>Reset:</strong> Press reset button on bottom of unit</li>
-                        <li><strong>Test:</strong> Turn power back on and test with water running</li>
-                    </ol>
-                `},
-                {id: 'loose-doorknob', title: 'Tighten Loose Doorknob', icon: 'fas fa-door-closed', difficulty: 'Easy', time: '15 min', description: 'Secure wobbly door handles', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Screwdriver set</li><li>Allen wrench set</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Identify type:</strong> Look for visible screws or hidden set screws</li>
-                        <li><strong>Tighten visible screws:</strong> If screws are visible, simply tighten them</li>
-                        <li><strong>Find set screws:</strong> Look for small holes on the side of handle</li>
-                        <li><strong>Tighten set screws:</strong> Use appropriate Allen wrench</li>
-                        <li><strong>Test operation:</strong> Check that handle turns smoothly</li>
-                    </ol>
-                `},
-                {id: 'cabinet-door', title: 'Fix Sagging Cabinet Door', icon: 'fas fa-clipboard', difficulty: 'Medium', time: '45 min', description: 'Adjust cabinet door alignment', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Screwdriver</li><li>Drill</li><li>Wood screws</li><li>Shims</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Check hinges:</strong> Look for loose or damaged hinges</li>
-                        <li><strong>Tighten screws:</strong> Tighten all hinge screws</li>
-                        <li><strong>Adjust hinges:</strong> Most modern hinges have adjustment screws</li>
-                        <li><strong>Add support:</strong> Install additional screws if needed</li>
-                        <li><strong>Use shims:</strong> Place shims behind hinges if door frame is warped</li>
-                    </ol>
-                `},
-                {id: 'sticky-window', title: 'Fix Sticky Windows', icon: 'fas fa-window-maximize', difficulty: 'Medium', time: '30 min', description: 'Make windows slide smoothly', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Soap bar</li><li>Vacuum</li><li>Brush</li><li>Lubricant spray</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean tracks:</strong> Vacuum debris from window tracks</li>
-                        <li><strong>Scrub tracks:</strong> Use brush to remove stubborn dirt</li>
-                        <li><strong>Lubricate:</strong> Rub soap bar on tracks or spray with lubricant</li>
-                        <li><strong>Work window:</strong> Open and close several times</li>
-                        <li><strong>Check weather stripping:</strong> Replace if worn or damaged</li>
-                    </ol>
-                `},
-                {id: 'ceiling-fan', title: 'Install Ceiling Fan', icon: 'fas fa-fan', difficulty: 'Hard', time: '2 hours', description: 'Complete ceiling fan installation', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Turn off power at circuit breaker. Use voltage tester.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Drill</li><li>Wire nuts</li><li>Ceiling fan mounting box</li><li>Ladder</li><li>Voltage tester</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off power:</strong> Switch off at breaker, test wires</li>
-                        <li><strong>Remove old fixture:</strong> Carefully disconnect and remove</li>
-                        <li><strong>Install mounting box:</strong> Ensure it's rated for fan weight</li>
-                        <li><strong>Install mounting bracket:</strong> Secure to ceiling box</li>
-                        <li><strong>Assemble fan:</strong> Follow manufacturer's instructions</li>
-                        <li><strong>Connect wires:</strong> Match colors: black to black, white to white, green to ground</li>
-                        <li><strong>Mount fan:</strong> Hang fan on bracket</li>
-                        <li><strong>Test:</strong> Turn power on and test all functions</li>
-                    </ol>
-                `},
-                {id: 'water-heater', title: 'Drain Water Heater', icon: 'fas fa-fire', difficulty: 'Medium', time: '1 hour', description: 'Annual maintenance to extend life', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Garden hose</li><li>Screwdriver</li><li>Gloves</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off power:</strong> Electric: breaker, Gas: pilot light</li>
-                        <li><strong>Turn off water:</strong> Close cold water supply valve</li>
-                        <li><strong>Connect hose:</strong> Attach hose to drain valve at bottom</li>
-                        <li><strong>Open hot taps:</strong> Turn on hot water faucets in house</li>
-                        <li><strong>Open drain valve:</strong> Let water drain completely</li>
-                        <li><strong>Flush tank:</strong> Turn water supply on briefly to flush sediment</li>
-                        <li><strong>Refill:</strong> Close drain, turn on water supply</li>
-                        <li><strong>Restart:</strong> Turn power back on when tank is full</li>
-                    </ol>
-                `},
-                {id: 'outlet-replacement', title: 'Replace Electrical Outlet', icon: 'fas fa-plug', difficulty: 'Medium', time: '30 min', description: 'Update old or damaged outlets', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Turn off power at circuit breaker. Test with voltage tester.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Screwdriver</li><li>Voltage tester</li><li>Wire nuts</li><li>New outlet</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off power:</strong> Switch off circuit breaker</li>
-                        <li><strong>Test power:</strong> Use voltage tester to confirm power is off</li>
-                        <li><strong>Remove old outlet:</strong> Unscrew and pull out</li>
-                        <li><strong>Note wire connections:</strong> Take photo of wire arrangement</li>
-                        <li><strong>Connect new outlet:</strong> Attach wires to corresponding terminals</li>
-                        <li><strong>Secure outlet:</strong> Push into box and screw in place</li>
-                        <li><strong>Test:</strong> Turn power on and test with device</li>
-                    </ol>
-                `},
-                {id: 'smoke-detector', title: 'Replace Smoke Detector Battery', icon: 'fas fa-bell', difficulty: 'Easy', time: '10 min', description: 'Essential safety maintenance', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>New 9V battery</li><li>Step ladder</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Remove detector:</strong> Twist counterclockwise to remove from mounting</li>
-                        <li><strong>Open battery compartment:</strong> Slide or lift cover</li>
-                        <li><strong>Remove old battery:</strong> Note positive/negative orientation</li>
-                        <li><strong>Install new battery:</strong> Connect positive and negative correctly</li>
-                        <li><strong>Test detector:</strong> Press test button to verify operation</li>
-                        <li><strong>Reinstall:</strong> Twist back onto mounting bracket</li>
-                    </ol>
-                    <h3>Pro Tips:</h3>
-                    <p>Change batteries when clocks change for daylight saving time. Test monthly.</p>
-                `},
-                {id: 'clogged-drain', title: 'Clear Clogged Sink Drain', icon: 'fas fa-sink', difficulty: 'Easy', time: '20 min', description: 'Natural methods to clear blockages', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Baking soda</li><li>White vinegar</li><li>Hot water</li><li>Plunger</li><li>Snake or wire coat hanger</li></ul>
-                    <h3>Method 1 - Natural Cleaning:</h3>
-                    <ol>
-                        <li><strong>Remove standing water:</strong> Bail out any standing water</li>
-                        <li><strong>Add baking soda:</strong> Pour 1 cup down drain</li>
-                        <li><strong>Add vinegar:</strong> Pour 1 cup white vinegar down drain</li>
-                        <li><strong>Wait:</strong> Let sit for 30 minutes</li>
-                        <li><strong>Flush with hot water:</strong> Pour boiling water down drain</li>
-                    </ol>
-                    <h3>Method 2 - Physical Removal:</h3>
-                    <ol>
-                        <li><strong>Use snake:</strong> Insert drain snake and twist to grab debris</li>
-                        <li><strong>Plunge:</strong> Use sink plunger to create pressure</li>
-                    </ol>
-                `},
-                {id: 'thermostat', title: 'Program Thermostat', icon: 'fas fa-thermometer-half', difficulty: 'Easy', time: '20 min', description: 'Save energy with proper programming', content: `
-                    <h3>Basic Programming Steps:</h3>
-                    <ol>
-                        <li><strong>Set current time:</strong> Use up/down arrows or +/- buttons</li>
-                        <li><strong>Set weekday schedule:</strong> Program morning, day, evening, and night temperatures</li>
-                        <li><strong>Set weekend schedule:</strong> Usually different from weekday</li>
-                        <li><strong>Enable program mode:</strong> Switch from "hold" to "program" or "auto"</li>
-                    </ol>
-                    <h3>Energy Saving Tips:</h3>
-                    <ul>
-                        <li>Lower temperature 7-10°F when away</li>
-                        <li>Avoid frequent manual overrides</li>
-                        <li>Change temperature gradually</li>
-                    </ul>
-                `},
-                {id: 'grout-repair', title: 'Repair Bathroom Grout', icon: 'fas fa-brush', difficulty: 'Medium', time: '2 hours', description: 'Restore tile grout lines', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Grout removal tool</li><li>New grout</li><li>Grout float</li><li>Sponge</li><li>Grout sealer</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Remove old grout:</strong> Use grout removal tool to scrape out damaged areas</li>
-                        <li><strong>Clean area:</strong> Vacuum debris and wipe clean</li>
-                        <li><strong>Mix new grout:</strong> Follow package directions for proper consistency</li>
-                        <li><strong>Apply grout:</strong> Use float to press grout into joints at 45-degree angle</li>
-                        <li><strong>Clean excess:</strong> Wipe diagonally with damp sponge</li>
-                        <li><strong>Let cure:</strong> Allow 24 hours before sealing</li>
-                        <li><strong>Apply sealer:</strong> Use grout sealer to protect new grout</li>
-                    </ol>
-                `},
-                {id: 'weatherstrip', title: 'Install Weather Stripping', icon: 'fas fa-wind', difficulty: 'Easy', time: '45 min', description: 'Improve energy efficiency', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Weather stripping</li><li>Scissors or utility knife</li><li>Measuring tape</li><li>Staple gun (for some types)</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean surfaces:</strong> Remove old weather stripping and clean thoroughly</li>
-                        <li><strong>Measure openings:</strong> Measure all sides that need sealing</li>
-                        <li><strong>Cut strips:</strong> Cut weather stripping to proper lengths</li>
-                        <li><strong>Install strips:</strong> Apply adhesive-backed strips or staple in place</li>
-                        <li><strong>Test door/window:</strong> Ensure proper fit without binding</li>
-                        <li><strong>Adjust if needed:</strong> Trim or reposition for smooth operation</li>
-                    </ol>
-                `},
-                {id: 'faucet-aerator', title: 'Clean Faucet Aerator', icon: 'fas fa-tint', difficulty: 'Easy', time: '15 min', description: 'Improve water flow and pressure', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Adjustable wrench</li><li>Old toothbrush</li><li>White vinegar</li><li>Small bowl</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Remove aerator:</strong> Unscrew from end of faucet (turn counterclockwise)</li>
-                        <li><strong>Disassemble:</strong> Take apart all pieces, noting order</li>
-                        <li><strong>Soak in vinegar:</strong> Place parts in bowl with white vinegar for 30 minutes</li>
-                        <li><strong>Scrub parts:</strong> Use toothbrush to remove mineral deposits</li>
-                        <li><strong>Rinse thoroughly:</strong> Rinse all parts with clean water</li>
-                        <li><strong>Reassemble:</strong> Put parts back together in reverse order</li>
-                        <li><strong>Reinstall:</strong> Screw back onto faucet (hand-tight plus 1/4 turn)</li>
-                    </ol>
-                `},
-                {id: 'showerhead', title: 'Clean Showerhead', icon: 'fas fa-shower', difficulty: 'Easy', time: '30 min', description: 'Remove mineral buildup for better flow', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Plastic bag</li><li>White vinegar</li><li>Rubber band</li><li>Old toothbrush</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Fill bag with vinegar:</strong> Use enough to submerge showerhead</li>
-                        <li><strong>Attach to showerhead:</strong> Secure bag with rubber band</li>
-                        <li><strong>Let soak:</strong> Leave overnight or at least 4 hours</li>
-                        <li><strong>Remove bag:</strong> Carefully remove and dispose of vinegar</li>
-                        <li><strong>Scrub:</strong> Use toothbrush to remove remaining deposits</li>
-                        <li><strong>Run water:</strong> Turn on shower to flush out loose debris</li>
-                    </ol>
-                `},
-                {id: 'garage-door', title: 'Lubricate Garage Door', icon: 'fas fa-warehouse', difficulty: 'Easy', time: '20 min', description: 'Maintain smooth operation', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Garage door lubricant</li><li>Clean rags</li><li>Step ladder</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Close door:</strong> Ensure door is fully closed</li>
-                        <li><strong>Clean tracks:</strong> Wipe debris from tracks (don't lubricate tracks)</li>
-                        <li><strong>Lubricate hinges:</strong> Apply small amount to all hinges</li>
-                        <li><strong>Lubricate rollers:</strong> Apply to roller bearings, not plastic parts</li>
-                        <li><strong>Lubricate springs:</strong> Spray torsion springs lightly</li>
-                        <li><strong>Operate door:</strong> Open and close several times to distribute lubricant</li>
-                    </ol>
-                `},
-                {id: 'paint-prep', title: 'Prepare Walls for Painting', icon: 'fas fa-paint-roller', difficulty: 'Medium', time: '3 hours', description: 'Professional prep for perfect results', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Sandpaper</li><li>Spackling compound</li><li>Putty knife</li><li>Primer</li><li>Drop cloths</li><li>Painter's tape</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean walls:</strong> Wash with mild detergent and let dry</li>
-                        <li><strong>Fill holes:</strong> Apply spackling compound to nail holes and cracks</li>
-                        <li><strong>Sand smooth:</strong> Sand filled areas and any rough spots</li>
-                        <li><strong>Apply primer:</strong> Prime all repaired areas and new surfaces</li>
-                        <li><strong>Protect surfaces:</strong> Lay drop cloths and apply painter's tape</li>
-                        <li><strong>Final inspection:</strong> Check for missed spots or imperfections</li>
-                    </ol>
-                `},
-                {id: 'deck-stain', title: 'Stain a Deck', icon: 'fas fa-home', difficulty: 'Hard', time: '6 hours', description: 'Protect and beautify outdoor wood', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Pressure washer or scrub brush</li><li>Deck stain</li><li>Brush and roller</li><li>Drop cloths</li><li>Deck cleaner</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean deck:</strong> Pressure wash or scrub with deck cleaner</li>
-                        <li><strong>Let dry:</strong> Allow 48 hours for complete drying</li>
-                        <li><strong>Sand if needed:</strong> Sand rough or splintered areas</li>
-                        <li><strong>Protect plants:</strong> Cover nearby vegetation</li>
-                        <li><strong>Apply stain:</strong> Work in manageable sections, maintain wet edge</li>
-                        <li><strong>Back-brush:</strong> Brush stain into wood grain</li>
-                        <li><strong>Clean up:</strong> Remove excess stain and clean tools</li>
-                    </ol>
-                `},
-                {id: 'gutter-clean', title: 'Clean Gutters', icon: 'fas fa-cloud-rain', difficulty: 'Medium', time: '2 hours', description: 'Prevent water damage with regular maintenance', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Ladder</li><li>Gloves</li><li>Scoop or trowel</li><li>Garden hose</li><li>Bucket</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Safety first:</strong> Use stable ladder, have someone spot you</li>
-                        <li><strong>Remove debris:</strong> Scoop out leaves and debris by hand</li>
-                        <li><strong>Check downspouts:</strong> Ensure water flows freely</li>
-                        <li><strong>Flush with water:</strong> Use hose to check for proper drainage</li>
-                        <li><strong>Inspect for damage:</strong> Look for rust, holes, or loose connections</li>
-                        <li><strong>Make repairs:</strong> Seal small holes with gutter sealant</li>
-                    </ol>
-                `}
+                {id: 'leaky-faucet', title: 'Fix a Leaky Faucet', icon: 'fas fa-faucet', difficulty: 'Easy', time: '30 min', description: 'Stop that annoying drip and save water', content: `<h3>Tools Needed:</h3><ul><li>Adjustable wrench</li><li>Screwdriver</li><li>Replacement washers/O-rings</li><li>Plumber's grease</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off water supply:</strong> Locate shutoff valves under the sink and turn clockwise</li><li><strong>Remove faucet handle:</strong> Unscrew the handle using appropriate screwdriver</li><li><strong>Remove packing nut:</strong> Use adjustable wrench to remove the large nut</li><li><strong>Remove stem:</strong> Pull out the valve stem assembly</li><li><strong>Replace washers:</strong> Remove old washer and O-ring, replace with new ones</li><li><strong>Apply grease:</strong> Coat new parts with plumber's grease</li><li><strong>Reassemble:</strong> Reverse the disassembly process</li><li><strong>Test:</strong> Turn water back on and check for leaks</li></ol>`},
+                {id: 'patch-drywall', title: 'Patch Drywall Holes', icon: 'fas fa-hammer', difficulty: 'Medium', time: '2 hours', description: 'Professional-looking wall repairs made simple', content: `<h3>Tools Needed:</h3><ul><li>Drywall patch kit</li><li>Putty knife</li><li>Sandpaper</li><li>Paint</li><li>Primer</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean the area:</strong> Remove loose debris around the hole</li><li><strong>Apply patch:</strong> Place self-adhesive patch over hole</li><li><strong>First coat:</strong> Apply thin layer of compound with putty knife</li><li><strong>Let dry:</strong> Allow 24 hours for complete drying</li><li><strong>Sand smooth:</strong> Use fine sandpaper to smooth surface</li><li><strong>Second coat:</strong> Apply another thin layer if needed</li><li><strong>Prime and paint:</strong> Apply primer then matching paint</li></ol>`},
+                {id: 'unclog-toilet', title: 'Unclog a Toilet', icon: 'fas fa-toilet', difficulty: 'Easy', time: '15 min', description: 'Multiple methods to handle any clog situation', content: `<h3>Tools Needed:</h3><ul><li>Toilet plunger</li><li>Rubber gloves</li><li>Bucket</li><li>Toilet auger (if needed)</li></ul><h3>Method 1 - Plunging:</h3><ol><li><strong>Use right plunger:</strong> Ensure you have a toilet plunger (flange bottom)</li><li><strong>Create seal:</strong> Place plunger over drain hole, ensure good seal</li><li><strong>Plunge vigorously:</strong> Push and pull forcefully 15-20 times</li><li><strong>Test flush:</strong> Try flushing to see if clog is cleared</li></ol>`},
+                {id: 'replace-light-switch', title: 'Replace Light Switch', icon: 'fas fa-lightbulb', difficulty: 'Medium', time: '45 min', description: 'Safe electrical work for beginners', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Turn off power at circuit breaker before starting. Test with voltage tester.</p><h3>Tools Needed:</h3><ul><li>Screwdriver set</li><li>Voltage tester</li><li>Wire nuts</li><li>New switch</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off circuit breaker, test with voltage tester</li><li><strong>Remove old switch:</strong> Unscrew and carefully pull out old switch</li><li><strong>Identify wires:</strong> Note which wire goes where (take photo)</li><li><strong>Disconnect wires:</strong> Remove wires from old switch terminals</li><li><strong>Connect new switch:</strong> Attach wires to corresponding terminals</li><li><strong>Secure switch:</strong> Push switch into box and screw in place</li><li><strong>Test:</strong> Turn power back on and test switch</li></ol>`},
+                {id: 'running-toilet', title: 'Fix Running Toilet', icon: 'fas fa-toilet-paper', difficulty: 'Easy', time: '20 min', description: 'Stop water waste and noise', content: `<h3>Tools Needed:</h3><ul><li>Adjustable wrench</li><li>Replacement flapper (if needed)</li><li>Chain</li></ul><h3>Common Causes and Fixes:</h3><h4>1. Flapper Issues:</h4><ul><li>Check if flapper seals properly</li><li>Clean rim of flush valve seat</li><li>Replace warped or cracked flapper</li></ul><h4>2. Chain Problems:</h4><ul><li>Adjust chain length - should have slight slack</li><li>Ensure chain doesn't catch under flapper</li></ul><h4>3. Water Level:</h4><ul><li>Bend float arm to adjust water level</li><li>Water should be 1 inch below rim</li></ul>`},
+                {id: 'caulk-bathtub', title: 'Caulk a Bathtub', icon: 'fas fa-bath', difficulty: 'Medium', time: '1 hour', description: 'Professional-looking seal job', content: `<h3>Tools Needed:</h3><ul><li>Caulk gun</li><li>Silicone caulk</li><li>Utility knife</li><li>Caulk smoothing tool</li><li>Painter's tape</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove old caulk:</strong> Use utility knife to cut and remove all old caulk</li><li><strong>Clean area:</strong> Thoroughly clean with rubbing alcohol</li><li><strong>Apply tape:</strong> Place painter's tape 1/8" from joint on both sides</li><li><strong>Apply caulk:</strong> Cut tip at 45-degree angle, apply steady bead</li><li><strong>Smooth joint:</strong> Use finger or smoothing tool to create even seal</li><li><strong>Remove tape:</strong> Pull tape away while caulk is still wet</li><li><strong>Let cure:</strong> Allow 24 hours before using shower</li></ol>`},
+                {id: 'squeaky-door', title: 'Fix Squeaky Door Hinges', icon: 'fas fa-door-open', difficulty: 'Easy', time: '10 min', description: 'Eliminate annoying door squeaks', content: `<h3>Tools Needed:</h3><ul><li>3-in-1 oil or WD-40</li><li>Clean cloth</li><li>Cotton swabs</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean hinges:</strong> Wipe away dirt and debris</li><li><strong>Apply lubricant:</strong> Spray or drop oil on hinge pins and pivot points</li><li><strong>Work the door:</strong> Open and close door several times</li><li><strong>Wipe excess:</strong> Clean off any excess oil with cloth</li></ol>`},
+                {id: 'garbage-disposal', title: 'Unclog Garbage Disposal', icon: 'fas fa-trash', difficulty: 'Medium', time: '30 min', description: 'Safely clear disposal blockages', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Never put hands in disposal. Always turn off power first.</p><h3>Tools Needed:</h3><ul><li>Flashlight</li><li>Tongs or pliers</li><li>Hex wrench (usually included with disposal)</li><li>Ice cubes</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off at wall and circuit breaker</li><li><strong>Look for objects:</strong> Use flashlight to check for visible blockages</li><li><strong>Remove debris:</strong> Use tongs to remove any visible objects</li><li><strong>Manual crank:</strong> Use hex wrench to manually turn disposal from bottom</li><li><strong>Reset:</strong> Press reset button on bottom of unit</li><li><strong>Test:</strong> Turn power back on and test with water running</li></ol>`},
+                {id: 'loose-doorknob', title: 'Tighten Loose Doorknob', icon: 'fas fa-door-closed', difficulty: 'Easy', time: '15 min', description: 'Secure wobbly door handles', content: `<h3>Tools Needed:</h3><ul><li>Screwdriver set</li><li>Allen wrench set</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Identify type:</strong> Look for visible screws or hidden set screws</li><li><strong>Tighten visible screws:</strong> If screws are visible, simply tighten them</li><li><strong>Find set screws:</strong> Look for small holes on the side of handle</li><li><strong>Tighten set screws:</strong> Use appropriate Allen wrench</li><li><strong>Test operation:</strong> Check that handle turns smoothly</li></ol>`},
+                {id: 'cabinet-door', title: 'Fix Sagging Cabinet Door', icon: 'fas fa-clipboard', difficulty: 'Medium', time: '45 min', description: 'Adjust cabinet door alignment', content: `<h3>Tools Needed:</h3><ul><li>Screwdriver</li><li>Drill</li><li>Wood screws</li><li>Shims</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Check hinges:</strong> Look for loose or damaged hinges</li><li><strong>Tighten screws:</strong> Tighten all hinge screws</li><li><strong>Adjust hinges:</strong> Most modern hinges have adjustment screws</li><li><strong>Add support:</strong> Install additional screws if needed</li><li><strong>Use shims:</strong> Place shims behind hinges if door frame is warped</li></ol>`},
+                {id: 'sticky-window', title: 'Fix Sticky Windows', icon: 'fas fa-window-maximize', difficulty: 'Medium', time: '30 min', description: 'Make windows slide smoothly', content: `<h3>Tools Needed:</h3><ul><li>Soap bar</li><li>Vacuum</li><li>Brush</li><li>Lubricant spray</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean tracks:</strong> Vacuum debris from window tracks</li><li><strong>Scrub tracks:</strong> Use brush to remove stubborn dirt</li><li><strong>Lubricate:</strong> Rub soap bar on tracks or spray with lubricant</li><li><strong>Work window:</strong> Open and close several times</li><li><strong>Check weather stripping:</strong> Replace if worn or damaged</li></ol>`},
+                {id: 'ceiling-fan', title: 'Install Ceiling Fan', icon: 'fas fa-fan', difficulty: 'Hard', time: '2 hours', description: 'Complete ceiling fan installation', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Turn off power at circuit breaker. Use voltage tester.</p><h3>Tools Needed:</h3><ul><li>Drill</li><li>Wire nuts</li><li>Ceiling fan mounting box</li><li>Ladder</li><li>Voltage tester</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off at breaker, test wires</li><li><strong>Remove old fixture:</strong> Carefully disconnect and remove</li><li><strong>Install mounting box:</strong> Ensure it's rated for fan weight</li><li><strong>Install mounting bracket:</strong> Secure to ceiling box</li><li><strong>Assemble fan:</strong> Follow manufacturer's instructions</li><li><strong>Connect wires:</strong> Match colors: black to black, white to white, green to ground</li><li><strong>Mount fan:</strong> Hang fan on bracket</li><li><strong>Test:</strong> Turn power on and test all functions</li></ol>`},
+                {id: 'water-heater', title: 'Drain Water Heater', icon: 'fas fa-fire', difficulty: 'Medium', time: '1 hour', description: 'Annual maintenance to extend life', content: `<h3>Tools Needed:</h3><ul><li>Garden hose</li><li>Screwdriver</li><li>Gloves</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Electric: breaker, Gas: pilot light</li><li><strong>Turn off water:</strong> Close cold water supply valve</li><li><strong>Connect hose:</strong> Attach hose to drain valve at bottom</li><li><strong>Open hot taps:</strong> Turn on hot water faucets in house</li><li><strong>Open drain valve:</strong> Let water drain completely</li><li><strong>Flush tank:</strong> Turn water supply on briefly to flush sediment</li><li><strong>Refill:</strong> Close drain, turn on water supply</li><li><strong>Restart:</strong> Turn power back on when tank is full</li></ol>`},
+                {id: 'outlet-replacement', title: 'Replace Electrical Outlet', icon: 'fas fa-plug', difficulty: 'Medium', time: '30 min', description: 'Update old or damaged outlets', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Turn off power at circuit breaker. Test with voltage tester.</p><h3>Tools Needed:</h3><ul><li>Screwdriver</li><li>Voltage tester</li><li>Wire nuts</li><li>New outlet</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off circuit breaker</li><li><strong>Test power:</strong> Use voltage tester to confirm power is off</li><li><strong>Remove old outlet:</strong> Unscrew and pull out</li><li><strong>Note wire connections:</strong> Take photo of wire arrangement</li><li><strong>Connect new outlet:</strong> Attach wires to corresponding terminals</li><li><strong>Secure outlet:</strong> Push into box and screw in place</li><li><strong>Test:</strong> Turn power on and test with device</li></ol>`},
+                {id: 'smoke-detector', title: 'Replace Smoke Detector Battery', icon: 'fas fa-bell', difficulty: 'Easy', time: '10 min', description: 'Essential safety maintenance', content: `<h3>Tools Needed:</h3><ul><li>New 9V battery</li><li>Step ladder</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove detector:</strong> Twist counterclockwise to remove from mounting</li><li><strong>Open battery compartment:</strong> Slide or lift cover</li><li><strong>Remove old battery:</strong> Note positive/negative orientation</li><li><strong>Install new battery:</strong> Connect positive and negative correctly</li><li><strong>Test detector:</strong> Press test button to verify operation</li><li><strong>Reinstall:</strong> Twist back onto mounting bracket</li></ol>`},
+                {id: 'clogged-drain', title: 'Clear Clogged Sink Drain', icon: 'fas fa-sink', difficulty: 'Easy', time: '20 min', description: 'Natural methods to clear blockages', content: `<h3>Tools Needed:</h3><ul><li>Baking soda</li><li>White vinegar</li><li>Hot water</li><li>Plunger</li><li>Snake or wire coat hanger</li></ul><h3>Method 1 - Natural Cleaning:</h3><ol><li><strong>Remove standing water:</strong> Bail out any standing water</li><li><strong>Add baking soda:</strong> Pour 1 cup down drain</li><li><strong>Add vinegar:</strong> Pour 1 cup white vinegar down drain</li><li><strong>Wait:</strong> Let sit for 30 minutes</li><li><strong>Flush with hot water:</strong> Pour boiling water down drain</li></ol>`},
+                {id: 'thermostat', title: 'Program Thermostat', icon: 'fas fa-thermometer-half', difficulty: 'Easy', time: '20 min', description: 'Save energy with proper programming', content: `<h3>Basic Programming Steps:</h3><ol><li><strong>Set current time:</strong> Use up/down arrows or +/- buttons</li><li><strong>Set weekday schedule:</strong> Program morning, day, evening, and night temperatures</li><li><strong>Set weekend schedule:</strong> Usually different from weekday</li><li><strong>Enable program mode:</strong> Switch from "hold" to "program" or "auto"</li></ol><h3>Energy Saving Tips:</h3><ul><li>Lower temperature 7-10°F when away</li><li>Avoid frequent manual overrides</li><li>Change temperature gradually</li></ul>`},
+                {id: 'grout-repair', title: 'Repair Bathroom Grout', icon: 'fas fa-brush', difficulty: 'Medium', time: '2 hours', description: 'Restore tile grout lines', content: `<h3>Tools Needed:</h3><ul><li>Grout removal tool</li><li>New grout</li><li>Grout float</li><li>Sponge</li><li>Grout sealer</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove old grout:</strong> Use grout removal tool to scrape out damaged areas</li><li><strong>Clean area:</strong> Vacuum debris and wipe clean</li><li><strong>Mix new grout:</strong> Follow package directions for proper consistency</li><li><strong>Apply grout:</strong> Use float to press grout into joints at 45-degree angle</li><li><strong>Clean excess:</strong> Wipe diagonally with damp sponge</li><li><strong>Let cure:</strong> Allow 24 hours before sealing</li><li><strong>Apply sealer:</strong> Use grout sealer to protect new grout</li></ol>`},
+                {id: 'weatherstrip', title: 'Install Weather Stripping', icon: 'fas fa-wind', difficulty: 'Easy', time: '45 min', description: 'Improve energy efficiency', content: `<h3>Tools Needed:</h3><ul><li>Weather stripping</li><li>Scissors or utility knife</li><li>Measuring tape</li><li>Staple gun (for some types)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean surfaces:</strong> Remove old weather stripping and clean thoroughly</li><li><strong>Measure openings:</strong> Measure all sides that need sealing</li><li><strong>Cut strips:</strong> Cut weather stripping to proper lengths</li><li><strong>Install strips:</strong> Apply adhesive-backed strips or staple in place</li><li><strong>Test door/window:</strong> Ensure proper fit without binding</li><li><strong>Adjust if needed:</strong> Trim or reposition for smooth operation</li></ol>`},
+                {id: 'faucet-aerator', title: 'Clean Faucet Aerator', icon: 'fas fa-tint', difficulty: 'Easy', time: '15 min', description: 'Improve water flow and pressure', content: `<h3>Tools Needed:</h3><ul><li>Adjustable wrench</li><li>Old toothbrush</li><li>White vinegar</li><li>Small bowl</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove aerator:</strong> Unscrew from end of faucet (turn counterclockwise)</li><li><strong>Disassemble:</strong> Take apart all pieces, noting order</li><li><strong>Soak in vinegar:</strong> Place parts in bowl with white vinegar for 30 minutes</li><li><strong>Scrub parts:</strong> Use toothbrush to remove mineral deposits</li><li><strong>Rinse thoroughly:</strong> Rinse all parts with clean water</li><li><strong>Reassemble:</strong> Put parts back together in reverse order</li><li><strong>Reinstall:</strong> Screw back onto faucet (hand-tight plus 1/4 turn)</li></ol>`},
+                {id: 'showerhead', title: 'Clean Showerhead', icon: 'fas fa-shower', difficulty: 'Easy', time: '30 min', description: 'Remove mineral buildup for better flow', content: `<h3>Tools Needed:</h3><ul><li>Plastic bag</li><li>White vinegar</li><li>Rubber band</li><li>Old toothbrush</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Fill bag with vinegar:</strong> Use enough to submerge showerhead</li><li><strong>Attach to showerhead:</strong> Secure bag with rubber band</li><li><strong>Let soak:</strong> Leave overnight or at least 4 hours</li><li><strong>Remove bag:</strong> Carefully remove and dispose of vinegar</li><li><strong>Scrub:</strong> Use toothbrush to remove remaining deposits</li><li><strong>Run water:</strong> Turn on shower to flush out loose debris</li></ol>`},
+                {id: 'garage-door', title: 'Lubricate Garage Door', icon: 'fas fa-warehouse', difficulty: 'Easy', time: '20 min', description: 'Maintain smooth operation', content: `<h3>Tools Needed:</h3><ul><li>Garage door lubricant</li><li>Clean rags</li><li>Step ladder</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Close door:</strong> Ensure door is fully closed</li><li><strong>Clean tracks:</strong> Wipe debris from tracks (don't lubricate tracks)</li><li><strong>Lubricate hinges:</strong> Apply small amount to all hinges</li><li><strong>Lubricate rollers:</strong> Apply to roller bearings, not plastic parts</li><li><strong>Lubricate springs:</strong> Spray torsion springs lightly</li><li><strong>Operate door:</strong> Open and close several times to distribute lubricant</li></ol>`},
+                {id: 'paint-prep', title: 'Prepare Walls for Painting', icon: 'fas fa-paint-roller', difficulty: 'Medium', time: '3 hours', description: 'Professional prep for perfect results', content: `<h3>Tools Needed:</h3><ul><li>Sandpaper</li><li>Spackling compound</li><li>Putty knife</li><li>Primer</li><li>Drop cloths</li><li>Painter's tape</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean walls:</strong> Wash with mild detergent and let dry</li><li><strong>Fill holes:</strong> Apply spackling compound to nail holes and cracks</li><li><strong>Sand smooth:</strong> Sand filled areas and any rough spots</li><li><strong>Apply primer:</strong> Prime all repaired areas and new surfaces</li><li><strong>Protect surfaces:</strong> Lay drop cloths and apply painter's tape</li><li><strong>Final inspection:</strong> Check for missed spots or imperfections</li></ol>`},
+                {id: 'deck-stain', title: 'Stain a Deck', icon: 'fas fa-home', difficulty: 'Hard', time: '6 hours', description: 'Protect and beautify outdoor wood', content: `<h3>Tools Needed:</h3><ul><li>Pressure washer or scrub brush</li><li>Deck stain</li><li>Brush and roller</li><li>Drop cloths</li><li>Deck cleaner</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean deck:</strong> Pressure wash or scrub with deck cleaner</li><li><strong>Let dry:</strong> Allow 48 hours for complete drying</li><li><strong>Sand if needed:</strong> Sand rough or splintered areas</li><li><strong>Protect plants:</strong> Cover nearby vegetation</li><li><strong>Apply stain:</strong> Work in manageable sections, maintain wet edge</li><li><strong>Back-brush:</strong> Brush stain into wood grain</li><li><strong>Clean up:</strong> Remove excess stain and clean tools</li></ol>`},
+                {id: 'gutter-clean', title: 'Clean Gutters', icon: 'fas fa-cloud-rain', difficulty: 'Medium', time: '2 hours', description: 'Prevent water damage with regular maintenance', content: `<h3>Tools Needed:</h3><ul><li>Ladder</li><li>Gloves</li><li>Scoop or trowel</li><li>Garden hose</li><li>Bucket</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Safety first:</strong> Use stable ladder, have someone spot you</li><li><strong>Remove debris:</strong> Scoop out leaves and debris by hand</li><li><strong>Check downspouts:</strong> Ensure water flows freely</li><li><strong>Flush with water:</strong> Use hose to check for proper drainage</li><li><strong>Inspect for damage:</strong> Look for rust, holes, or loose connections</li><li><strong>Make repairs:</strong> Seal small holes with gutter sealant</li></ol>`},
+                {id: 'fix-hardwood-scratch', title: 'Fix Hardwood Floor Scratches', icon: 'fas fa-tree', difficulty: 'Medium', time: '45 min', description: 'Restore beauty to scratched floors', content: `<h3>Tools Needed:</h3><ul><li>Wood stain markers</li><li>Fine steel wool</li><li>Wood polish</li><li>Clean cloth</li><li>Sandpaper (220 grit)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean the area:</strong> Remove all dirt and debris from scratch</li><li><strong>Assess depth:</strong> Determine if scratch is surface or deep</li><li><strong>Light scratches:</strong> Use wood stain marker to color in scratch</li><li><strong>Deep scratches:</strong> Lightly sand with fine sandpaper</li><li><strong>Apply stain:</strong> Use matching wood stain to blend repair</li><li><strong>Apply finish:</strong> Use wood polish to protect and shine</li><li><strong>Buff surface:</strong> Buff with clean cloth for even finish</li></ol>`},
+                {id: 'insulate-pipes', title: 'Insulate Water Pipes', icon: 'fas fa-temperature-low', difficulty: 'Easy', time: '1 hour', description: 'Prevent frozen pipes and save energy', content: `<h3>Tools Needed:</h3><ul><li>Pipe insulation foam</li><li>Duct tape</li><li>Utility knife</li><li>Measuring tape</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Measure pipes:</strong> Measure length and diameter of pipes to insulate</li><li><strong>Purchase insulation:</strong> Buy foam pipe insulation of correct size</li><li><strong>Clean pipes:</strong> Wipe down pipes to remove dust and moisture</li><li><strong>Install insulation:</strong> Slip foam tubes over pipes</li><li><strong>Seal joints:</strong> Use duct tape to seal seams and joints</li><li><strong>Check coverage:</strong> Ensure all exposed pipes are covered</li><li><strong>Focus on problem areas:</strong> Pay special attention to unheated areas</li></ol>`},
+                {id: 'replace-doorbell', title: 'Replace Doorbell', icon: 'fas fa-bell', difficulty: 'Medium', time: '45 min', description: 'Update your home\'s first impression', content: `<h3>Tools Needed:</h3><ul><li>New doorbell</li><li>Screwdriver</li><li>Wire nuts</li><li>Voltage tester</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off circuit breaker for doorbell</li><li><strong>Remove old doorbell:</strong> Unscrew from wall and disconnect wires</li><li><strong>Test wires:</strong> Use voltage tester to ensure power is off</li><li><strong>Connect new doorbell:</strong> Attach wires to new doorbell terminals</li><li><strong>Mount doorbell:</strong> Secure to wall with screws</li><li><strong>Turn on power:</strong> Restore power at circuit breaker</li><li><strong>Test operation:</strong> Press doorbell to verify it works</li></ol>`},
+                {id: 'fix-creaky-stairs', title: 'Fix Creaky Stairs', icon: 'fas fa-stairs', difficulty: 'Medium', time: '1 hour', description: 'Eliminate annoying stair squeaks', content: `<h3>Tools Needed:</h3><ul><li>Wood screws</li><li>Drill</li><li>Screwdriver</li><li>Wood glue</li><li>Shims</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Identify source:</strong> Walk on stairs to locate squeaky steps</li><li><strong>Check from underneath:</strong> Look for loose connections between tread and riser</li><li><strong>Tighten connections:</strong> Drive screws through tread into riser</li><li><strong>Add support blocks:</strong> Install small blocks between tread and riser</li><li><strong>Use wood glue:</strong> Apply glue to loose joints</li><li><strong>Add shims:</strong> Insert shims in gaps between components</li><li><strong>Test repairs:</strong> Walk on stairs to verify squeaks are gone</li></ol>`},
+                {id: 'clean-chimney', title: 'Clean Fireplace Chimney', icon: 'fas fa-fire', difficulty: 'Hard', time: '3 hours', description: 'Maintain safe fireplace operation', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Consider hiring professional for first cleaning. Ensure fireplace is completely cool.</p><h3>Tools Needed:</h3><ul><li>Chimney brush</li><li>Drop cloths</li><li>Flashlight</li><li>Vacuum</li><li>Protective gear</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Cool fireplace:</strong> Ensure fireplace has been cold for at least 12 hours</li><li><strong>Protect area:</strong> Lay drop cloths around fireplace</li><li><strong>Close damper:</strong> Ensure damper is closed to prevent soot falling</li><li><strong>Clean from top:</strong> Use chimney brush to scrub creosote buildup</li><li><strong>Work systematically:</strong> Clean in sections from top to bottom</li><li><strong>Vacuum debris:</strong> Remove all loose soot and debris</li><li><strong>Inspect for damage:</strong> Look for cracks or deterioration</li></ol>`},
+                {id: 'install-ceiling-light', title: 'Install Ceiling Light Fixture', icon: 'fas fa-lightbulb', difficulty: 'Medium', time: '1 hour', description: 'Add lighting to any room', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Turn off power at circuit breaker. Test wires with voltage tester.</p><h3>Tools Needed:</h3><ul><li>New light fixture</li><li>Wire nuts</li><li>Screwdriver</li><li>Voltage tester</li><li>Ladder</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off power:</strong> Switch off circuit breaker and test wires</li><li><strong>Remove old fixture:</strong> Unscrew and carefully disconnect</li><li><strong>Check electrical box:</strong> Ensure box is properly secured to ceiling</li><li><strong>Connect wires:</strong> Match wire colors - black to black, white to white, ground to ground</li><li><strong>Attach fixture:</strong> Secure fixture to electrical box</li><li><strong>Install bulb:</strong> Add appropriate bulb</li><li><strong>Test operation:</strong> Turn power back on and test light</li></ol>`},
+                {id: 'repair-window-screen', title: 'Repair Window Screen', icon: 'fas fa-window-restore', difficulty: 'Easy', time: '30 min', description: 'Fix tears and holes in screens', content: `<h3>Tools Needed:</h3><ul><li>Screen patch kit</li><li>Utility knife</li><li>Needle and thread</li><li>Clear nail polish</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean the screen:</strong> Remove dirt and debris from damaged area</li><li><strong>Small holes:</strong> Apply clear nail polish to seal tiny holes</li><li><strong>Medium tears:</strong> Use needle and thread to sew edges together</li><li><strong>Large holes:</strong> Cut patch from screen material, slightly larger than hole</li><li><strong>Apply patch:</strong> Secure patch with screen adhesive or sewing</li><li><strong>Trim excess:</strong> Cut away any excess patch material</li><li><strong>Test screen:</strong> Reinstall and check for proper fit</li></ol>`},
+                {id: 'fix-loose-handrail', title: 'Tighten Loose Handrail', icon: 'fas fa-hand-paper', difficulty: 'Medium', time: '45 min', description: 'Ensure stair safety', content: `<h3>Tools Needed:</h3><ul><li>Screwdriver</li><li>Drill</li><li>Wood screws</li><li>Wall anchors</li><li>Level</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Identify loose points:</strong> Check all mounting points for movement</li><li><strong>Tighten existing screws:</strong> Use screwdriver to tighten loose screws</li><li><strong>Add new screws:</strong> Install additional screws for extra support</li><li><strong>Check wall anchors:</strong> Replace any loose or damaged wall anchors</li><li><strong>Verify level:</strong> Ensure handrail is level and properly aligned</li><li><strong>Test stability:</strong> Apply pressure to test handrail security</li><li><strong>Make adjustments:</strong> Fine-tune mounting for optimal stability</li></ol>`},
+                {id: 'winterize-outdoor-faucets', title: 'Winterize Outdoor Faucets', icon: 'fas fa-snowflake', difficulty: 'Easy', time: '20 min', description: 'Prevent frozen pipe damage', content: `<h3>Tools Needed:</h3><ul><li>Faucet covers</li><li>Pipe insulation</li><li>Shut-off wrench</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate shut-off valve:</strong> Find indoor shut-off valve for outdoor faucet</li><li><strong>Turn off water supply:</strong> Close the shut-off valve</li><li><strong>Drain faucet:</strong> Open outdoor faucet to drain remaining water</li><li><strong>Remove hoses:</strong> Disconnect and store garden hoses</li><li><strong>Install covers:</strong> Place insulated covers over outdoor faucets</li><li><strong>Insulate pipes:</strong> Wrap exposed pipes with insulation</li><li><strong>Check for leaks:</strong> Ensure all connections are secure</li></ol>`},
+                {id: 'replace-filter', title: 'Replace HVAC Filter', icon: 'fas fa-filter', difficulty: 'Easy', time: '10 min', description: 'Improve air quality and system efficiency', content: `<h3>Tools Needed:</h3><ul><li>New HVAC filter</li><li>Screwdriver (possibly)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off system:</strong> Switch off HVAC system before changing filter</li><li><strong>Locate filter:</strong> Find filter compartment (usually near air handler)</li><li><strong>Note filter size:</strong> Check existing filter size before removing</li><li><strong>Remove old filter:</strong> Slide out old filter, noting airflow direction</li><li><strong>Install new filter:</strong> Insert new filter with airflow arrows pointing correct direction</li><li><strong>Secure compartment:</strong> Close and secure filter compartment</li><li><strong>Turn system back on:</strong> Restart HVAC system</li></ol>`},
+                {id: 'caulk-windows', title: 'Caulk Around Windows', icon: 'fas fa-window-close', difficulty: 'Medium', time: '1 hour', description: 'Seal gaps for energy efficiency', content: `<h3>Tools Needed:</h3><ul><li>Exterior caulk</li><li>Caulk gun</li><li>Utility knife</li><li>Scraper</li><li>Primer (if needed)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove old caulk:</strong> Scrape away all old, damaged caulk</li><li><strong>Clean surface:</strong> Remove dirt and debris from caulk area</li><li><strong>Apply primer:</strong> Prime surfaces if recommended by caulk manufacturer</li><li><strong>Cut caulk tip:</strong> Cut at 45-degree angle for proper bead size</li><li><strong>Apply caulk:</strong> Run steady bead along gap</li><li><strong>Smooth bead:</strong> Use finger or tool to create smooth, even seal</li><li><strong>Clean excess:</strong> Remove excess caulk before it cures</li></ol>`},
+                {id: 'fix-fence-post', title: 'Fix Loose Fence Post', icon: 'fas fa-hammer', difficulty: 'Medium', time: '2 hours', description: 'Restore fence stability', content: `<h3>Tools Needed:</h3><ul><li>Shovel</li><li>Concrete mix</li><li>Level</li><li>Gravel</li><li>Tamping tool</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Assess damage:</strong> Determine if post needs resetting or replacement</li><li><strong>Dig around post:</strong> Remove soil around loose post</li><li><strong>Add gravel base:</strong> Place gravel in bottom of hole for drainage</li><li><strong>Level the post:</strong> Use level to ensure post is plumb</li><li><strong>Mix concrete:</strong> Prepare quick-setting concrete mix</li><li><strong>Pour concrete:</strong> Add concrete around post base</li><li><strong>Support post:</strong> Brace post until concrete sets</li><li><strong>Allow to cure:</strong> Wait 24 hours before applying stress to post</li></ol>`},
+                {id: 'organize-garage', title: 'Organize Garage Storage', icon: 'fas fa-warehouse', difficulty: 'Medium', time: '4 hours', description: 'Maximize storage space efficiency', content: `<h3>Tools Needed:</h3><ul><li>Storage shelves</li><li>Hooks and hangers</li><li>Storage bins</li><li>Label maker</li><li>Measuring tape</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Empty everything:</strong> Remove all items from garage</li><li><strong>Sort items:</strong> Group similar items together</li><li><strong>Purge unwanted items:</strong> Donate, sell, or discard items you don't need</li><li><strong>Plan storage zones:</strong> Designate areas for different categories</li><li><strong>Install shelving:</strong> Add vertical storage solutions</li><li><strong>Use wall space:</strong> Install hooks for tools and equipment</li><li><strong>Label everything:</strong> Clearly label all storage containers</li><li><strong>Create clear pathways:</strong> Ensure easy access to all areas</li></ol>`},
+                {id: 'replace-mailbox', title: 'Replace Mailbox Post', icon: 'fas fa-mailbox', difficulty: 'Medium', time: '2 hours', description: 'Install new mailbox securely', content: `<h3>Tools Needed:</h3><ul><li>New mailbox and post</li><li>Shovel</li><li>Concrete mix</li><li>Level</li><li>Measuring tape</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Check regulations:</strong> Verify local mailbox placement requirements</li><li><strong>Remove old mailbox:</strong> Dig out old post and mailbox</li><li><strong>Dig new hole:</strong> Create hole 2 feet deep, 6 inches wide</li><li><strong>Set post depth:</strong> Ensure mailbox will be 41-45 inches high</li><li><strong>Level the post:</strong> Use level to ensure post is plumb</li><li><strong>Add concrete:</strong> Mix and pour concrete around post</li><li><strong>Attach mailbox:</strong> Mount mailbox to post per manufacturer instructions</li><li><strong>Allow to cure:</strong> Wait 24 hours before using mailbox</li></ol>`},
+                {id: 'seal-driveway', title: 'Seal Asphalt Driveway', icon: 'fas fa-road', difficulty: 'Medium', time: '4 hours', description: 'Protect and extend driveway life', content: `<h3>Tools Needed:</h3><ul><li>Driveway sealer</li><li>Squeegee or brush</li><li>Pressure washer</li><li>Crack filler</li><li>Protective equipment</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean driveway:</strong> Pressure wash to remove all dirt and debris</li><li><strong>Fill cracks:</strong> Use crack filler for any damage</li><li><strong>Let dry completely:</strong> Wait 24 hours after cleaning</li><li><strong>Apply sealer:</strong> Work in sections, maintaining wet edge</li><li><strong>Spread evenly:</strong> Use squeegee to distribute sealer evenly</li><li><strong>Allow to dry:</strong> Keep traffic off for 24-48 hours</li><li><strong>Apply second coat:</strong> Add second coat if recommended</li></ol>`}
             ],
             'auto-repairs': [
-                {id: 'change-tire', title: 'Change a Flat Tire', icon: 'fas fa-tire', difficulty: 'Medium', time: '30 min', description: 'Essential roadside repair every driver should know', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Spare tire</li><li>Jack</li><li>Lug wrench</li><li>Vehicle owner's manual</li><li>Flashlight</li><li>Gloves</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Find safe location:</strong> Pull over on flat, stable ground away from traffic</li>
-                        <li><strong>Apply parking brake:</strong> Engage parking brake and turn on hazards</li>
-                        <li><strong>Loosen lug nuts:</strong> Turn counterclockwise while tire is on ground</li>
-                        <li><strong>Position jack:</strong> Place jack under vehicle's designated lifting point</li>
-                        <li><strong>Raise vehicle:</strong> Lift until flat tire is off the ground</li>
-                        <li><strong>Remove lug nuts:</strong> Completely remove and keep in safe place</li>
-                        <li><strong>Remove flat tire:</strong> Pull tire straight toward you to remove</li>
-                        <li><strong>Mount spare tire:</strong> Align holes and push spare tire onto wheel bolts</li>
-                        <li><strong>Replace lug nuts:</strong> Tighten by hand first, then with wrench</li>
-                        <li><strong>Lower vehicle:</strong> Lower jack until spare tire touches ground but still supports weight</li>
-                        <li><strong>Fully tighten:</strong> Use lug wrench to fully tighten lug nuts in star pattern</li>
-                        <li><strong>Fully lower:</strong> Lower jack completely and remove from under vehicle</li>
-                    </ol>
-                    <h3>Safety Tips:</h3>
-                    <p>Never attempt on busy highway - call for help. Check spare tire pressure monthly.</p>
-                `},
-                {id: 'jump-start', title: 'Jump Start a Car', icon: 'fas fa-car-battery', difficulty: 'Easy', time: '15 min', description: 'Get back on the road safely', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Jumper cables</li><li>Another vehicle with good battery</li><li>Gloves and safety glasses</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Position vehicles:</strong> Park vehicles close enough for cables to reach both batteries</li>
-                        <li><strong>Turn off both engines:</strong> Remove keys and set parking brakes</li>
-                        <li><strong>Identify battery terminals:</strong> Locate positive (+) and negative (-) on both batteries</li>
-                        <li><strong>Connect cables in order:</strong>
-                            <ul>
-                                <li>Red cable to dead battery positive terminal</li>
-                                <li>Other red end to good battery positive terminal</li>
-                                <li>Black cable to good battery negative terminal</li>
-                                <li>Other black end to unpainted metal surface in dead car (ground)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Start good car:</strong> Run engine for 2-3 minutes</li>
-                        <li><strong>Try starting dead car:</strong> Turn key and attempt to start</li>
-                        <li><strong>Remove cables:</strong> Reverse the connection order exactly</li>
-                        <li><strong>Keep dead car running:</strong> Drive for at least 30 minutes to recharge</li>
-                    </ol>
-                    <h3>Safety Warning:</h3>
-                    <p>Never touch cable ends together. If battery is cracked or leaking, do not attempt jump start.</p>
-                `},
-                {id: 'check-oil', title: 'Check Engine Oil', icon: 'fas fa-oil-can', difficulty: 'Easy', time: '10 min', description: 'Maintain your engine\'s health', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Clean rag or paper towels</li><li>Engine oil (if needed for top-off)</li><li>Funnel</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Park on level ground:</strong> Ensure car is on flat surface</li>
-                        <li><strong>Turn off engine:</strong> Wait 5-10 minutes for oil to settle</li>
-                        <li><strong>Locate dipstick:</strong> Find the oil dipstick (usually has yellow or orange handle)</li>
-                        <li><strong>Remove dipstick:</strong> Pull out completely and clean with rag</li>
-                        <li><strong>Reinsert fully:</strong> Push dipstick all the way back in</li>
-                        <li><strong>Remove and check:</strong> Pull out again and check oil level</li>
-                        <li><strong>Read the level:</strong> Oil should be between MIN and MAX marks</li>
-                        <li><strong>Check oil condition:</strong> Clean oil is amber/black; dirty oil is thick and dark</li>
-                        <li><strong>Add oil if needed:</strong> If below MIN mark, add small amounts at a time</li>
-                    </ol>
-                    <h3>What to Look For:</h3>
-                    <ul>
-                        <li>Oil level between MIN and MAX marks</li>
-                        <li>Clean, relatively clear oil</li>
-                        <li>No metal particles or foam</li>
-                    </ul>
-                `},
-                {id: 'air-filter', title: 'Replace Air Filter', icon: 'fas fa-wind', difficulty: 'Easy', time: '15 min', description: 'Improve engine performance and fuel economy', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>New air filter</li><li>Screwdriver (possibly)</li><li>Clean rag</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Locate air filter box:</strong> Usually rectangular or round plastic box near engine</li>
-                        <li><strong>Open air filter housing:</strong> Unclip or unscrew housing cover</li>
-                        <li><strong>Remove old filter:</strong> Take note of which way filter faces</li>
-                        <li><strong>Clean housing:</strong> Wipe out any debris from filter box</li>
-                        <li><strong>Install new filter:</strong> Insert new filter same direction as old one</li>
-                        <li><strong>Close housing:</strong> Replace cover and secure clips or screws</li>
-                    </ol>
-                    <h3>When to Replace:</h3>
-                    <p>Every 12,000-15,000 miles or annually. More often in dusty conditions.</p>
-                `},
-                {id: 'brake-fluid', title: 'Check Brake Fluid', icon: 'fas fa-brake-warning', difficulty: 'Easy', time: '5 min', description: 'Critical safety check', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Flashlight</li><li>Clean rag</li><li>Brake fluid (if needed)</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Locate brake fluid reservoir:</strong> Usually on driver's side of engine bay</li>
-                        <li><strong>Clean reservoir cap:</strong> Wipe away dirt to prevent contamination</li>
-                        <li><strong>Check fluid level:</strong> Look at side markings - should be between MIN and MAX</li>
-                        <li><strong>Check fluid color:</strong> Should be clear or light amber, not dark or cloudy</li>
-                        <li><strong>Add fluid if needed:</strong> Use only specified brake fluid type</li>
-                    </ol>
-                    <h3>Warning Signs:</h3>
-                    <ul>
-                        <li>Low fluid level may indicate brake pad wear or leak</li>
-                        <li>Dark, dirty fluid needs to be changed</li>
-                        <li>If reservoir is empty, DO NOT DRIVE</li>
-                    </ul>
-                `},
-                {id: 'coolant-check', title: 'Check Coolant Level', icon: 'fas fa-thermometer-full', difficulty: 'Easy', time: '5 min', description: 'Prevent engine overheating', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Never check coolant on hot engine. Wait until engine is completely cool.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Flashlight</li><li>Coolant (if needed)</li><li>Funnel</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Engine must be cool:</strong> Wait at least 30 minutes after driving</li>
-                        <li><strong>Locate coolant reservoir:</strong> Translucent plastic tank with MAX/MIN markings</li>
-                        <li><strong>Check level:</strong> Coolant should be between MIN and MAX when cold</li>
-                        <li><strong>Check coolant condition:</strong> Should be clean, not rusty or oily</li>
-                        <li><strong>Add coolant if needed:</strong> Use 50/50 coolant/water mix</li>
-                    </ol>
-                    <h3>Signs of Problems:</h3>
-                    <ul>
-                        <li>Consistently low levels may indicate leak</li>
-                        <li>Rusty or oily coolant needs system flush</li>
-                    </ul>
-                `},
-                {id: 'windshield-wipers', title: 'Replace Windshield Wipers', icon: 'fas fa-eye', difficulty: 'Easy', time: '15 min', description: 'Maintain clear visibility', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>New wiper blades (correct size)</li><li>Clean cloth</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Lift wiper arms:</strong> Pull wiper arms away from windshield</li>
-                        <li><strong>Locate release mechanism:</strong> Look for tab, button, or clip on blade</li>
-                        <li><strong>Remove old blade:</strong> Press release and slide blade off arm</li>
-                        <li><strong>Attach new blade:</strong> Slide new blade onto arm until you hear click</li>
-                        <li><strong>Test fit:</strong> Gently lower arm and test wiper operation</li>
-                        <li><strong>Repeat for other side:</strong> Replace both wipers for even performance</li>
-                    </ol>
-                    <h3>When to Replace:</h3>
-                    <p>Every 6-12 months or when wipers streak, skip, or chatter.</p>
-                `},
-                {id: 'headlight-bulb', title: 'Replace Headlight Bulb', icon: 'fas fa-lightbulb', difficulty: 'Medium', time: '30 min', description: 'Restore proper lighting', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Replacement bulb</li><li>Screwdriver</li><li>Gloves</li><li>Owner's manual</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off engine:</strong> Ensure headlights are off and cool</li>
-                        <li><strong>Open hood:</strong> Access headlight assembly from engine bay</li>
-                        <li><strong>Locate bulb holder:</strong> Find the back of headlight assembly</li>
-                        <li><strong>Disconnect power:</strong> Unplug electrical connector</li>
-                        <li><strong>Remove retaining ring:</strong> Turn counterclockwise to remove</li>
-                        <li><strong>Remove old bulb:</strong> Pull straight out without twisting</li>
-                        <li><strong>Install new bulb:</strong> Handle by base only, don't touch glass</li>
-                        <li><strong>Reassemble:</strong> Replace retaining ring and reconnect power</li>
-                        <li><strong>Test:</strong> Turn on headlights to verify operation</li>
-                    </ol>
-                    <h3>Important:</h3>
-                    <p>Never touch halogen bulb glass with bare hands. Oils from skin cause premature failure.</p>
-                `},
-                {id: 'car-wash', title: 'Wash Your Car Properly', icon: 'fas fa-car', difficulty: 'Easy', time: '45 min', description: 'Protect your car\'s finish', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Two buckets</li><li>Car wash soap</li><li>Wash mitt or sponge</li><li>Microfiber towels</li><li>Hose with nozzle</li><li>Wheel cleaner</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Park in shade:</strong> Avoid direct sunlight</li>
-                        <li><strong>Rinse car:</strong> Remove loose dirt with hose</li>
-                        <li><strong>Clean wheels first:</strong> Use wheel cleaner and separate tools</li>
-                        <li><strong>Two-bucket method:</strong> One for soapy water, one for rinsing mitt</li>
-                        <li><strong>Wash top to bottom:</strong> Start with roof, work down</li>
-                        <li><strong>Rinse frequently:</strong> Don't let soap dry on surface</li>
-                        <li><strong>Final rinse:</strong> Remove all soap residue</li>
-                        <li><strong>Dry immediately:</strong> Use microfiber towels to prevent water spots</li>
-                    </ol>
-                `},
-                {id: 'battery-maintenance', title: 'Clean Battery Terminals', icon: 'fas fa-car-battery', difficulty: 'Easy', time: '20 min', description: 'Prevent starting problems', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Baking soda</li><li>Water</li><li>Wire brush</li><li>Wrench set</li><li>Petroleum jelly</li><li>Safety glasses and gloves</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Safety first:</strong> Wear gloves and safety glasses</li>
-                        <li><strong>Turn off engine:</strong> Remove keys and ensure engine is cool</li>
-                        <li><strong>Identify terminals:</strong> Locate positive (+) and negative (-) terminals</li>
-                        <li><strong>Remove negative first:</strong> Loosen and remove negative cable</li>
-                        <li><strong>Remove positive cable:</strong> Loosen and remove positive cable</li>
-                        <li><strong>Make cleaning solution:</strong> Mix baking soda with water</li>
-                        <li><strong>Clean terminals:</strong> Scrub terminals and cable ends with wire brush</li>
-                        <li><strong>Rinse and dry:</strong> Rinse with clean water and dry thoroughly</li>
-                        <li><strong>Apply petroleum jelly:</strong> Coat terminals to prevent corrosion</li>
-                        <li><strong>Reconnect cables:</strong> Positive first, then negative</li>
-                    </ol>
-                `},
-                {id: 'tire-pressure', title: 'Check Tire Pressure', icon: 'fas fa-gauge-high', difficulty: 'Easy', time: '10 min', description: 'Improve safety and fuel economy', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Tire pressure gauge</li><li>Air compressor or pump</li><li>Valve cap remover (if needed)</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Check when cold:</strong> Before driving or 3+ hours after driving</li>
-                        <li><strong>Find recommended pressure:</strong> Check driver's door jamb sticker</li>
-                        <li><strong>Remove valve cap:</strong> Unscrew cap from tire valve stem</li>
-                        <li><strong>Press gauge firmly:</strong> Push gauge onto valve stem until hissing stops</li>
-                        <li><strong>Read measurement:</strong> Note pressure reading on gauge</li>
-                        <li><strong>Add air if needed:</strong> If low, add air in small increments</li>
-                        <li><strong>Recheck pressure:</strong> Verify correct pressure after adding air</li>
-                        <li><strong>Replace valve cap:</strong> Screw cap back on to keep dirt out</li>
-                        <li><strong>Check all tires:</strong> Include spare tire in monthly checks</li>
-                    </ol>
-                `},
-                {id: 'cabin-filter', title: 'Replace Cabin Air Filter', icon: 'fas fa-leaf', difficulty: 'Easy', time: '15 min', description: 'Improve interior air quality', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>New cabin air filter</li><li>Screwdriver (possibly)</li><li>Vacuum cleaner</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Locate filter housing:</strong> Usually behind glove box or under hood</li>
-                        <li><strong>Access filter:</strong> May need to remove glove box or panel</li>
-                        <li><strong>Remove old filter:</strong> Note direction of airflow arrows</li>
-                        <li><strong>Clean housing:</strong> Vacuum out any debris</li>
-                        <li><strong>Install new filter:</strong> Insert with airflow arrows pointing correct direction</li>
-                        <li><strong>Reassemble:</strong> Replace any panels or covers removed</li>
-                    </ol>
-                    <h3>Benefits:</h3>
-                    <ul>
-                        <li>Cleaner interior air</li>
-                        <li>Better AC/heater performance</li>
-                        <li>Reduced allergens</li>
-                    </ul>
-                `},
-                {id: 'spark-plugs', title: 'Replace Spark Plugs', icon: 'fas fa-bolt', difficulty: 'Medium', time: '1 hour', description: 'Improve engine performance', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>New spark plugs</li><li>Spark plug wrench</li><li>Gap gauge</li><li>Dielectric grease</li><li>Torque wrench</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Engine must be cool:</strong> Wait until engine is completely cool</li>
-                        <li><strong>Locate spark plugs:</strong> Follow ignition wires to engine</li>
-                        <li><strong>Remove one at a time:</strong> Work on one plug at a time to avoid mix-ups</li>
-                        <li><strong>Clean area:</strong> Blow out debris around plug before removal</li>
-                        <li><strong>Remove old plug:</strong> Turn counterclockwise with spark plug wrench</li>
-                        <li><strong>Check gap on new plug:</strong> Use gap gauge to verify proper spacing</li>
-                        <li><strong>Apply anti-seize:</strong> Small amount on threads (not electrode end)</li>
-                        <li><strong>Install new plug:</strong> Hand-tighten first, then use wrench</li>
-                        <li><strong>Reconnect ignition wire:</strong> Push firmly until you hear/feel click</li>
-                        <li><strong>Repeat for all plugs:</strong> Replace remaining plugs one at a time</li>
-                    </ol>
-                `},
-                {id: 'transmission-fluid', title: 'Check Transmission Fluid', icon: 'fas fa-cogs', difficulty: 'Easy', time: '10 min', description: 'Ensure smooth shifting', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Clean rag</li><li>Funnel</li><li>Transmission fluid (if needed)</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Warm up engine:</strong> Drive for 5-10 minutes to warm transmission</li>
-                        <li><strong>Park on level ground:</strong> Engine running, transmission in park</li>
-                        <li><strong>Locate dipstick:</strong> Usually red handle, may be labeled "TRANS"</li>
-                        <li><strong>Remove and clean:</strong> Pull out dipstick and clean with rag</li>
-                        <li><strong>Reinsert fully:</strong> Push dipstick all the way back in</li>
-                        <li><strong>Remove and check:</strong> Pull out and check fluid level and condition</li>
-                        <li><strong>Add fluid if needed:</strong> Use only specified transmission fluid type</li>
-                    </ol>
-                    <h3>Fluid Condition:</h3>
-                    <ul>
-                        <li>Good: Red or pink, transparent</li>
-                        <li>Needs attention: Brown or black, burnt smell</li>
-                    </ul>
-                `},
-                {id: 'belt-inspection', title: 'Inspect Drive Belts', icon: 'fas fa-sync', difficulty: 'Easy', time: '15 min', description: 'Prevent roadside breakdowns', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Flashlight</li><li>Visual inspection only</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Engine must be off:</strong> Ensure engine is cool and off</li>
-                        <li><strong>Locate drive belts:</strong> Usually on front of engine</li>
-                        <li><strong>Check for cracks:</strong> Look for cracks across the ribs</li>
-                        <li><strong>Check for fraying:</strong> Look for worn or frayed edges</li>
-                        <li><strong>Check tension:</strong> Belt should have slight give when pressed</li>
-                        <li><strong>Look for glazing:</strong> Shiny appearance indicates slipping</li>
-                        <li><strong>Check alignment:</strong> Belt should run straight on pulleys</li>
-                    </ol>
-                    <h3>Warning Signs:</h3>
-                    <ul>
-                        <li>Squealing noise when starting</li>
-                        <li>Visible cracks or fraying</li>
-                        <li>Belt too loose or too tight</li>
-                    </ul>
-                `},
-                {id: 'fuse-replacement', title: 'Replace Car Fuses', icon: 'fas fa-plug', difficulty: 'Easy', time: '10 min', description: 'Fix electrical problems', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Replacement fuses</li><li>Fuse puller tool</li><li>Owner's manual</li><li>Flashlight</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Turn off engine:</strong> Remove keys and turn off all electrical accessories</li>
-                        <li><strong>Locate fuse box:</strong> Check under hood and/or inside cabin</li>
-                        <li><strong>Identify problem circuit:</strong> Use fuse box diagram to find correct fuse</li>
-                        <li><strong>Remove suspect fuse:</strong> Use fuse puller or needle-nose pliers</li>
-                        <li><strong>Check fuse:</strong> Look for broken metal strip inside fuse</li>
-                        <li><strong>Replace if blown:</strong> Install new fuse of same amperage</li>
-                        <li><strong>Test circuit:</strong> Turn on affected electrical component</li>
-                    </ol>
-                    <h3>Important:</h3>
-                    <p>Always replace with same amperage fuse. Higher amperage can cause electrical damage.</p>
-                `},
-                {id: 'power-steering', title: 'Check Power Steering Fluid', icon: 'fas fa-steering-wheel', difficulty: 'Easy', time: '5 min', description: 'Maintain easy steering', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Clean rag</li><li>Power steering fluid (if needed)</li><li>Funnel</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Engine should be warm:</strong> Run engine for a few minutes</li>
-                        <li><strong>Turn off engine:</strong> Check fluid with engine off</li>
-                        <li><strong>Locate reservoir:</strong> Usually has steering wheel symbol on cap</li>
-                        <li><strong>Clean cap area:</strong> Wipe away dirt before removing cap</li>
-                        <li><strong>Check level:</strong> Fluid should be between MIN and MAX marks</li>
-                        <li><strong>Check fluid condition:</strong> Should be clear or light amber</li>
-                        <li><strong>Add fluid if needed:</strong> Use only recommended power steering fluid</li>
-                    </ol>
-                    <h3>Warning Signs:</h3>
-                    <ul>
-                        <li>Hard steering</li>
-                        <li>Whining noise when turning</li>
-                        <li>Dark, dirty fluid</li>
-                    </ul>
-                `},
-                {id: 'radiator-hoses', title: 'Inspect Radiator Hoses', icon: 'fas fa-thermometer-half', difficulty: 'Easy', time: '15 min', description: 'Prevent cooling system failure', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Flashlight</li><li>Visual and tactile inspection</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Engine must be cool:</strong> Wait until engine is completely cool</li>
-                        <li><strong>Locate radiator hoses:</strong> Upper and lower hoses from radiator to engine</li>
-                        <li><strong>Check for leaks:</strong> Look for coolant stains or puddles</li>
-                        <li><strong>Feel hose condition:</strong> Squeeze gently - should be firm, not soft or hard</li>
-                        <li><strong>Check clamps:</strong> Ensure hose clamps are tight</li>
-                        <li><strong>Look for bulges:</strong> Hoses should be uniform in shape</li>
-                        <li><strong>Check connections:</strong> Verify hoses are properly seated</li>
-                    </ol>
-                    <h3>Replace If:</h3>
-                    <ul>
-                        <li>Soft and squishy when squeezed</li>
-                        <li>Hard and brittle</li>
-                        <li>Visible cracks or bulges</li>
-                        <li>Coolant leaks at connections</li>
-                    </ul>
-                `},
-                {id: 'door-locks', title: 'Fix Sticky Door Locks', icon: 'fas fa-key', difficulty: 'Easy', time: '15 min', description: 'Maintain security and convenience', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Graphite lubricant or lock spray</li><li>Key</li><li>Clean cloth</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean lock exterior:</strong> Wipe away dirt and debris</li>
-                        <li><strong>Apply lubricant:</strong> Spray graphite lubricant into lock cylinder</li>
-                        <li><strong>Work the key:</strong> Insert key and turn several times</li>
-                        <li><strong>Test operation:</strong> Lock and unlock several times</li>
-                        <li><strong>Clean excess:</strong> Wipe away any excess lubricant</li>
-                        <li><strong>Test remote:</strong> If equipped, test key fob operation</li>
-                    </ol>
-                    <h3>Prevention:</h3>
-                    <p>Lubricate locks every 6 months or when they start to feel stiff.</p>
-                `},
-                {id: 'washer-fluid', title: 'Refill Washer Fluid', icon: 'fas fa-spray-can', difficulty: 'Easy', time: '5 min', description: 'Maintain clear visibility', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Windshield washer fluid</li><li>Funnel (helpful)</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Locate reservoir:</strong> Look for cap with windshield/spray symbol</li>
-                        <li><strong>Remove cap:</strong> Unscrew or lift cap</li>
-                        <li><strong>Check current level:</strong> Look inside reservoir</li>
-                        <li><strong>Add washer fluid:</strong> Pour in washer fluid, don't overfill</li>
-                        <li><strong>Replace cap:</strong> Secure cap tightly</li>
-                        <li><strong>Test system:</strong> Try windshield washers to verify operation</li>
-                    </ol>
-                    <h3>Seasonal Tip:</h3>
-                    <p>Use winter-formula washer fluid in cold climates to prevent freezing.</p>
-                `},
-                {id: 'emergency-kit', title: 'Build Emergency Car Kit', icon: 'fas fa-first-aid', difficulty: 'Easy', time: '30 min', description: 'Be prepared for roadside emergencies', content: `
-                    <h3>Essential Items:</h3>
-                    <ul>
-                        <li>Jumper cables</li>
-                        <li>Tire gauge and portable air compressor</li>
-                        <li>Multi-tool or basic tool kit</li>
-                        <li>Flashlight and extra batteries</li>
-                        <li>First aid kit</li>
-                        <li>Emergency flares or reflective triangles</li>
-                        <li>Emergency blanket</li>
-                        <li>Water and non-perishable snacks</li>
-                        <li>Phone charger (car adapter)</li>
-                        <li>Cash in small bills</li>
-                        <li>Paper towels and wet wipes</li>
-                        <li>Duct tape</li>
-                    </ul>
-                    <h3>Seasonal Additions:</h3>
-                    <h4>Winter:</h4>
-                    <ul>
-                        <li>Ice scraper and snow brush</li>
-                        <li>Sand or cat litter for traction</li>
-                        <li>Extra warm clothing</li>
-                    </ul>
-                    <h4>Summer:</h4>
-                    <ul>
-                        <li>Extra water</li>
-                        <li>Sunscreen</li>
-                        <li>Umbrella for shade</li>
-                    </ul>
-                `},
-                {id: 'car-detailing', title: 'Detail Your Car Interior', icon: 'fas fa-car-side', difficulty: 'Medium', time: '2 hours', description: 'Professional-level interior cleaning', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Vacuum cleaner with attachments</li><li>Microfiber cloths</li><li>Interior cleaner</li><li>Glass cleaner</li><li>Leather conditioner (if applicable)</li><li>Soft brushes</li><li>Cotton swabs</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Remove everything:</strong> Take out floor mats, trash, and personal items</li>
-                        <li><strong>Vacuum thoroughly:</strong> Seats, carpets, crevices, and trunk</li>
-                        <li><strong>Clean hard surfaces:</strong> Dashboard, door panels, center console</li>
-                        <li><strong>Clean seats:</strong> Use appropriate cleaner for fabric or leather</li>
-                        <li><strong>Clean windows:</strong> Inside surfaces with glass cleaner</li>
-                        <li><strong>Detail small areas:</strong> Use cotton swabs for vents and small spaces</li>
-                        <li><strong>Condition leather:</strong> Apply leather conditioner if equipped</li>
-                        <li><strong>Clean floor mats:</strong> Wash and dry floor mats</li>
-                        <li><strong>Final vacuum:</strong> Touch up any areas disturbed during cleaning</li>
-                    </ol>
-                `},
-                {id: 'paint-touch-up', title: 'Touch Up Paint Scratches', icon: 'fas fa-palette', difficulty: 'Medium', time: '45 min', description: 'Repair minor paint damage', content: `
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Touch-up paint (matching your car)</li><li>Fine sandpaper (2000 grit)</li><li>Primer (if needed)</li><li>Small brush or touch-up pen</li><li>Clear coat</li><li>Polishing compound</li><li>Microfiber cloths</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Clean the area:</strong> Wash and dry the scratched area thoroughly</li>
-                        <li><strong>Assess damage:</strong> Determine if scratch goes through paint to metal</li>
-                        <li><strong>Sand lightly:</strong> If deep scratch, sand lightly with fine sandpaper</li>
-                        <li><strong>Apply primer:</strong> If metal is exposed, apply thin coat of primer</li>
-                        <li><strong>Apply base coat:</strong> Use thin layers, allow each to dry</li>
-                        <li><strong>Apply clear coat:</strong> Protect the new paint with clear coat</li>
-                        <li><strong>Let cure:</strong> Allow 24-48 hours for complete curing</li>
-                        <li><strong>Polish:</strong> Blend edges with polishing compound</li>
-                    </ol>
-                `}
+                {id: 'change-tire', title: 'Change a Flat Tire', icon: 'fas fa-tire', difficulty: 'Medium', time: '30 min', description: 'Essential roadside repair every driver should know', content: `<h3>Tools Needed:</h3><ul><li>Spare tire</li><li>Jack</li><li>Lug wrench</li><li>Vehicle owner's manual</li><li>Flashlight</li><li>Gloves</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Find safe location:</strong> Pull over on flat, stable ground away from traffic</li><li><strong>Apply parking brake:</strong> Engage parking brake and turn on hazards</li><li><strong>Loosen lug nuts:</strong> Turn counterclockwise while tire is on ground</li><li><strong>Position jack:</strong> Place jack under vehicle's designated lifting point</li><li><strong>Raise vehicle:</strong> Lift until flat tire is off the ground</li><li><strong>Remove lug nuts:</strong> Completely remove and keep in safe place</li><li><strong>Remove flat tire:</strong> Pull tire straight toward you to remove</li><li><strong>Mount spare tire:</strong> Align holes and push spare tire onto wheel bolts</li><li><strong>Replace lug nuts:</strong> Tighten by hand first, then with wrench</li><li><strong>Lower vehicle:</strong> Lower jack until spare tire touches ground but still supports weight</li><li><strong>Fully tighten:</strong> Use lug wrench to fully tighten lug nuts in star pattern</li><li><strong>Fully lower:</strong> Lower jack completely and remove from under vehicle</li></ol>`},
+                {id: 'jump-start', title: 'Jump Start a Car', icon: 'fas fa-car-battery', difficulty: 'Easy', time: '15 min', description: 'Get back on the road safely', content: `<h3>Tools Needed:</h3><ul><li>Jumper cables</li><li>Another vehicle with good battery</li><li>Gloves and safety glasses</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Position vehicles:</strong> Park vehicles close enough for cables to reach both batteries</li><li><strong>Turn off both engines:</strong> Remove keys and set parking brakes</li><li><strong>Identify battery terminals:</strong> Locate positive (+) and negative (-) on both batteries</li><li><strong>Connect cables in order:</strong> Red cable to dead battery positive terminal, Other red end to good battery positive terminal, Black cable to good battery negative terminal, Other black end to unpainted metal surface in dead car (ground)</li><li><strong>Start good car:</strong> Run engine for 2-3 minutes</li><li><strong>Try starting dead car:</strong> Turn key and attempt to start</li><li><strong>Remove cables:</strong> Reverse the connection order exactly</li><li><strong>Keep dead car running:</strong> Drive for at least 30 minutes to recharge</li></ol>`},
+                {id: 'check-oil', title: 'Check Engine Oil', icon: 'fas fa-oil-can', difficulty: 'Easy', time: '10 min', description: 'Maintain your engine\'s health', content: `<h3>Tools Needed:</h3><ul><li>Clean rag or paper towels</li><li>Engine oil (if needed for top-off)</li><li>Funnel</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Park on level ground:</strong> Ensure car is on flat surface</li><li><strong>Turn off engine:</strong> Wait 5-10 minutes for oil to settle</li><li><strong>Locate dipstick:</strong> Find the oil dipstick (usually has yellow or orange handle)</li><li><strong>Remove dipstick:</strong> Pull out completely and clean with rag</li><li><strong>Reinsert fully:</strong> Push dipstick all the way back in</li><li><strong>Remove and check:</strong> Pull out again and check oil level</li><li><strong>Read the level:</strong> Oil should be between MIN and MAX marks</li><li><strong>Check oil condition:</strong> Clean oil is amber/black; dirty oil is thick and dark</li><li><strong>Add oil if needed:</strong> If below MIN mark, add small amounts at a time</li></ol>`},
+                {id: 'air-filter', title: 'Replace Air Filter', icon: 'fas fa-wind', difficulty: 'Easy', time: '15 min', description: 'Improve engine performance and fuel economy', content: `<h3>Tools Needed:</h3><ul><li>New air filter</li><li>Screwdriver (possibly)</li><li>Clean rag</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate air filter box:</strong> Usually rectangular or round plastic box near engine</li><li><strong>Open air filter housing:</strong> Unclip or unscrew housing cover</li><li><strong>Remove old filter:</strong> Take note of which way filter faces</li><li><strong>Clean housing:</strong> Wipe out any debris from filter box</li><li><strong>Install new filter:</strong> Insert new filter same direction as old one</li><li><strong>Close housing:</strong> Replace cover and secure clips or screws</li></ol>`},
+                {id: 'brake-fluid', title: 'Check Brake Fluid', icon: 'fas fa-brake-warning', difficulty: 'Easy', time: '5 min', description: 'Critical safety check', content: `<h3>Tools Needed:</h3><ul><li>Flashlight</li><li>Clean rag</li><li>Brake fluid (if needed)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate brake fluid reservoir:</strong> Usually on driver's side of engine bay</li><li><strong>Clean reservoir cap:</strong> Wipe away dirt to prevent contamination</li><li><strong>Check fluid level:</strong> Look at side markings - should be between MIN and MAX</li><li><strong>Check fluid color:</strong> Should be clear or light amber, not dark or cloudy</li><li><strong>Add fluid if needed:</strong> Use only specified brake fluid type</li></ol>`},
+                {id: 'coolant-check', title: 'Check Coolant Level', icon: 'fas fa-thermometer-full', difficulty: 'Easy', time: '5 min', description: 'Prevent engine overheating', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Never check coolant on hot engine. Wait until engine is completely cool.</p><h3>Tools Needed:</h3><ul><li>Flashlight</li><li>Coolant (if needed)</li><li>Funnel</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine must be cool:</strong> Wait at least 30 minutes after driving</li><li><strong>Locate coolant reservoir:</strong> Translucent plastic tank with MAX/MIN markings</li><li><strong>Check level:</strong> Coolant should be between MIN and MAX when cold</li><li><strong>Check coolant condition:</strong> Should be clean, not rusty or oily</li><li><strong>Add coolant if needed:</strong> Use 50/50 coolant/water mix</li></ol>`},
+                {id: 'windshield-wipers', title: 'Replace Windshield Wipers', icon: 'fas fa-eye', difficulty: 'Easy', time: '15 min', description: 'Maintain clear visibility', content: `<h3>Tools Needed:</h3><ul><li>New wiper blades (correct size)</li><li>Clean cloth</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Lift wiper arms:</strong> Pull wiper arms away from windshield</li><li><strong>Locate release mechanism:</strong> Look for tab, button, or clip on blade</li><li><strong>Remove old blade:</strong> Press release and slide blade off arm</li><li><strong>Attach new blade:</strong> Slide new blade onto arm until you hear click</li><li><strong>Test fit:</strong> Gently lower arm and test wiper operation</li><li><strong>Repeat for other side:</strong> Replace both wipers for even performance</li></ol>`},
+                {id: 'headlight-bulb', title: 'Replace Headlight Bulb', icon: 'fas fa-lightbulb', difficulty: 'Medium', time: '30 min', description: 'Restore proper lighting', content: `<h3>Tools Needed:</h3><ul><li>Replacement bulb</li><li>Screwdriver</li><li>Gloves</li><li>Owner's manual</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off engine:</strong> Ensure headlights are off and cool</li><li><strong>Open hood:</strong> Access headlight assembly from engine bay</li><li><strong>Locate bulb holder:</strong> Find the back of headlight assembly</li><li><strong>Disconnect power:</strong> Unplug electrical connector</li><li><strong>Remove retaining ring:</strong> Turn counterclockwise to remove</li><li><strong>Remove old bulb:</strong> Pull straight out without twisting</li><li><strong>Install new bulb:</strong> Handle by base only, don't touch glass</li><li><strong>Reassemble:</strong> Replace retaining ring and reconnect power</li><li><strong>Test:</strong> Turn on headlights to verify operation</li></ol>`},
+                {id: 'car-wash', title: 'Wash Your Car Properly', icon: 'fas fa-car', difficulty: 'Easy', time: '45 min', description: 'Protect your car\'s finish', content: `<h3>Tools Needed:</h3><ul><li>Two buckets</li><li>Car wash soap</li><li>Wash mitt or sponge</li><li>Microfiber towels</li><li>Hose with nozzle</li><li>Wheel cleaner</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Park in shade:</strong> Avoid direct sunlight</li><li><strong>Rinse car:</strong> Remove loose dirt with hose</li><li><strong>Clean wheels first:</strong> Use wheel cleaner and separate tools</li><li><strong>Two-bucket method:</strong> One for soapy water, one for rinsing mitt</li><li><strong>Wash top to bottom:</strong> Start with roof, work down</li><li><strong>Rinse frequently:</strong> Don't let soap dry on surface</li><li><strong>Final rinse:</strong> Remove all soap residue</li><li><strong>Dry immediately:</strong> Use microfiber towels to prevent water spots</li></ol>`},
+                {id: 'battery-maintenance', title: 'Clean Battery Terminals', icon: 'fas fa-car-battery', difficulty: 'Easy', time: '20 min', description: 'Prevent starting problems', content: `<h3>Tools Needed:</h3><ul><li>Baking soda</li><li>Water</li><li>Wire brush</li><li>Wrench set</li><li>Petroleum jelly</li><li>Safety glasses and gloves</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Safety first:</strong> Wear gloves and safety glasses</li><li><strong>Turn off engine:</strong> Remove keys and ensure engine is cool</li><li><strong>Identify terminals:</strong> Locate positive (+) and negative (-) terminals</li><li><strong>Remove negative first:</strong> Loosen and remove negative cable</li><li><strong>Remove positive cable:</strong> Loosen and remove positive cable</li><li><strong>Make cleaning solution:</strong> Mix baking soda with water</li><li><strong>Clean terminals:</strong> Scrub terminals and cable ends with wire brush</li><li><strong>Rinse and dry:</strong> Rinse with clean water and dry thoroughly</li><li><strong>Apply petroleum jelly:</strong> Coat terminals to prevent corrosion</li><li><strong>Reconnect cables:</strong> Positive first, then negative</li></ol>`},
+                {id: 'tire-pressure', title: 'Check Tire Pressure', icon: 'fas fa-gauge-high', difficulty: 'Easy', time: '10 min', description: 'Improve safety and fuel economy', content: `<h3>Tools Needed:</h3><ul><li>Tire pressure gauge</li><li>Air compressor or pump</li><li>Valve cap remover (if needed)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Check when cold:</strong> Before driving or 3+ hours after driving</li><li><strong>Find recommended pressure:</strong> Check driver's door jamb sticker</li><li><strong>Remove valve cap:</strong> Unscrew cap from tire valve stem</li><li><strong>Press gauge firmly:</strong> Push gauge onto valve stem until hissing stops</li><li><strong>Read measurement:</strong> Note pressure reading on gauge</li><li><strong>Add air if needed:</strong> If low, add air in small increments</li><li><strong>Recheck pressure:</strong> Verify correct pressure after adding air</li><li><strong>Replace valve cap:</strong> Screw cap back on to keep dirt out</li><li><strong>Check all tires:</strong> Include spare tire in monthly checks</li></ol>`},
+                {id: 'cabin-filter', title: 'Replace Cabin Air Filter', icon: 'fas fa-leaf', difficulty: 'Easy', time: '15 min', description: 'Improve interior air quality', content: `<h3>Tools Needed:</h3><ul><li>New cabin air filter</li><li>Screwdriver (possibly)</li><li>Vacuum cleaner</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate filter housing:</strong> Usually behind glove box or under hood</li><li><strong>Access filter:</strong> May need to remove glove box or panel</li><li><strong>Remove old filter:</strong> Note direction of airflow arrows</li><li><strong>Clean housing:</strong> Vacuum out any debris</li><li><strong>Install new filter:</strong> Insert with airflow arrows pointing correct direction</li><li><strong>Reassemble:</strong> Replace any panels or covers removed</li></ol>`},
+                {id: 'spark-plugs', title: 'Replace Spark Plugs', icon: 'fas fa-bolt', difficulty: 'Medium', time: '1 hour', description: 'Improve engine performance', content: `<h3>Tools Needed:</h3><ul><li>New spark plugs</li><li>Spark plug wrench</li><li>Gap gauge</li><li>Dielectric grease</li><li>Torque wrench</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine must be cool:</strong> Wait until engine is completely cool</li><li><strong>Locate spark plugs:</strong> Follow ignition wires to engine</li><li><strong>Remove one at a time:</strong> Work on one plug at a time to avoid mix-ups</li><li><strong>Clean area:</strong> Blow out debris around plug before removal</li><li><strong>Remove old plug:</strong> Turn counterclockwise with spark plug wrench</li><li><strong>Check gap on new plug:</strong> Use gap gauge to verify proper spacing</li><li><strong>Apply anti-seize:</strong> Small amount on threads (not electrode end)</li><li><strong>Install new plug:</strong> Hand-tighten first, then use wrench</li><li><strong>Reconnect ignition wire:</strong> Push firmly until you hear/feel click</li><li><strong>Repeat for all plugs:</strong> Replace remaining plugs one at a time</li></ol>`},
+                {id: 'transmission-fluid', title: 'Check Transmission Fluid', icon: 'fas fa-cogs', difficulty: 'Easy', time: '10 min', description: 'Ensure smooth shifting', content: `<h3>Tools Needed:</h3><ul><li>Clean rag</li><li>Funnel</li><li>Transmission fluid (if needed)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Warm up engine:</strong> Drive for 5-10 minutes to warm transmission</li><li><strong>Park on level ground:</strong> Engine running, transmission in park</li><li><strong>Locate dipstick:</strong> Usually red handle, may be labeled "TRANS"</li><li><strong>Remove and clean:</strong> Pull out dipstick and clean with rag</li><li><strong>Reinsert fully:</strong> Push dipstick all the way back in</li><li><strong>Remove and check:</strong> Pull out and check fluid level and condition</li><li><strong>Add fluid if needed:</strong> Use only specified transmission fluid type</li></ol>`},
+                {id: 'belt-inspection', title: 'Inspect Drive Belts', icon: 'fas fa-sync', difficulty: 'Easy', time: '15 min', description: 'Prevent roadside breakdowns', content: `<h3>Tools Needed:</h3><ul><li>Flashlight</li><li>Visual inspection only</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine must be off:</strong> Ensure engine is cool and off</li><li><strong>Locate drive belts:</strong> Usually on front of engine</li><li><strong>Check for cracks:</strong> Look for cracks across the ribs</li><li><strong>Check for fraying:</strong> Look for worn or frayed edges</li><li><strong>Check tension:</strong> Belt should have slight give when pressed</li><li><strong>Look for glazing:</strong> Shiny appearance indicates slipping</li><li><strong>Check alignment:</strong> Belt should run straight on pulleys</li></ol>`},
+                {id: 'fuse-replacement', title: 'Replace Car Fuses', icon: 'fas fa-plug', difficulty: 'Easy', time: '10 min', description: 'Fix electrical problems', content: `<h3>Tools Needed:</h3><ul><li>Replacement fuses</li><li>Fuse puller tool</li><li>Owner's manual</li><li>Flashlight</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Turn off engine:</strong> Remove keys and turn off all electrical accessories</li><li><strong>Locate fuse box:</strong> Check under hood and/or inside cabin</li><li><strong>Identify problem circuit:</strong> Use fuse box diagram to find correct fuse</li><li><strong>Remove suspect fuse:</strong> Use fuse puller or needle-nose pliers</li><li><strong>Check fuse:</strong> Look for broken metal strip inside fuse</li><li><strong>Replace if blown:</strong> Install new fuse of same amperage</li><li><strong>Test circuit:</strong> Turn on affected electrical component</li></ol>`},
+                {id: 'power-steering', title: 'Check Power Steering Fluid', icon: 'fas fa-steering-wheel', difficulty: 'Easy', time: '5 min', description: 'Maintain easy steering', content: `<h3>Tools Needed:</h3><ul><li>Clean rag</li><li>Power steering fluid (if needed)</li><li>Funnel</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine should be warm:</strong> Run engine for a few minutes</li><li><strong>Turn off engine:</strong> Check fluid with engine off</li><li><strong>Locate reservoir:</strong> Usually has steering wheel symbol on cap</li><li><strong>Clean cap area:</strong> Wipe away dirt before removing cap</li><li><strong>Check level:</strong> Fluid should be between MIN and MAX marks</li><li><strong>Check fluid condition:</strong> Should be clear or light amber</li><li><strong>Add fluid if needed:</strong> Use only recommended power steering fluid</li></ol>`},
+                {id: 'radiator-hoses', title: 'Inspect Radiator Hoses', icon: 'fas fa-thermometer-half', difficulty: 'Easy', time: '15 min', description: 'Prevent cooling system failure', content: `<h3>Tools Needed:</h3><ul><li>Flashlight</li><li>Visual and tactile inspection</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine must be cool:</strong> Wait until engine is completely cool</li><li><strong>Locate radiator hoses:</strong> Upper and lower hoses from radiator to engine</li><li><strong>Check for leaks:</strong> Look for coolant stains or puddles</li><li><strong>Feel hose condition:</strong> Squeeze gently - should be firm, not soft or hard</li><li><strong>Check clamps:</strong> Ensure hose clamps are tight</li><li><strong>Look for bulges:</strong> Hoses should be uniform in shape</li><li><strong>Check connections:</strong> Verify hoses are properly seated</li></ol>`},
+                {id: 'door-locks', title: 'Fix Sticky Door Locks', icon: 'fas fa-key', difficulty: 'Easy', time: '15 min', description: 'Maintain security and convenience', content: `<h3>Tools Needed:</h3><ul><li>Graphite lubricant or lock spray</li><li>Key</li><li>Clean cloth</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean lock exterior:</strong> Wipe away dirt and debris</li><li><strong>Apply lubricant:</strong> Spray graphite lubricant into lock cylinder</li><li><strong>Work the key:</strong> Insert key and turn several times</li><li><strong>Test operation:</strong> Lock and unlock several times</li><li><strong>Clean excess:</strong> Wipe away any excess lubricant</li><li><strong>Test remote:</strong> If equipped, test key fob operation</li></ol>`},
+                {id: 'washer-fluid', title: 'Refill Washer Fluid', icon: 'fas fa-spray-can', difficulty: 'Easy', time: '5 min', description: 'Maintain clear visibility', content: `<h3>Tools Needed:</h3><ul><li>Windshield washer fluid</li><li>Funnel (helpful)</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate reservoir:</strong> Look for cap with windshield/spray symbol</li><li><strong>Remove cap:</strong> Unscrew or lift cap</li><li><strong>Check current level:</strong> Look inside reservoir</li><li><strong>Add washer fluid:</strong> Pour in washer fluid, don't overfill</li><li><strong>Replace cap:</strong> Secure cap tightly</li><li><strong>Test system:</strong> Try windshield washers to verify operation</li></ol>`},
+                {id: 'emergency-kit', title: 'Build Emergency Car Kit', icon: 'fas fa-first-aid', difficulty: 'Easy', time: '30 min', description: 'Be prepared for roadside emergencies', content: `<h3>Essential Items:</h3><ul><li>Jumper cables</li><li>Tire gauge and portable air compressor</li><li>Multi-tool or basic tool kit</li><li>Flashlight and extra batteries</li><li>First aid kit</li><li>Emergency flares or reflective triangles</li><li>Emergency blanket</li><li>Water and non-perishable snacks</li><li>Phone charger (car adapter)</li><li>Cash in small bills</li><li>Paper towels and wet wipes</li><li>Duct tape</li></ul>`},
+                {id: 'car-detailing', title: 'Detail Your Car Interior', icon: 'fas fa-car-side', difficulty: 'Medium', time: '2 hours', description: 'Professional-level interior cleaning', content: `<h3>Tools Needed:</h3><ul><li>Vacuum cleaner with attachments</li><li>Microfiber cloths</li><li>Interior cleaner</li><li>Glass cleaner</li><li>Leather conditioner (if applicable)</li><li>Soft brushes</li><li>Cotton swabs</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Remove everything:</strong> Take out floor mats, trash, and personal items</li><li><strong>Vacuum thoroughly:</strong> Seats, carpets, crevices, and trunk</li><li><strong>Clean hard surfaces:</strong> Dashboard, door panels, center console</li><li><strong>Clean seats:</strong> Use appropriate cleaner for fabric or leather</li><li><strong>Clean windows:</strong> Inside surfaces with glass cleaner</li><li><strong>Detail small areas:</strong> Use cotton swabs for vents and small spaces</li><li><strong>Condition leather:</strong> Apply leather conditioner if equipped</li><li><strong>Clean floor mats:</strong> Wash and dry floor mats</li><li><strong>Final vacuum:</strong> Touch up any areas disturbed during cleaning</li></ol>`},
+                {id: 'paint-touch-up', title: 'Touch Up Paint Scratches', icon: 'fas fa-palette', difficulty: 'Medium', time: '45 min', description: 'Repair minor paint damage', content: `<h3>Tools Needed:</h3><ul><li>Touch-up paint (matching your car)</li><li>Fine sandpaper (2000 grit)</li><li>Primer (if needed)</li><li>Small brush or touch-up pen</li><li>Clear coat</li><li>Polishing compound</li><li>Microfiber cloths</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Clean the area:</strong> Wash and dry the scratched area thoroughly</li><li><strong>Assess damage:</strong> Determine if scratch goes through paint to metal</li><li><strong>Sand lightly:</strong> If deep scratch, sand lightly with fine sandpaper</li><li><strong>Apply primer:</strong> If metal is exposed, apply thin coat of primer</li><li><strong>Apply base coat:</strong> Use thin layers, allow each to dry</li><li><strong>Apply clear coat:</strong> Protect the new paint with clear coat</li><li><strong>Let cure:</strong> Allow 24-48 hours for complete curing</li><li><strong>Polish:</strong> Blend edges with polishing compound</li></ol>`},
+                {id: 'replace-wiper-motor', title: 'Replace Wiper Motor', icon: 'fas fa-cog', difficulty: 'Hard', time: '2 hours', description: 'Fix non-functioning wipers', content: `<h3>Tools Needed:</h3><ul><li>New wiper motor</li><li>Socket set</li><li>Screwdriver</li><li>Trim removal tools</li><li>Electrical tester</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Disconnect battery:</strong> Remove negative battery cable</li><li><strong>Remove wiper arms:</strong> Mark position and remove wiper arms</li><li><strong>Remove cowl panel:</strong> Take off plastic cowl covering</li><li><strong>Disconnect wiper linkage:</strong> Remove linkage from motor</li><li><strong>Disconnect electrical:</strong> Unplug motor electrical connections</li><li><strong>Remove motor:</strong> Unbolt motor from mounting bracket</li><li><strong>Install new motor:</strong> Reverse removal process</li><li><strong>Test operation:</strong> Reconnect battery and test wipers</li></ol>`},
+                {id: 'replace-serpentine-belt', title: 'Replace Serpentine Belt', icon: 'fas fa-cog', difficulty: 'Medium', time: '45 min', description: 'Essential engine component replacement', content: `<h3>Tools Needed:</h3><ul><li>New serpentine belt</li><li>Socket set</li><li>Belt routing diagram</li><li>Flashlight</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Locate belt routing:</strong> Find diagram under hood or in manual</li><li><strong>Take a photo:</strong> Photograph belt routing before removal</li><li><strong>Release belt tension:</strong> Use wrench on tensioner pulley</li><li><strong>Remove old belt:</strong> Slip belt off pulleys while holding tensioner</li><li><strong>Inspect pulleys:</strong> Check for damage or excessive wear</li><li><strong>Install new belt:</strong> Follow routing diagram carefully</li><li><strong>Release tensioner:</strong> Allow tensioner to apply proper pressure</li><li><strong>Check alignment:</strong> Ensure belt is properly seated on all pulleys</li></ol>`},
+                {id: 'replace-thermostat', title: 'Replace Engine Thermostat', icon: 'fas fa-thermometer-half', difficulty: 'Medium', time: '1 hour', description: 'Fix engine temperature issues', content: `<h3>Tools Needed:</h3><ul><li>New thermostat</li><li>Gasket or sealant</li><li>Socket set</li><li>Coolant</li><li>Drain pan</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Engine must be cool:</strong> Wait until completely cool</li><li><strong>Drain coolant:</strong> Drain enough coolant to access thermostat</li><li><strong>Locate thermostat housing:</strong> Follow upper radiator hose to engine</li><li><strong>Remove housing:</strong> Unbolt thermostat housing</li><li><strong>Remove old thermostat:</strong> Note orientation of thermostat</li><li><strong>Clean surfaces:</strong> Remove old gasket material</li><li><strong>Install new thermostat:</strong> Ensure proper orientation</li><li><strong>Reassemble:</strong> Use new gasket and bolt housing back</li><li><strong>Refill coolant:</strong> Add coolant and check for leaks</li></ol>`},
+                {id: 'replace-fuel-filter', title: 'Replace Fuel Filter', icon: 'fas fa-filter', difficulty: 'Medium', time: '30 min', description: 'Maintain fuel system performance', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Work in well-ventilated area. No smoking or open flames.</p><h3>Tools Needed:</h3><ul><li>New fuel filter</li><li>Fuel line disconnect tools</li><li>Safety glasses</li><li>Gloves</li><li>Catch pan</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Relieve fuel pressure:</strong> Remove fuel pump fuse and run engine until it stalls</li><li><strong>Locate fuel filter:</strong> Usually along fuel line under vehicle</li><li><strong>Prepare catch pan:</strong> Place pan under filter to catch fuel</li><li><strong>Disconnect fuel lines:</strong> Use proper disconnect tools</li><li><strong>Remove old filter:</strong> Note direction of fuel flow arrow</li><li><strong>Install new filter:</strong> Ensure arrow points toward engine</li><li><strong>Reconnect fuel lines:</strong> Ensure secure connections</li><li><strong>Start engine:</strong> Check for leaks after starting</li></ol>`},
+                {id: 'replace-alternator', title: 'Replace Alternator', icon: 'fas fa-car-battery', difficulty: 'Hard', time: '2 hours', description: 'Fix charging system problems', content: `<h3>Tools Needed:</h3><ul><li>New alternator</li><li>Socket set</li><li>Wrenches</li><li>Belt</li><li>Battery terminal puller</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Disconnect battery:</strong> Remove negative battery cable</li><li><strong>Remove drive belt:</strong> Release belt tension and remove belt</li><li><strong>Disconnect alternator wiring:</strong> Remove electrical connections</li><li><strong>Remove mounting bolts:</strong> Remove alternator mounting bolts</li><li><strong>Remove alternator:</strong> Lift alternator out of engine bay</li><li><strong>Install new alternator:</strong> Reverse removal process</li><li><strong>Reconnect everything:</strong> Wiring, belt, and battery</li><li><strong>Test charging:</strong> Start engine and verify proper charging</li></ol>`},
+                {id: 'replace-brake-pads', title: 'Replace Brake Pads', icon: 'fas fa-brake-warning', difficulty: 'Hard', time: '2 hours', description: 'Critical safety maintenance', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Brakes are critical safety components. If unsure, consult a professional.</p><h3>Tools Needed:</h3><ul><li>New brake pads</li><li>C-clamp or piston tool</li><li>Socket set</li><li>Brake cleaner</li><li>Jack and stands</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Secure vehicle:</strong> Use jack stands, never work under car supported only by jack</li><li><strong>Remove wheel:</strong> Remove lug nuts and wheel</li><li><strong>Remove caliper:</strong> Remove caliper bolts and hang caliper with wire</li><li><strong>Remove old pads:</strong> Take out old brake pads</li><li><strong>Compress piston:</strong> Use C-clamp to compress caliper piston</li><li><strong>Install new pads:</strong> Place new pads in caliper bracket</li><li><strong>Reinstall caliper:</strong> Bolt caliper back in place</li><li><strong>Test brakes:</strong> Pump brake pedal before driving</li></ol>`},
+                {id: 'replace-starter', title: 'Replace Starter Motor', icon: 'fas fa-cog', difficulty: 'Hard', time: '2 hours', description: 'Fix starting problems', content: `<h3>Tools Needed:</h3><ul><li>New starter</li><li>Socket set</li><li>Wrenches</li><li>Jack and stands</li><li>Wire brush</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Disconnect battery:</strong> Remove negative battery cable</li><li><strong>Raise vehicle:</strong> Use jack and stands for access</li><li><strong>Locate starter:</strong> Usually on lower part of engine</li><li><strong>Disconnect wiring:</strong> Remove electrical connections from starter</li><li><strong>Remove mounting bolts:</strong> Unbolt starter from engine</li><li><strong>Remove starter:</strong> Carefully lower starter out</li><li><strong>Install new starter:</strong> Reverse removal process</li><li><strong>Test operation:</strong> Reconnect battery and test starting</li></ol>`},
+                {id: 'replace-water-pump', title: 'Replace Water Pump', icon: 'fas fa-cog', difficulty: 'Hard', time: '4 hours', description: 'Fix cooling system circulation', content: `<h3>Tools Needed:</h3><ul><li>New water pump</li><li>Gasket set</li><li>Coolant</li><li>Socket set</li><li>Drain pan</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Drain cooling system:</strong> Completely drain all coolant</li><li><strong>Remove accessories:</strong> Remove fan, shroud, and belts</li><li><strong>Remove pulleys:</strong> Remove water pump pulley</li><li><strong>Disconnect hoses:</strong> Remove radiator and heater hoses</li><li><strong>Remove water pump:</strong> Unbolt pump from engine</li><li><strong>Clean surfaces:</strong> Remove old gasket material</li><li><strong>Install new pump:</strong> Use new gasket and proper torque</li><li><strong>Reassemble:</strong> Reverse disassembly process</li><li><strong>Refill coolant:</strong> Fill and bleed cooling system</li></ol>`},
+                {id: 'replace-cv-joint', title: 'Replace CV Joint', icon: 'fas fa-cog', difficulty: 'Hard', time: '3 hours', description: 'Fix clicking noise when turning', content: `<h3>Tools Needed:</h3><ul><li>New CV joint or axle</li><li>Socket set</li><li>Pry bar</li><li>Hammer</li><li>Jack and stands</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Raise vehicle:</strong> Secure on jack stands</li><li><strong>Remove wheel:</strong> Remove wheel and brake caliper</li><li><strong>Remove axle nut:</strong> Remove large axle nut (may require breaker bar)</li><li><strong>Disconnect suspension:</strong> Remove ball joint or tie rod</li><li><strong>Remove axle:</strong> Pull axle from hub and transmission</li><li><strong>Replace CV joint:</strong> Install new joint or complete axle</li><li><strong>Reassemble:</strong> Reverse disassembly process</li><li><strong>Test drive:</strong> Check for proper operation and no noise</li></ol>`},
+                {id: 'replace-radiator', title: 'Replace Radiator', icon: 'fas fa-thermometer-half', difficulty: 'Hard', time: '3 hours', description: 'Fix overheating issues', content: `<h3>Tools Needed:</h3><ul><li>New radiator</li><li>Coolant</li><li>Socket set</li><li>Drain pan</li><li>Funnel</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Drain cooling system:</strong> Completely drain all coolant</li><li><strong>Remove cooling fans:</strong> Disconnect and remove cooling fans</li><li><strong>Disconnect hoses:</strong> Remove upper and lower radiator hoses</li><li><strong>Disconnect transmission lines:</strong> If automatic, disconnect cooler lines</li><li><strong>Remove radiator:</strong> Lift radiator out of vehicle</li><li><strong>Install new radiator:</strong> Reverse removal process</li><li><strong>Refill cooling system:</strong> Fill with proper coolant mixture</li><li><strong>Test for leaks:</strong> Run engine and check for leaks</li></ol>`}
             ],
             'tech-help': [
-                {id: 'reset-router', title: 'Reset WiFi Router', icon: 'fas fa-wifi', difficulty: 'Easy', time: '10 min', description: 'Fix internet connectivity issues', content: `
-                    <h3>When to Reset:</h3>
-                    <ul><li>Slow internet speeds</li><li>Frequent disconnections</li><li>Can't connect new devices</li><li>Internet completely down</li></ul>
-                    <h3>Step-by-Step Instructions:</h3>
-                    <ol>
-                        <li><strong>Try soft reset first:</strong> Unplug router for 30 seconds, plug back in</li>
-                        <li><strong>Wait for full startup:</strong> Allow 2-3 minutes for complete boot</li>
-                        <li><strong>Test connection:</strong> Try connecting a device to internet</li>
-                        <li><strong>If still not working, factory reset:</strong> Hold reset button for 10-15 seconds while powered on</li>
-                        <li><strong>Wait for restart:</strong> Router will reboot to factory settings</li>
-                        <li><strong>Reconfigure settings:</strong> You'll need to set up WiFi name and password again</li>
-                        <li><strong>Update firmware:</strong> Check for and install any available updates</li>
-                    </ol>
-                    <h3>Pro Tips:</h3>
-                    <p>Write down your current WiFi settings before factory reset. Contact your ISP if problems persist.</p>
-                `},
-                {id: 'clear-storage', title: 'Clear Phone Storage', icon: 'fas fa-mobile-alt', difficulty: 'Easy', time: '20 min', description: 'Free up space and improve performance', content: `
-                    <h3>iPhone Storage Cleanup:</h3>
-                    <ol>
-                        <li><strong>Check storage:</strong> Settings > General > iPhone Storage</li>
-                        <li><strong>Delete unused apps:</strong> Tap apps you don't use, select Delete App</li>
-                        <li><strong>Clear photo cache:</strong> Review and delete duplicate or unwanted photos</li>
-                        <li><strong>Manage messages:</strong> Delete old text conversations with photos/videos</li>
-                        <li><strong>Clear browser cache:</strong> Settings > Safari > Clear History and Website Data</li>
-                        <li><strong>Offload unused apps:</strong> Enable "Offload Unused Apps" in settings</li>
-                    </ol>
-                    <h3>Android Storage Cleanup:</h3>
-                    <ol>
-                        <li><strong>Check storage:</strong> Settings > Storage</li>
-                        <li><strong>Clear app cache:</strong> Settings > Apps > [App Name] > Storage > Clear Cache</li>
-                        <li><strong>Delete downloads:</strong> File manager > Downloads folder</li>
-                        <li><strong>Clear photos/videos:</strong> Back up to cloud, then delete local copies</li>
-                        <li><strong>Use storage analyzer:</strong> Use built-in storage manager recommendations</li>
-                    </ol>
-                `},
-                {id: 'install-printer', title: 'Install a Printer', icon: 'fas fa-print', difficulty: 'Medium', time: '30 min', description: 'Setup and troubleshooting guide', content: `
-                    <h3>Wireless Printer Setup:</h3>
-                    <ol>
-                        <li><strong>Unbox and setup:</strong> Remove all tape and packing materials</li>
-                        <li><strong>Install ink/toner:</strong> Follow manufacturer's instructions</li>
-                        <li><strong>Power on printer:</strong> Connect power and turn on</li>
-                        <li><strong>Connect to WiFi:</strong> Use printer's display menu to connect to your network</li>
-                        <li><strong>Download drivers:</strong> Visit manufacturer's website for latest drivers</li>
-                        <li><strong>Add printer to computer:</strong> 
-                            <ul>
-                                <li>Windows: Settings > Printers & Scanners > Add Printer</li>
-                                <li>Mac: System Preferences > Printers & Scanners > Add</li>
-                            </ul>
-                        </li>
-                        <li><strong>Print test page:</strong> Verify everything is working correctly</li>
-                    </ol>
-                    <h3>USB Printer Setup:</h3>
-                    <ol>
-                        <li><strong>Connect USB cable:</strong> Connect printer to computer with USB cable</li>
-                        <li><strong>Power on printer:</strong> Turn on printer</li>
-                        <li><strong>Install drivers:</strong> Computer should automatically detect and install</li>
-                        <li><strong>Test printing:</strong> Print a test page to verify setup</li>
-                    </ol>
-                `},
-                {id: 'speed-up-computer', title: 'Speed Up Slow Computer', icon: 'fas fa-tachometer-alt', difficulty: 'Medium', time: '45 min', description: 'Improve computer performance', content: `
-                    <h3>Windows Optimization:</h3>
-                    <ol>
-                        <li><strong>Restart computer:</strong> Simple restart can solve many performance issues</li>
-                        <li><strong>Check for malware:</strong> Run full antivirus scan</li>
-                        <li><strong>Uninstall unused programs:</strong> Control Panel > Programs and Features</li>
-                        <li><strong>Disable startup programs:</strong> Task Manager > Startup tab</li>
-                        <li><strong>Run disk cleanup:</strong> Search "Disk Cleanup" in start menu</li>
-                        <li><strong>Check hard drive space:</strong> Ensure at least 15% free space</li>
-                        <li><strong>Update drivers:</strong> Device Manager > check for driver updates</li>
-                        <li><strong>Add more RAM:</strong> If consistently using >80% RAM, consider upgrade</li>
-                    </ol>
-                    <h3>Mac Optimization:</h3>
-                    <ol>
-                        <li><strong>Restart Mac:</strong> Apple Menu > Restart</li>
-                        <li><strong>Check Activity Monitor:</strong> See which apps use most resources</li>
-                        <li><strong>Clean up storage:</strong> Apple Menu > About This Mac > Storage > Manage</li>
-                        <li><strong>Remove login items:</strong> System Preferences > Users & Groups > Login Items</li>
-                        <li><strong>Reset SMC/PRAM:</strong> Look up specific key combinations for your Mac model</li>
-                    </ol>
-                `},
-                {id: 'backup-data', title: 'Backup Your Data', icon: 'fas fa-cloud-upload-alt', difficulty: 'Easy', time: '30 min', description: 'Protect your important files', content: `
-                    <h3>Cloud Backup Options:</h3>
-                    <ul>
-                        <li><strong>Google Drive:</strong> 15GB free, integrates with Google services</li>
-                        <li><strong>iCloud:</strong> 5GB free, seamless with Apple devices</li>
-                        <li><strong>Dropbox:</strong> 2GB free, excellent sync across devices</li>
-                        <li><strong>OneDrive:</strong> 5GB free, integrates with Microsoft Office</li>
-                    </ul>
-                    <h3>Setting Up Automatic Backup:</h3>
-                    <h4>Windows:</h4>
-                    <ol>
-                        <li><strong>Enable File History:</strong> Settings > Update & Security > Backup</li>
-                        <li><strong>Choose backup drive:</strong> External drive or network location</li>
-                        <li><strong>Select folders:</strong> Choose which folders to back up</li>
-                        <li><strong>Set schedule:</strong> Configure backup frequency</li>
-                    </ol>
-                    <h4>Mac:</h4>
-                    <ol>
-                        <li><strong>Enable Time Machine:</strong> System Preferences > Time Machine</li>
-                        <li><strong>Select backup disk:</strong> Choose external drive</li>
-                        <li><strong>Turn on Time Machine:</strong> Enable automatic backups</li>
-                    </ol>
-                `},
-                {id: 'password-manager', title: 'Set Up Password Manager', icon: 'fas fa-key', difficulty: 'Easy', time: '45 min', description: 'Improve online security', content: `
-                    <h3>Popular Password Managers:</h3>
-                    <ul>
-                        <li><strong>1Password:</strong> Premium option with excellent features</li>
-                        <li><strong>Bitwarden:</strong> Free version with good functionality</li>
-                        <li><strong>LastPass:</strong> Popular choice with free tier</li>
-                        <li><strong>Dashlane:</strong> User-friendly with additional security features</li>
-                    </ul>
-                    <h3>Setup Process:</h3>
-                    <ol>
-                        <li><strong>Choose password manager:</strong> Research and select one that fits your needs</li>
-                        <li><strong>Create master password:</strong> Use a strong, unique password you'll remember</li>
-                        <li><strong>Install browser extension:</strong> Add extension to all your browsers</li>
-                        <li><strong>Import existing passwords:</strong> Most browsers can export saved passwords</li>
-                        <li><strong>Generate new passwords:</strong> Replace weak passwords with strong, unique ones</li>
-                        <li><strong>Enable two-factor authentication:</strong> Add extra security to the password manager itself</li>
-                        <li><strong>Install mobile app:</strong> Access passwords on your phone</li>
-                    </ol>
-                `},
-                {id: 'email-security', title: 'Secure Your Email', icon: 'fas fa-envelope-open-text', difficulty: 'Medium', time: '30 min', description: 'Protect against email threats', content: `
-                    <h3>Email Security Steps:</h3>
-                    <ol>
-                        <li><strong>Enable two-factor authentication:</strong> Add 2FA to all email accounts</li>
-                        <li><strong>Use strong passwords:</strong> Unique password for each email account</li>
-                        <li><strong>Review login activity:</strong> Check for suspicious login attempts</li>
-                        <li><strong>Enable encryption:</strong> Use encrypted email services when possible</li>
-                        <li><strong>Be cautious with attachments:</strong> Don't open unexpected attachments</li>
-                        <li><strong>Verify sender identity:</strong> Check sender carefully for phishing attempts</li>
-                        <li><strong>Use separate email addresses:</strong> Different emails for banking, shopping, social media</li>
-                        <li><strong>Regular password updates:</strong> Change passwords every 3-6 months</li>
-                    </ol>
-                    <h3>Red Flags to Watch For:</h3>
-                    <ul>
-                        <li>Urgent requests for personal information</li>
-                        <li>Spelling/grammar errors in official emails</li>
-                        <li>Suspicious links or attachments</li>
-                        <li>Requests to verify account information</li>
-                    </ul>
-                `},
-                {id: 'software-updates', title: 'Update Software Safely', icon: 'fas fa-download', difficulty: 'Easy', time: '20 min', description: 'Keep your system secure', content: `
-                    <h3>Windows Updates:</h3>
-                    <ol>
-                        <li><strong>Check for updates:</strong> Settings > Update & Security > Windows Update</li>
-                        <li><strong>Download and install:</strong> Click "Check for updates"</li>
-                        <li><strong>Restart when prompted:</strong> Complete installation with restart</li>
-                        <li><strong>Enable automatic updates:</strong> Keep system updated automatically</li>
-                    </ol>
-                    <h3>Mac Updates:</h3>
-                    <ol>
-                        <li><strong>Check for updates:</strong> Apple Menu > System Preferences > Software Update</li>
-                        <li><strong>Install available updates:</strong> Click "Update Now"</li>
-                        <li><strong>Enable automatic updates:</strong> Check "Keep my Mac up to date"</li>
-                    </ol>
-                    <h3>App Updates:</h3>
-                    <ul>
-                        <li><strong>Enable automatic updates:</strong> Most apps can update automatically</li>
-                        <li><strong>Check app stores:</strong> Regularly check for app updates</li>
-                        <li><strong>Only download from official sources:</strong> Avoid third-party download sites</li>
-                    </ul>
-                `},
-                {id: 'fix-bluetooth', title: 'Fix Bluetooth Connection Issues', icon: 'fas fa-bluetooth', difficulty: 'Easy', time: '15 min', description: 'Resolve common Bluetooth problems', content: `
-                    <h3>Basic Troubleshooting:</h3>
-                    <ol>
-                        <li><strong>Turn Bluetooth off and on:</strong> Toggle Bluetooth setting</li>
-                        <li><strong>Restart both devices:</strong> Turn off and on both devices</li>
-                        <li><strong>Check distance:</strong> Ensure devices are within 30 feet</li>
-                        <li><strong>Remove interference:</strong> Move away from WiFi routers, microwaves</li>
-                        <li><strong>Clear Bluetooth cache:</strong> (Android) Settings > Apps > Bluetooth > Storage > Clear Cache</li>
-                    </ol>
-                    <h3>Advanced Solutions:</h3>
-                    <ol>
-                        <li><strong>Forget and re-pair device:</strong> Remove device from Bluetooth list, pair again</li>
-                        <li><strong>Update drivers:</strong> (Windows) Device Manager > Bluetooth > Update driver</li>
-                        <li><strong>Reset network settings:</strong> (iPhone) Settings > General > Reset > Reset Network Settings</li>
-                        <li><strong>Check compatibility:</strong> Ensure devices support same Bluetooth version</li>
-                    </ol>
-                `},
-                {id: 'social-media-privacy', title: 'Secure Social Media Privacy', icon: 'fas fa-user-shield', difficulty: 'Medium', time: '40 min', description: 'Protect your online presence', content: `
-                    <h3>Facebook Privacy:</h3>
-                    <ol>
-                        <li><strong>Review privacy settings:</strong> Settings & Privacy > Privacy</li>
-                        <li><strong>Limit post visibility:</strong> Set default audience to "Friends"</li>
-                        <li><strong>Control friend requests:</strong> Limit who can send friend requests</li>
-                        <li><strong>Review tagged posts:</strong> Enable timeline review for tagged posts</li>
-                        <li><strong>Limit app permissions:</strong> Review and remove unnecessary app access</li>
-                    </ol>
-                    <h3>Instagram Privacy:</h3>
-                    <ol>
-                        <li><strong>Make account private:</strong> Settings > Privacy > Private Account</li>
-                        <li><strong>Control story viewing:</strong> Limit who can see your stories</li>
-                        <li><strong>Disable location tracking:</strong> Turn off location services</li>
-                        <li><strong>Review followers:</strong> Remove unwanted followers</li>
-                    </ol>
-                    <h3>General Tips:</h3>
-                    <ul>
-                        <li>Don't share personal information publicly</li>
-                        <li>Be careful with location check-ins</li>
-                        <li>Review and clean up old posts</li>
-                        <li>Use strong, unique passwords</li>
-                    </ul>
-                `},
-                {id: 'recover-deleted-files', title: 'Recover Deleted Files', icon: 'fas fa-trash-restore', difficulty: 'Medium', time: '30 min', description: 'Restore accidentally deleted files', content: `
-                    <h3>Windows File Recovery:</h3>
-                    <ol>
-                        <li><strong>Check Recycle Bin:</strong> Double-click Recycle Bin on desktop</li>
-                        <li><strong>Restore from Recycle Bin:</strong> Right-click file > Restore</li>
-                        <li><strong>Use File History:</strong> If enabled: File Explorer > History button</li>
-                        <li><strong>Check backup drives:</strong> Look in any backup locations</li>
-                        <li><strong>Use recovery software:</strong> Tools like Recuva or PhotoRec</li>
-                    </ol>
-                    <h3>Mac File Recovery:</h3>
-                    <ol>
-                        <li><strong>Check Trash:</strong> Click Trash icon in dock</li>
-                        <li><strong>Restore from Trash:</strong> Right-click file > Put Back</li>
-                        <li><strong>Use Time Machine:</strong> If enabled: Time Machine > Browse backups</li>
-                        <li><strong>Check recently deleted:</strong> Some apps have recently deleted folders</li>
-                    </ol>
-                    <h3>Prevention Tips:</h3>
-                    <ul>
-                        <li>Enable automatic backups</li>
-                        <li>Use cloud storage for important files</li>
-                        <li>Don't empty trash immediately</li>
-                    </ul>
-                `},
-                {id: 'clean-computer', title: 'Clean Computer Physically', icon: 'fas fa-broom', difficulty: 'Easy', time: '25 min', description: 'Maintain hardware for better performance', content: `
-                    <h3>Safety First:</h3>
-                    <p><strong>WARNING:</strong> Turn off and unplug computer before cleaning. Never use water directly on components.</p>
-                    <h3>Tools Needed:</h3>
-                    <ul><li>Compressed air</li><li>Microfiber cloths</li><li>Isopropyl alcohol (70% or higher)</li><li>Cotton swabs</li><li>Screwdriver (if opening case)</li></ul>
-                    <h3>Desktop Computer:</h3>
-                    <ol>
-                        <li><strong>Power down completely:</strong> Shut down and unplug from power</li>
-                        <li><strong>Remove dust from exterior:</strong> Use microfiber cloth</li>
-                        <li><strong>Clean keyboard and mouse:</strong> Use alcohol and cloth</li>
-                        <li><strong>Open computer case:</strong> Remove side panel (if comfortable doing so)</li>
-                        <li><strong>Blow out dust:</strong> Use compressed air on fans, heat sinks</li>
-                        <li><strong>Clean monitor:</strong> Use appropriate screen cleaner</li>
-                    </ol>
-                    <h3>Laptop Cleaning:</h3>
-                    <ol>
-                        <li><strong>Power down and unplug:</strong> Ensure laptop is completely off</li>
-                        <li><strong>Clean screen:</strong> Use microfiber cloth and screen cleaner</li>
-                        <li><strong>Clean keyboard:</strong> Use compressed air and alcohol wipes</li>
-                        <li><strong>Clean ports:</strong> Use compressed air to clear dust</li>
-                        <li><strong>Wipe exterior:</strong> Clean case with slightly damp cloth</li>
-                    </ol>
-                `},
-                {id: 'organize-desktop', title: 'Organize Desktop and Files', icon: 'fas fa-folder-open', difficulty: 'Easy', time: '35 min', description: 'Improve productivity with better organization', content: `
-                    <h3>Desktop Organization:</h3>
-                    <ol>
-                        <li><strong>Create folders by category:</strong> Work, Personal, Utilities, etc.</li>
-                        <li><strong>Move files to folders:</strong> Don't keep files loose on desktop</li>
-                        <li><strong>Delete unnecessary shortcuts:</strong> Remove shortcuts you don't use</li>
-                        <li><strong>Use descriptive names:</strong> Name files and folders clearly</li>
-                        <li><strong>Regular cleanup:</strong> Set weekly reminder to organize</li>
-                    </ol>
-                    <h3>File System Organization:</h3>
-                    <ol>
-                        <li><strong>Create main categories:</strong> Documents, Pictures, Projects, etc.</li>
-                        <li><strong>Use subfolders:</strong> Break down large categories</li>
-                        <li><strong>Date-based folders:</strong> For time-sensitive projects</li>
-                        <li><strong>Consistent naming:</strong> Use same naming convention throughout</li>
-                        <li><strong>Archive old files:</strong> Move old files to archive folders</li>
-                    </ol>
-                    <h3>Digital Maintenance:</h3>
-                    <ul>
-                        <li>Empty downloads folder regularly</li>
-                        <li>Uninstall programs you don't use</li>
-                        <li>Clear browser downloads</li>
-                        <li>Organize bookmarks in folders</li>
-                    </ul>
-                `},
-                {id: 'screen-mirroring', title: 'Set Up Screen Mirroring', icon: 'fas fa-desktop', difficulty: 'Medium', time: '20 min', description: 'Display phone/computer on TV', content: `
-                    <h3>Wireless Mirroring Options:</h3>
-                    <ul>
-                        <li><strong>Chromecast:</strong> Works with Android, iPhone, and computers</li>
-                        <li><strong>Apple TV/AirPlay:</strong> Best for Apple devices</li>
-                        <li><strong>Roku:</strong> Screen mirroring feature on most models</li>
-                        <li><strong>Smart TV built-in:</strong> Many TVs have built-in mirroring</li>
-                    </ul>
-                    <h3>iPhone to TV (AirPlay):</h3>
-                    <ol>
-                        <li><strong>Connect to same WiFi:</strong> Ensure iPhone and Apple TV/compatible device on same network</li>
-                        <li><strong>Open Control Center:</strong> Swipe down from top-right (newer iPhones)</li>
-                        <li><strong>Tap Screen Mirroring:</strong> Select your Apple TV or compatible device</li>
-                        <li><strong>Enter code if prompted:</strong> Some devices require verification code</li>
-                    </ol>
-                    <h3>Android to TV:</h3>
-                    <ol>
-                        <li><strong>Enable screen mirroring on TV:</strong> Look for "Screen Mirroring" or "Cast" option</li>
-                        <li><strong>Open settings on phone:</strong> Settings > Connected Devices > Cast</li>
-                        <li><strong>Select your TV:</strong> Choose TV from available devices list</li>
-                        <li><strong>Confirm connection:</strong> Follow any on-screen prompts</li>
-                    </ol>
-                `},
-                {id: 'home-network-security', title: 'Secure Your Home Network', icon: 'fas fa-shield-alt', difficulty: 'Medium', time: '30 min', description: 'Protect your WiFi and connected devices', content: `
-                    <h3>Router Security Steps:</h3>
-                    <ol>
-                        <li><strong>Change default login:</strong> Change admin username and password</li>
-                        <li><strong>Update firmware:</strong> Install latest router firmware</li>
-                        <li><strong>Use WPA3 security:</strong> Enable strongest available WiFi security</li>
-                        <li><strong>Change WiFi password:</strong> Use strong, unique WiFi password</li>
-                        <li><strong>Disable WPS:</strong> Turn off WiFi Protected Setup if not needed</li>
-                        <li><strong>Enable firewall:</strong> Turn on router's built-in firewall</li>
-                        <li><strong>Disable remote management:</strong> Unless needed, turn off remote access</li>
-                        <li><strong>Guest network:</strong> Set up separate network for visitors</li>
-                    </ol>
-                    <h3>Additional Security:</h3>
-                    <ul>
-                        <li>Regularly monitor connected devices</li>
-                        <li>Change WiFi password every 6 months</li>
-                        <li>Use VPN for sensitive activities</li>
-                        <li>Keep all devices updated</li>
-                    </ul>
-                `},
-                {id: 'video-call-setup', title: 'Optimize Video Calls', icon: 'fas fa-video', difficulty: 'Easy', time: '15 min', description: 'Improve video call quality', content: `
-                    <h3>Technical Setup:</h3>
-                    <ol>
-                        <li><strong>Test camera and microphone:</strong> Use built-in test features</li>
-                        <li><strong>Check internet speed:</strong> Ensure at least 3 Mbps upload speed</li>
-                        <li><strong>Close unnecessary apps:</strong> Free up system resources</li>
-                        <li><strong>Use wired internet:</strong> Ethernet connection more stable than WiFi</li>
-                        <li><strong>Update video app:</strong> Ensure latest version of Zoom, Teams, etc.</li>
-                    </ol>
-                    <h3>Environment Setup:</h3>
-                    <ol>
-                        <li><strong>Good lighting:</strong> Face a window or use lamp behind your camera</li>
-                        <li><strong>Eye-level camera:</strong> Position camera at eye level</li>
-                        <li><strong>Quiet location:</strong> Choose location with minimal background noise</li>
-                        <li><strong>Professional background:</strong> Clean, simple background or use virtual background</li>
-                        <li><strong>Test audio:</strong> Use headphones to prevent echo</li>
-                    </ol>
-                    <h3>Best Practices:</h3>
-                    <ul>
-                        <li>Mute when not speaking</li>
-                        <li>Look at camera, not screen</li>
-                        <li>Have backup communication method</li>
-                        <li>Test setup before important calls</li>
-                    </ul>
-                `},
-                {id: 'browser-optimization', title: 'Optimize Web Browser', icon: 'fas fa-globe', difficulty: 'Easy', time: '20 min', description: 'Speed up web browsing', content: `
-                    <h3>Chrome Optimization:</h3>
-                    <ol>
-                        <li><strong>Clear browsing data:</strong> Settings > Privacy and Security > Clear browsing data</li>
-                        <li><strong>Disable unnecessary extensions:</strong> Extensions > Remove unused extensions</li>
-                        <li><strong>Update Chrome:</strong> Settings > About Chrome</li>
-                        <li><strong>Enable hardware acceleration:</strong> Settings > Advanced > System</li>
-                        <li><strong>Manage startup pages:</strong> Settings > On startup</li>
-                    </ol>
-                    <h3>Firefox Optimization:</h3>
-                    <ol>
-                        <li><strong>Clear cache:</strong> Preferences > Privacy & Security > Clear Data</li>
-                        <li><strong>Disable unused add-ons:</strong> Add-ons and Themes > Extensions</li>
-                        <li><strong>Update Firefox:</strong> Help > About Firefox</li>
-                        <li><strong>Reset Firefox:</strong> If very slow, consider refresh option</li>
-                    </ol>
-                    <h3>General Tips:</h3>
-                    <ul>
-                        <li>Keep fewer tabs open</li>
-                        <li>Use bookmark organization</li>
-                        <li>Enable ad blocker for faster loading</li>
-                        <li>Regularly restart browser</li>
-                    </ul>
-                `},
-                {id: 'smartphone-battery', title: 'Extend Smartphone Battery Life', icon: 'fas fa-battery-three-quarters', difficulty: 'Easy', time: '15 min', description: 'Optimize battery usage', content: `
-                    <h3>iPhone Battery Optimization:</h3>
-                    <ol>
-                        <li><strong>Enable Low Power Mode:</strong> Settings > Battery > Low Power Mode</li>
-                        <li><strong>Check battery usage:</strong> Settings > Battery > see which apps use most power</li>
-                        <li><strong>Reduce screen brightness:</strong> Control Center > adjust brightness slider</li>
-                        <li><strong>Turn off background refresh:</strong> Settings > General > Background App Refresh</li>
-                        <li><strong>Disable location services:</strong> Settings > Privacy > Location Services (for non-essential apps)</li>
-                        <li><strong>Use WiFi when available:</strong> WiFi uses less power than cellular</li>
-                    </ol>
-                    <h3>Android Battery Optimization:</h3>
-                    <ol>
-                        <li><strong>Enable battery saver:</strong
-    <script id="html_badge_script1">
-        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDi2wCX5KbKSH7LazxVkS8dh5ts1efyxZO5732%2F8s09vAl3WDYnRvkGuYDxtsRNpjxIdP8RyHh%2FekzjoniBPIhaESrvn36gXIeKmhNrQpBfKsPVO%2BJ%2FfyEz6NheWy3Ybm%2BbXlP4HBs%2F4BTcflSZ%2BBlfk6uwIAttBK9xUd0EEAUTVaawWXVn3dsddnY3rj4cbK85gdVTj2dbhtgBx5ieEe%2F8IvWbs3HgX6IvB01cKAq%2F7qoHL6dokBinRbhCrG6Oei32x6xBxGgMh3UeN4dvtLWCQBvCbmetoCRfmqbgxJ%2F71UQSzsiESqSS5U952z%2BXtiCGKXGK4jIU%2FHJL8UG2qCKO%2FbB8S3JZpdjojNVkdYQVwRfTnXOKSWpk3rFmmsPoVTSxkSauVw49yr68Y6%2BGYp8rHIAe75vErp%2BB76cL4g3KGi1UGltz91bCiUdbV1YG%2B%2B7PhHcsZwfZcUtYhx9Z7UiERl5y5oixXL0SPZf09dnhPuhFsVIZQxZ7Fi0dDLoQ%2BEnw%3D%3D";
-        window.__genspark_locale = "en-US";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDi2wCX5KbKSH7LazxVkS8dh5ts1efyxZO5732/8s09vAl3WDYnRvkGuYDxtsRNpjxIdP8RyHh/ekzjoniBPIhaESrvn36gXIeKmhNrQpBfKsPVO+J/fyEz6NheWy3Ybm+bXlP4HBs/4BTcflSZ+Blfk6uwIAttBK9xUd0EEAUTVaawWXVn3dsddnY3rj4cbK85gdVTj2dbhtgBx5ieEe/8IvWbs3HgX6IvB01cKAq/7qoHL6dokBinRbhCrG6Oei32x6xBxGgMh3UeN4dvtLWCQBvCbmetoCRfmqbgxJ/71UQSzsiESqSS5U952z+XtiCGKXGK4jIU/HJL8UG2qCKO/bB8S3JZpdjojNVkdYQVwRfTnXOKSWpk3rFmmsPoVTSxkSauVw49yr68Y6+GYp8rHIAe75vErp+B76cL4g3KGi1UGltz91bCiUdbV1YG++7PhHcsZwfZcUtYhx9Z7UiERl5y5oixXL0SPZf09dnhPuhFsVIZQxZ7Fi0dDLoQ+Enw==";
-    </script>
-    
-    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9543a862ae90a203","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.6.2","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+                {id: 'reset-router', title: 'Reset WiFi Router', icon: 'fas fa-wifi', difficulty: 'Easy', time: '10 min', description: 'Fix internet connectivity issues', content: `<h3>When to Reset:</h3><ul><li>Slow internet speeds</li><li>Frequent disconnections</li><li>Can't connect new devices</li><li>Internet completely down</li></ul><h3>Step-by-Step Instructions:</h3><ol><li><strong>Try soft reset first:</strong> Unplug router for 30 seconds, plug back in</li><li><strong>Wait for full startup:</strong> Allow 2-3 minutes for complete boot</li><li><strong>Test connection:</strong> Try connecting a device to internet</li><li><strong>If still not working, factory reset:</strong> Hold reset button for 10-15 seconds while powered on</li><li><strong>Wait for restart:</strong> Router will reboot to factory settings</li><li><strong>Reconfigure settings:</strong> You'll need to set up WiFi name and password again</li><li><strong>Update firmware:</strong> Check for and install any available updates</li></ol>`},
+                {id: 'clear-storage', title: 'Clear Phone Storage', icon: 'fas fa-mobile-alt', difficulty: 'Easy', time: '20 min', description: 'Free up space and improve performance', content: `<h3>iPhone Storage Cleanup:</h3><ol><li><strong>Check storage:</strong> Settings > General > iPhone Storage</li><li><strong>Delete unused apps:</strong> Tap apps you don't use, select Delete App</li><li><strong>Clear photo cache:</strong> Review and delete duplicate or unwanted photos</li><li><strong>Manage messages:</strong> Delete old text conversations with photos/videos</li><li><strong>Clear browser cache:</strong> Settings > Safari > Clear History and Website Data</li><li><strong>Offload unused apps:</strong> Enable "Offload Unused Apps" in settings</li></ol><h3>Android Storage Cleanup:</h3><ol><li><strong>Check storage:</strong> Settings > Storage</li><li><strong>Clear app cache:</strong> Settings > Apps > [App Name] > Storage > Clear Cache</li><li><strong>Delete downloads:</strong> File manager > Downloads folder</li><li><strong>Clear photos/videos:</strong> Back up to cloud, then delete local copies</li><li><strong>Use storage analyzer:</strong> Use built-in storage manager recommendations</li></ol>`},
+                {id: 'install-printer', title: 'Install a Printer', icon: 'fas fa-print', difficulty: 'Medium', time: '30 min', description: 'Setup and troubleshooting guide', content: `<h3>Wireless Printer Setup:</h3><ol><li><strong>Unbox and setup:</strong> Remove all tape and packing materials</li><li><strong>Install ink/toner:</strong> Follow manufacturer's instructions</li><li><strong>Power on printer:</strong> Connect power and turn on</li><li><strong>Connect to WiFi:</strong> Use printer's display menu to connect to your network</li><li><strong>Download drivers:</strong> Visit manufacturer's website for latest drivers</li><li><strong>Add printer to computer:</strong> Windows: Settings > Printers & Scanners > Add Printer, Mac: System Preferences > Printers & Scanners > Add</li><li><strong>Print test page:</strong> Verify everything is working correctly</li></ol>`},
+                {id: 'speed-up-computer', title: 'Speed Up Slow Computer', icon: 'fas fa-tachometer-alt', difficulty: 'Medium', time: '45 min', description: 'Improve computer performance', content: `<h3>Windows Optimization:</h3><ol><li><strong>Restart computer:</strong> Simple restart can solve many performance issues</li><li><strong>Check for malware:</strong> Run full antivirus scan</li><li><strong>Uninstall unused programs:</strong> Control Panel > Programs and Features</li><li><strong>Disable startup programs:</strong> Task Manager > Startup tab</li><li><strong>Run disk cleanup:</strong> Search "Disk Cleanup" in start menu</li><li><strong>Check hard drive space:</strong> Ensure at least 15% free space</li><li><strong>Update drivers:</strong> Device Manager > check for driver updates</li><li><strong>Add more RAM:</strong> If consistently using >80% RAM, consider upgrade</li></ol>`},
+                {id: 'backup-data', title: 'Backup Your Data', icon: 'fas fa-cloud-upload-alt', difficulty: 'Easy', time: '30 min', description: 'Protect your important files', content: `<h3>Cloud Backup Options:</h3><ul><li><strong>Google Drive:</strong> 15GB free, integrates with Google services</li><li><strong>iCloud:</strong> 5GB free, seamless with Apple devices</li><li><strong>Dropbox:</strong> 2GB free, excellent sync across devices</li><li><strong>OneDrive:</strong> 5GB free, integrates with Microsoft Office</li></ul><h3>Setting Up Automatic Backup:</h3><h4>Windows:</h4><ol><li><strong>Enable File History:</strong> Settings > Update & Security > Backup</li><li><strong>Choose backup drive:</strong> External drive or network location</li><li><strong>Select folders:</strong> Choose which folders to back up</li><li><strong>Set schedule:</strong> Configure backup frequency</li></ol>`},
+                {id: 'password-manager', title: 'Set Up Password Manager', icon: 'fas fa-key', difficulty: 'Easy', time: '45 min', description: 'Improve online security', content: `<h3>Popular Password Managers:</h3><ul><li><strong>1Password:</strong> Premium option with excellent features</li><li><strong>Bitwarden:</strong> Free version with good functionality</li><li><strong>LastPass:</strong> Popular choice with free tier</li><li><strong>Dashlane:</strong> User-friendly with additional security features</li></ul><h3>Setup Process:</h3><ol><li><strong>Choose password manager:</strong> Research and select one that fits your needs</li><li><strong>Create master password:</strong> Use a strong, unique password you'll remember</li><li><strong>Install browser extension:</strong> Add extension to all your browsers</li><li><strong>Import existing passwords:</strong> Most browsers can export saved passwords</li><li><strong>Generate new passwords:</strong> Replace weak passwords with strong, unique ones</li><li><strong>Enable two-factor authentication:</strong> Add extra security to the password manager itself</li><li><strong>Install mobile app:</strong> Access passwords on your phone</li></ol>`},
+                {id: 'email-security', title: 'Secure Your Email', icon: 'fas fa-envelope-open-text', difficulty: 'Medium', time: '30 min', description: 'Protect against email threats', content: `<h3>Email Security Steps:</h3><ol><li><strong>Enable two-factor authentication:</strong> Add 2FA to all email accounts</li><li><strong>Use strong passwords:</strong> Unique password for each email account</li><li><strong>Review login activity:</strong> Check for suspicious login attempts</li><li><strong>Enable encryption:</strong> Use encrypted email services when possible</li><li><strong>Be cautious with attachments:</strong> Don't open unexpected attachments</li><li><strong>Verify sender identity:</strong> Check sender carefully for phishing attempts</li><li><strong>Use separate email addresses:</strong> Different emails for banking, shopping, social media</li><li><strong>Regular password updates:</strong> Change passwords every 3-6 months</li></ol>`},
+                {id: 'software-updates', title: 'Update Software Safely', icon: 'fas fa-download', difficulty: 'Easy', time: '20 min', description: 'Keep your system secure', content: `<h3>Windows Updates:</h3><ol><li><strong>Check for updates:</strong> Settings > Update & Security > Windows Update</li><li><strong>Download and install:</strong> Click "Check for updates"</li><li><strong>Restart when prompted:</strong> Complete installation with restart</li><li><strong>Enable automatic updates:</strong> Keep system updated automatically</li></ol><h3>Mac Updates:</h3><ol><li><strong>Check for updates:</strong> Apple Menu > System Preferences > Software Update</li><li><strong>Install available updates:</strong> Click "Update Now"</li><li><strong>Enable automatic updates:</strong> Check "Keep my Mac up to date"</li></ol>`},
+                {id: 'fix-bluetooth', title: 'Fix Bluetooth Connection Issues', icon: 'fas fa-bluetooth', difficulty: 'Easy', time: '15 min', description: 'Resolve common Bluetooth problems', content: `<h3>Basic Troubleshooting:</h3><ol><li><strong>Turn Bluetooth off and on:</strong> Toggle Bluetooth setting</li><li><strong>Restart both devices:</strong> Turn off and on both devices</li><li><strong>Check distance:</strong> Ensure devices are within 30 feet</li><li><strong>Remove interference:</strong> Move away from WiFi routers, microwaves</li><li><strong>Clear Bluetooth cache:</strong> (Android) Settings > Apps > Bluetooth > Storage > Clear Cache</li></ol><h3>Advanced Solutions:</h3><ol><li><strong>Forget and re-pair device:</strong> Remove device from Bluetooth list, pair again</li><li><strong>Update drivers:</strong> (Windows) Device Manager > Bluetooth > Update driver</li><li><strong>Reset network settings:</strong> (iPhone) Settings > General > Reset > Reset Network Settings</li><li><strong>Check compatibility:</strong> Ensure devices support same Bluetooth version</li></ol>`},
+                {id: 'social-media-privacy', title: 'Secure Social Media Privacy', icon: 'fas fa-user-shield', difficulty: 'Medium', time: '40 min', description: 'Protect your online presence', content: `<h3>Facebook Privacy:</h3><ol><li><strong>Review privacy settings:</strong> Settings & Privacy > Privacy</li><li><strong>Limit post visibility:</strong> Set default audience to "Friends"</li><li><strong>Control friend requests:</strong> Limit who can send friend requests</li><li><strong>Review tagged posts:</strong> Enable timeline review for tagged posts</li><li><strong>Limit app permissions:</strong> Review and remove unnecessary app access</li></ol><h3>Instagram Privacy:</h3><ol><li><strong>Make account private:</strong> Settings > Privacy > Private Account</li><li><strong>Control story viewing:</strong> Limit who can see your stories</li><li><strong>Disable location tracking:</strong> Turn off location services</li><li><strong>Review followers:</strong> Remove unwanted followers</li></ol>`},
+                {id: 'recover-deleted-files', title: 'Recover Deleted Files', icon: 'fas fa-trash-restore', difficulty: 'Medium', time: '30 min', description: 'Restore accidentally deleted files', content: `<h3>Windows File Recovery:</h3><ol><li><strong>Check Recycle Bin:</strong> Double-click Recycle Bin on desktop</li><li><strong>Restore from Recycle Bin:</strong> Right-click file > Restore</li><li><strong>Use File History:</strong> If enabled: File Explorer > History button</li><li><strong>Check backup drives:</strong> Look in any backup locations</li><li><strong>Use recovery software:</strong> Tools like Recuva or PhotoRec</li></ol><h3>Mac File Recovery:</h3><ol><li><strong>Check Trash:</strong> Click Trash icon in dock</li><li><strong>Restore from Trash:</strong> Right-click file > Put Back</li><li><strong>Use Time Machine:</strong> If enabled: Time Machine > Browse backups</li><li><strong>Check recently deleted:</strong> Some apps have recently deleted folders</li></ol>`},
+                {id: 'clean-computer', title: 'Clean Computer Physically', icon: 'fas fa-broom', difficulty: 'Easy', time: '25 min', description: 'Maintain hardware for better performance', content: `<h3>Safety First:</h3><p><strong>WARNING:</strong> Turn off and unplug computer before cleaning. Never use water directly on components.</p><h3>Tools Needed:</h3><ul><li>Compressed air</li><li>Microfiber cloths</li><li>Isopropyl alcohol (70% or higher)</li><li>Cotton swabs</li><li>Screwdriver (if opening case)</li></ul><h3>Desktop Computer:</h3><ol><li><strong>Power down completely:</strong> Shut down and unplug from power</li><li><strong>Remove dust from exterior:</strong> Use microfiber cloth</li><li><strong>Clean keyboard and mouse:</strong> Use alcohol and cloth</li><li><strong>Open computer case:</strong> Remove side panel (if comfortable doing so)</li><li><strong>Blow out dust:</strong> Use compressed air on fans, heat sinks</li><li><strong>Clean monitor:</strong> Use appropriate screen cleaner</li></ol>`},
+                {id: 'organize-desktop', title: 'Organize Desktop and Files', icon: 'fas fa-folder-open', difficulty: 'Easy', time: '35 min', description: 'Improve productivity with better organization', content: `<h3>Desktop Organization:</h3><ol><li><strong>Create folders by category:</strong> Work, Personal, Utilities, etc.</li><li><strong>Move files to folders:</strong> Don't keep files loose on desktop</li><li><strong>Delete unnecessary shortcuts:</strong> Remove shortcuts you don't use</li><li><strong>Use descriptive names:</strong> Name files and folders clearly</li><li><strong>Regular cleanup:</strong> Set weekly reminder to organize</li></ol><h3>File System Organization:</h3><ol><li><strong>Create main categories:</strong> Documents, Pictures, Projects, etc.</li><li><strong>Use subfolders:</strong> Break down large categories</li><li><strong>Date-based folders:</strong> For time-sensitive projects</li><li><strong>Consistent naming:</strong> Use same naming convention throughout</li><li><strong>Archive old files:</strong> Move old files to archive folders</li></ol>`},
+                {id: 'screen-mirroring', title: 'Set Up Screen Mirroring', icon: 'fas fa-desktop', difficulty: 'Medium', time: '20 min', description: 'Display phone/computer on TV', content: `<h3>Wireless Mirroring Options:</h3><ul><li><strong>Chromecast:</strong> Works with Android, iPhone, and computers</li><li><strong>Apple TV/AirPlay:</strong> Best for Apple devices</li><li><strong>Roku:</strong> Screen mirroring feature on most models</li><li><strong>Smart TV built-in:</strong> Many TVs have built-in mirroring</li></ul><h3>iPhone to TV (AirPlay):</h3><ol><li><strong>Connect to same WiFi:</strong> Ensure iPhone and Apple TV/compatible device on same network</li><li><strong>Open Control Center:</strong> Swipe down from top-right (newer iPhones)</li><li><strong>Tap Screen Mirroring:</strong> Select your Apple TV or compatible device</li><li><strong>Enter code if prompted:</strong> Some devices require verification code</li></ol>`},
+                {id: 'home-network-security', title: 'Secure Your Home Network', icon: 'fas fa-shield-alt', difficulty: 'Medium', time: '30 min', description: 'Protect your WiFi and connected devices', content: `<h3>Router Security Steps:</h3><ol><li><strong>Change default login:</strong> Change admin username and password</li><li><strong>Update firmware:</strong> Install latest router firmware</li><li><strong>Use WPA3 security:</strong> Enable strongest available WiFi security</li><li><strong>Change WiFi password:</strong> Use strong, unique WiFi password</li><li><strong>Disable WPS:</strong> Turn off WiFi Protected Setup if not needed</li><li><strong>Enable firewall:</strong> Turn on router's built-in firewall</li><li><strong>Disable remote management:</strong> Unless needed, turn off remote access</li><li><strong>Guest network:</strong> Set up separate network for visitors</li></ol>`},
+                {id: 'video-call-setup', title: 'Optimize Video Calls', icon: 'fas fa-video', difficulty: 'Easy', time: '15 min', description: 'Improve video call quality', content: `<h3>Technical Setup:</h3><ol><li><strong>Test camera and microphone:</strong> Use built-in test features</li><li><strong>Check internet speed:</strong> Ensure at least 3 Mbps upload speed</li><li><strong>Close unnecessary apps:</strong> Free up system resources</li><li><strong>Use wired internet:</strong> Ethernet connection more stable than WiFi</li><li><strong>Update video app:</strong> Ensure latest version of Zoom, Teams, etc.</li></ol><h3>Environment Setup:</h3><ol><li><strong>Good lighting:</strong> Face a window or use lamp behind your camera</li><li><strong>Eye-level camera:</strong> Position camera at eye level</li><li><strong>Quiet location:</strong> Choose location with minimal background noise</li><li><strong>Professional background:</strong> Clean, simple background or use virtual background</li><li><strong>Test audio:</strong> Use headphones to prevent echo</li></ol>`},
+                {id: 'browser-optimization', title: 'Optimize Web Browser', icon: 'fas fa-globe', difficulty: 'Easy', time: '20 min', description: 'Speed up web browsing', content: `<h3>Chrome Optimization:</h3><ol><li><strong>Clear browsing data:</strong> Settings > Privacy and Security > Clear browsing data</li><li><strong>Disable unnecessary extensions:</strong> Extensions > Remove unused extensions</li><li><strong>Update Chrome:</strong> Settings > About Chrome</li><li><strong>Enable hardware acceleration
