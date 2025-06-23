@@ -4,1662 +4,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DailyFixes.com - 200 Complete DIY Repair Guides</title>
+    <title>DailyFixes.com - Interactive DIY Repair Hub</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .fix-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .fix-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .fix-detail {
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .fix-detail.active {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .email-gradient {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
         .adsense-placeholder {
-            background: #f3f4f6;
-            border: 2px dashed #d1d5db;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6b7280;
-            font-weight: 500;
+            color: #6c757d;
+            font-weight: 600;
         }
-         {
-            .no-print { display: none; }
-            body { font-size: 12px; }
-            .guide-item { page-break-inside: avoid; margin-bottom: 20px; }
-        }
-        .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
     </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-40">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
                     <i class="fas fa-tools text-blue-600 text-2xl mr-3"></i>
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900">DailyFixes.com</h1>
-                        <p class="text-sm text-gray-600">200+ Professional DIY Solutions</p>
+                        <p class="text-sm text-gray-500">Professional DIY Solutions</p>
                     </div>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#home-fixes" class="text-gray-700 hover:text-blue-600">Home Fixes</a>
-                    <a href="#auto-repairs" class="text-gray-700 hover:text-blue-600">Auto Repairs</a>
-                    <a href="#tech-help" class="text-gray-700 hover:text-blue-600">Tech Help</a>
-                    <a href="#life-hacks" class="text-gray-700 hover:text-blue-600">Life Hacks</a>
+                    <button onclick="showCategory('home')" class="text-gray-700 hover:text-blue-600 font-medium">Home Fixes</button>
+                    <button onclick="showCategory('auto')" class="text-gray-700 hover:text-blue-600 font-medium">Auto Repairs</button>
+                    <button onclick="showCategory('tech')" class="text-gray-700 hover:text-blue-600 font-medium">Tech Help</button>
+                    <button onclick="showCategory('life')" class="text-gray-700 hover:text-blue-600 font-medium">Life Hacks</button>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+    <section class="hero-gradient text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-4xl md:text-6xl font-bold mb-4">Fix It. Live Better.</h2>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Your ultimate guide to DIY repairs with 200 detailed guides</p>
-            <div class="bg-white/10 backdrop-blur rounded-lg p-6 max-w-2xl mx-auto">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div><span class="block text-2xl font-bold">50</span><span class="text-sm">Home Fixes</span></div>
-                    <div><span class="block text-2xl font-bold">50</span><span class="text-sm">Auto Repairs</span></div>
-                    <div><span class="block text-2xl font-bold">50</span><span class="text-sm">Tech Help</span></div>
-                    <div><span class="block text-2xl font-bold">50</span><span class="text-sm">Life Hacks</span></div>
-                </div>
-            </div>
+            <h2 class="text-5xl font-bold mb-6">Fix It. Live Better.</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Your ultimate destination for professional DIY repair guides. Master 200+ fixes across 4 essential categories.</p>
+            <button onclick="showCategory('home')" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300">
+                <i class="fas fa-play mr-2"></i>Start Fixing Now
+            </button>
         </div>
     </section>
 
     <!-- Premium Ad Space -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-6">
         <div class="adsense-placeholder h-24 rounded-lg">
-            Google AdSense - Premium Header Banner (728x90)
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            Google AdSense - Header Banner (728×90)
         </div>
     </div>
 
-    <!-- Categories Overview -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-home text-green-600 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Home Fixes</h3>
-                <p class="text-gray-600 mb-4">Plumbing, electrical, and household repairs</p>
-                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-car text-red-600 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Auto Repairs</h3>
-                <p class="text-gray-600 mb-4">Car maintenance and basic repairs</p>
-                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-laptop text-purple-600 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Tech Help</h3>
-                <p class="text-gray-600 mb-4">Computer, phone, and device fixes</p>
-                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-lightbulb text-yellow-600 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-2">Life Hacks</h3>
-                <p class="text-gray-600 mb-4">Cleaning, organizing, and daily tips</p>
-                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+    <!-- Category Selection -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">Choose Your Category</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button onclick="showCategory('home')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="home-btn">
+                    <i class="fas fa-home text-4xl text-blue-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Home Fixes</h4>
+                    <p class="text-gray-600">Plumbing, electrical, and household repairs</p>
+                    <span class="inline-block mt-3 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                </button>
+                
+                <button onclick="showCategory('auto')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="auto-btn">
+                    <i class="fas fa-car text-4xl text-green-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Auto Repairs</h4>
+                    <p class="text-gray-600">Car maintenance and mechanical fixes</p>
+                    <span class="inline-block mt-3 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                </button>
+                
+                <button onclick="showCategory('tech')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="tech-btn">
+                    <i class="fas fa-laptop text-4xl text-purple-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Tech Help</h4>
+                    <p class="text-gray-600">Computer, phone, and device solutions</p>
+                    <span class="inline-block mt-3 bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                </button>
+                
+                <button onclick="showCategory('life')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="life-btn">
+                    <i class="fas fa-lightbulb text-4xl text-orange-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Life Hacks</h4>
+                    <p class="text-gray-600">Cleaning, organizing, and daily tips</p>
+                    <span class="inline-block mt-3 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Ad Space -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div class="adsense-placeholder h-20 rounded-lg">
-            Google AdSense - Category Banner (728x90)
-        </div>
-    </div>
-
-    <!-- Home Fixes Section -->
-    <section id="home-fixes" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex items-center mb-8">
-            <i class="fas fa-home text-green-600 text-3xl mr-4"></i>
-            <h2 class="text-3xl font-bold text-gray-900">Home Fixes - 50 Essential Guides</h2>
-        </div>
-        
-        <!-- Sidebar Ad -->
-        <div class="float-right ml-6 mb-6 w-48 no-print">
-            <div class="adsense-placeholder h-60 rounded-lg">
-                AdSense<br>Sidebar<br>(160x600)
-            </div>
-        </div>
-
-        <div class="guide-grid">
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-wrench mr-2"></i>Fix a Leaky Faucet</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Adjustable wrench, screwdriver, plumber's grease, replacement parts
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off water supply under the sink</p>
-                    <p><strong>Step 2:</strong> Remove faucet handle by unscrewing</p>
-                    <p><strong>Step 3:</strong> Replace worn O-ring or washer</p>
-                    <p><strong>Step 4:</strong> Apply plumber's grease to new parts</p>
-                    <p><strong>Step 5:</strong> Reassemble and test for leaks</p>
-                </div>
-                <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
-                    <p class="text-xs text-yellow-800"><i class="fas fa-exclamation-triangle mr-1"></i><strong>Safety:</strong> Always turn off water supply before starting repairs</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-bolt mr-2"></i>Replace Light Switch</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, wire strippers, voltage tester, new switch
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off power at circuit breaker</p>
-                    <p><strong>Step 2:</strong> Test wires with voltage tester</p>
-                    <p><strong>Step 3:</strong> Remove old switch and disconnect wires</p>
-                    <p><strong>Step 4:</strong> Connect wires to new switch</p>
-                    <p><strong>Step 5:</strong> Install switch and restore power</p>
-                </div>
-                <div class="mt-4 p-3 bg-red-50 rounded-lg">
-                    <p class="text-xs text-red-800"><i class="fas fa-exclamation-triangle mr-1"></i><strong>Danger:</strong> Always verify power is off before working with electrical</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-fire mr-2"></i>Unclog Toilet Without Plunger</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Dish soap, hot water, toilet brush, rubber gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Add generous amount of dish soap to bowl</p>
-                    <p><strong>Step 2:</strong> Pour hot (not boiling) water from waist height</p>
-                    <p><strong>Step 3:</strong> Let sit for 20-30 minutes</p>
-                    <p><strong>Step 4:</strong> Use toilet brush to break up blockage</p>
-                    <p><strong>Step 5:</strong> Flush and repeat if necessary</p>
-                </div>
-                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-                    <p class="text-xs text-blue-800"><i class="fas fa-info-circle mr-1"></i><strong>Tip:</strong> This method works for most organic blockages</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-door-open mr-2"></i>Fix Squeaky Door Hinges</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> WD-40 or 3-in-1 oil, cloth, screwdriver
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean hinges with dry cloth</p>
-                    <p><strong>Step 2:</strong> Apply lubricant to hinge pins</p>
-                    <p><strong>Step 3:</strong> Work door back and forth several times</p>
-                    <p><strong>Step 4:</strong> Wipe excess lubricant</p>
-                    <p><strong>Step 5:</strong> Test door movement</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-shower mr-2"></i>Replace Showerhead</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Adjustable wrench, plumber's tape, new showerhead
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off water supply</p>
-                    <p><strong>Step 2:</strong> Unscrew old showerhead counterclockwise</p>
-                    <p><strong>Step 3:</strong> Clean threads on pipe</p>
-                    <p><strong>Step 4:</strong> Wrap threads with plumber's tape</p>
-                    <p><strong>Step 5:</strong> Install new showerhead hand-tight plus 1/4 turn</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-window-close mr-2"></i>Repair Window Screen</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screen material, spline roller, utility knife, spline cord
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove screen from window frame</p>
-                    <p><strong>Step 2:</strong> Remove old spline and damaged screen</p>
-                    <p><strong>Step 3:</strong> Cut new screen 2 inches larger than frame</p>
-                    <p><strong>Step 4:</strong> Install screen using spline roller</p>
-                    <p><strong>Step 5:</strong> Trim excess screen material</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-thermometer-half mr-2"></i>Fix Running Toilet</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Adjustable wrench, replacement flapper, chain
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove toilet tank lid</p>
-                    <p><strong>Step 2:</strong> Check flapper seal at bottom</p>
-                    <p><strong>Step 3:</strong> Adjust chain length if needed</p>
-                    <p><strong>Step 4:</strong> Replace flapper if warped</p>
-                    <p><strong>Step 5:</strong> Test flush mechanism</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-plug mr-2"></i>Replace Electrical Outlet</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, voltage tester, wire nuts, new outlet
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off power at breaker</p>
-                    <p><strong>Step 2:</strong> Test outlet with voltage tester</p>
-                    <p><strong>Step 3:</strong> Remove old outlet and disconnect wires</p>
-                    <p><strong>Step 4:</strong> Connect wires to new outlet</p>
-                    <p><strong>Step 5:</strong> Install outlet and restore power</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-paint-roller mr-2"></i>Patch Drywall Holes</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Drywall patch, joint compound, putty knife, sandpaper
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean hole edges and remove loose debris</p>
-                    <p><strong>Step 2:</strong> Apply self-adhesive patch over hole</p>
-                    <p><strong>Step 3:</strong> Cover with joint compound in thin layers</p>
-                    <p><strong>Step 4:</strong> Let dry and sand smooth</p>
-                    <p><strong>Step 5:</strong> Prime and paint to match wall</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-sink mr-2"></i>Clear Slow Drain</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Baking soda, vinegar, hot water, drain snake
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove visible debris from drain</p>
-                    <p><strong>Step 2:</strong> Pour 1/2 cup baking soda down drain</p>
-                    <p><strong>Step 3:</strong> Follow with 1/2 cup vinegar</p>
-                    <p><strong>Step 4:</strong> Cover drain for 30 minutes</p>
-                    <p><strong>Step 5:</strong> Flush with hot water</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-hammer mr-2"></i>Fix Loose Cabinet Door</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, wood screws, toothpicks, wood glue
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove loose hinge screws</p>
-                    <p><strong>Step 2:</strong> Fill stripped holes with glued toothpicks</p>
-                    <p><strong>Step 3:</strong> Let glue dry completely</p>
-                    <p><strong>Step 4:</strong> Trim toothpicks flush</p>
-                    <p><strong>Step 5:</strong> Reinstall hinge with screws</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-wind mr-2"></i>Replace Furnace Filter</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New filter, flashlight, gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off furnace system</p>
-                    <p><strong>Step 2:</strong> Locate filter compartment</p>
-                    <p><strong>Step 3:</strong> Note airflow direction on old filter</p>
-                    <p><strong>Step 4:</strong> Remove old filter carefully</p>
-                    <p><strong>Step 5:</strong> Install new filter with correct airflow</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-clipboard-check mr-2"></i>Caulk Bathtub</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Caulk gun, caulk, utility knife, cleaning solution
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove old caulk completely</p>
-                    <p><strong>Step 2:</strong> Clean area with alcohol</p>
-                    <p><strong>Step 3:</strong> Cut caulk tube at 45-degree angle</p>
-                    <p><strong>Step 4:</strong> Apply steady bead along seam</p>
-                    <p><strong>Step 5:</strong> Smooth with finger and let cure</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-lock mr-2"></i>Fix Sticking Door Lock</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Graphite lubricant, key, compressed air
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean key and lock exterior</p>
-                    <p><strong>Step 2:</strong> Spray compressed air into keyhole</p>
-                    <p><strong>Step 3:</strong> Apply graphite to key</p>
-                    <p><strong>Step 4:</strong> Insert and turn key several times</p>
-                    <p><strong>Step 5:</strong> Test lock operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-snowflake mr-2"></i>Defrost Refrigerator</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Towels, bowls, hair dryer, cleaning solution
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Unplug refrigerator</p>
-                    <p><strong>Step 2:</strong> Remove all food items</p>
-                    <p><strong>Step 3:</strong> Place towels to catch water</p>
-                    <p><strong>Step 4:</strong> Speed defrost with hair dryer (carefully)</p>
-                    <p><strong>Step 5:</strong> Clean and dry before plugging back in</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-cut mr-2"></i>Sharpen Kitchen Knives</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Sharpening stone, honing steel, water
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Soak sharpening stone in water</p>
-                    <p><strong>Step 2:</strong> Hold knife at 20-degree angle</p>
-                    <p><strong>Step 3:</strong> Draw blade across stone 10 times each side</p>
-                    <p><strong>Step 4:</strong> Use honing steel to finish</p>
-                    <p><strong>Step 5:</strong> Test sharpness carefully</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-fire-extinguisher mr-2"></i>Clean Garbage Disposal</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Ice cubes, coarse salt, lemon, cold water
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off power to disposal</p>
-                    <p><strong>Step 2:</strong> Add ice cubes and coarse salt</p>
-                    <p><strong>Step 3:</strong> Run disposal with cold water</p>
-                    <p><strong>Step 4:</strong> Add lemon peels for freshness</p>
-                    <p><strong>Step 5:</strong> Run again with cold water</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-lightbulb mr-2"></i>Replace Light Fixture</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, wire nuts, voltage tester, new fixture
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off power at breaker</p>
-                    <p><strong>Step 2:</strong> Remove old fixture carefully</p>
-                    <p><strong>Step 3:</strong> Test wires with voltage tester</p>
-                    <p><strong>Step 4:</strong> Connect new fixture wires</p>
-                    <p><strong>Step 5:</strong> Mount fixture and restore power</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-tint mr-2"></i>Fix Low Water Pressure</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Adjustable wrench, vinegar, plastic bag
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check all faucets for pressure issues</p>
-                    <p><strong>Step 2:</strong> Remove and clean aerator screens</p>
-                    <p><strong>Step 3:</strong> Soak aerators in vinegar overnight</p>
-                    <p><strong>Step 4:</strong> Reinstall cleaned aerators</p>
-                    <p><strong>Step 5:</strong> Test water pressure improvement</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-stairs mr-2"></i>Fix Squeaky Stairs</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Wood screws, drill, lubricant, wood glue
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Identify squeaky step location</p>
-                    <p><strong>Step 2:</strong> Drive screws through tread into joist</p>
-                    <p><strong>Step 3:</strong> Apply wood glue to loose joints</p>
-                    <p><strong>Step 4:</strong> Tighten all visible connections</p>
-                    <p><strong>Step 5:</strong> Test stairs for remaining squeaks</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-tools mr-2"></i>Adjust Cabinet Doors</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, level, measuring tape
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check door alignment with level</p>
-                    <p><strong>Step 2:</strong> Adjust hinges using built-in screws</p>
-                    <p><strong>Step 3:</strong> Test door closure and gaps</p>
-                    <p><strong>Step 4:</strong> Fine-tune until doors align properly</p>
-                    <p><strong>Step 5:</strong> Tighten all adjustment screws</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-home mr-2"></i>Seal Air Leaks</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Weatherstripping, caulk, incense stick
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Use incense to detect air leaks</p>
-                    <p><strong>Step 2:</strong> Apply weatherstripping to doors/windows</p>
-                    <p><strong>Step 3:</strong> Caulk gaps around trim and outlets</p>
-                    <p><strong>Step 4:</strong> Check and seal basement rim joists</p>
-                    <p><strong>Step 5:</strong> Test with incense again</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-thermometer mr-2"></i>Fix Thermostat Issues</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Level, soft brush, screwdriver
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check thermostat is level on wall</p>
-                    <p><strong>Step 2:</strong> Clean dust from inside unit</p>
-                    <p><strong>Step 3:</strong> Check wire connections are tight</p>
-                    <p><strong>Step 4:</strong> Replace batteries if applicable</p>
-                    <p><strong>Step 5:</strong> Test heating/cooling operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-fan mr-2"></i>Balance Ceiling Fan</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Balancing kit, screwdriver, measuring tape
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean fan blades thoroughly</p>
-                    <p><strong>Step 2:</strong> Check blade angles are equal</p>
-                    <p><strong>Step 3:</strong> Tighten all blade screws</p>
-                    <p><strong>Step 4:</strong> Add balancing weights if needed</p>
-                    <p><strong>Step 5:</strong> Test fan at all speeds</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-water mr-2"></i>Fix Water Heater Pilot Light</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Long lighter, flashlight, instruction manual
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn gas control to OFF, wait 5 minutes</p>
-                    <p><strong>Step 2:</strong> Turn control to PILOT position</p>
-                    <p><strong>Step 3:</strong> Hold pilot button and light with long lighter</p>
-                    <p><strong>Step 4:</strong> Keep button pressed for 30 seconds</p>
-                    <p><strong>Step 5:</strong> Turn control to ON position</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-clipboard mr-2"></i>Repair Vinyl Flooring</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Utility knife, heat gun, vinyl adhesive, roller
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean damaged area thoroughly</p>
-                    <p><strong>Step 2:</strong> Cut replacement piece slightly larger</p>
-                    <p><strong>Step 3:</strong> Apply adhesive to subfloor</p>
-                    <p><strong>Step 4:</strong> Position and press patch firmly</p>
-                    <p><strong>Step 5:</strong> Roll to remove air bubbles</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-envelope mr-2"></i>Fix Mailbox Post</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Shovel, concrete mix, level, brace boards
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Dig out loose soil around post</p>
-                    <p><strong>Step 2:</strong> Straighten post with level</p>
-                    <p><strong>Step 3:</strong> Brace post in correct position</p>
-                    <p><strong>Step 4:</strong> Fill hole with concrete mix</p>
-                    <p><strong>Step 5:</strong> Keep braced until concrete sets</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-leaf mr-2"></i>Clean Gutters Safely</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Stable ladder, gloves, trowel, garden hose
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Set ladder safely with spotter</p>
-                    <p><strong>Step 2:</strong> Remove debris by hand or trowel</p>
-                    <p><strong>Step 3:</strong> Check downspouts for blockages</p>
-                    <p><strong>Step 4:</strong> Flush gutters with garden hose</p>
-                    <p><strong>Step 5:</strong> Check for leaks and proper drainage</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-seedling mr-2"></i>Fix Sprinkler Head</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Shovel, replacement head, pipe wrench, Teflon tape
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off irrigation system</p>
-                    <p><strong>Step 2:</strong> Dig around broken sprinkler head</p>
-                    <p><strong>Step 3:</strong> Unscrew damaged head</p>
-                    <p><strong>Step 4:</strong> Wrap threads with Teflon tape</p>
-                    <p><strong>Step 5:</strong> Install new head and test system</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-clock mr-2"></i>Reset Garage Door Opener</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Ladder, remote control, owner's manual
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate learn button on opener motor</p>
-                    <p><strong>Step 2:</strong> Press and hold learn button until light turns off</p>
-                    <p><strong>Step 3:</strong> Press learn button briefly until light turns on</p>
-                    <p><strong>Step 4:</strong> Within 30 seconds, press remote button</p>
-                    <p><strong>Step 5:</strong> Test remote operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-border-style mr-2"></i>Touch Up Paint</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Matching paint, small brush, primer, sandpaper
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean area to be painted</p>
-                    <p><strong>Step 2:</strong> Sand lightly if needed</p>
-                    <p><strong>Step 3:</strong> Apply primer to bare spots</p>
-                    <p><strong>Step 4:</strong> Apply thin coats of matching paint</p>
-                    <p><strong>Step 5:</strong> Blend edges with surrounding paint</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-prescription-bottle mr-2"></i>Winterize Outdoor Faucets</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Insulated covers, pipe insulation, shut-off valve key
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off water supply to outdoor faucets</p>
-                    <p><strong>Step 2:</strong> Open faucets to drain remaining water</p>
-                    <p><strong>Step 3:</strong> Install insulated faucet covers</p>
-                    <p><strong>Step 4:</strong> Wrap exposed pipes with insulation</p>
-                    <p><strong>Step 5:</strong> Check covers are secure</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-chess-board mr-2"></i>Fix Loose Tile</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Tile adhesive, grout, grout float, sponge
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove loose tile carefully</p>
-                    <p><strong>Step 2:</strong> Clean old adhesive from back</p>
-                    <p><strong>Step 3:</strong> Apply fresh tile adhesive</p>
-                    <p><strong>Step 4:</strong> Press tile firmly in place</p>
-                    <p><strong>Step 5:</strong> Regrout around edges when set</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-satellite-dish mr-2"></i>Improve WiFi Signal</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Router, ethernet cable, WiFi analyzer app
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Position router in central location</p>
-                    <p><strong>Step 2:</strong> Elevate router off the floor</p>
-                    <p><strong>Step 3:</strong> Change WiFi channel to less crowded one</p>
-                    <p><strong>Step 4:</strong> Update router firmware</p>
-                    <p><strong>Step 5:</strong> Consider WiFi extender for large homes</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-smoke mr-2"></i>Test Smoke Detectors</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> 9V batteries, step ladder, vacuum cleaner
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Press test button on each detector</p>
-                    <p><strong>Step 2:</strong> Replace batteries in chirping units</p>
-                    <p><strong>Step 3:</strong> Vacuum dust from detector vents</p>
-                    <p><strong>Step 4:</strong> Test again after cleaning</p>
-                    <p><strong>Step 5:</strong> Replace detectors over 10 years old</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-stopwatch mr-2"></i>Fix Garbage Disposal Jam</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Allen wrench set, flashlight, tongs
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off power to disposal</p>
-                    <p><strong>Step 2:</strong> Use flashlight to look for visible objects</p>
-                    <p><strong>Step 3:</strong> Remove objects with tongs (never hands)</p>
-                    <p><strong>Step 4:</strong> Use Allen wrench on bottom to manually turn</p>
-                    <p><strong>Step 5:</strong> Press reset button and test</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-eye mr-2"></i>Fix Peephole</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New peephole, drill, appropriate bit, screwdriver
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove old peephole by unscrewing</p>
-                    <p><strong>Step 2:</strong> Clean hole of debris</p>
-                    <p><strong>Step 3:</strong> Test fit new peephole</p>
-                    <p><strong>Step 4:</strong> Screw in new peephole from both sides</p>
-                    <p><strong>Step 5:</strong> Test viewing clarity</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-compress-arrows-alt mr-2"></i>Adjust Sliding Door</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, level, vacuum cleaner
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean debris from door track</p>
-                    <p><strong>Step 2:</strong> Locate adjustment screws on door</p>
-                    <p><strong>Step 3:</strong> Raise or lower door using screws</p>
-                    <p><strong>Step 4:</strong> Check door is level and slides smoothly</p>
-                    <p><strong>Step 5:</strong> Lubricate track if needed</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-exclamation-circle mr-2"></i>Reset GFCI Outlet</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> None (just the reset button)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate GFCI outlet (has TEST/RESET buttons)</p>
-                    <p><strong>Step 2:</strong> Press RESET button firmly</p>
-                    <p><strong>Step 3:</strong> Check if power is restored</p>
-                    <p><strong>Step 4:</strong> Test monthly by pressing TEST button</p>
-                    <p><strong>Step 5:</strong> Replace if won't reset or test properly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-tv mr-2"></i>Mount TV on Wall</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> TV mount, drill, level, stud finder, screws
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Find wall studs with stud finder</p>
-                    <p><strong>Step 2:</strong> Mark mounting bracket locations</p>
-                    <p><strong>Step 3:</strong> Drill pilot holes into studs</p>
-                    <p><strong>Step 4:</strong> Attach bracket with appropriate screws</p>
-                    <p><strong>Step 5:</strong> Mount TV and check security</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-icicles mr-2"></i>Fix Ice Maker</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Flashlight, soft cloth, warm water
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check ice maker is turned ON</p>
-                    <p><strong>Step 2:</strong> Verify water supply line connection</p>
-                    <p><strong>Step 3:</strong> Clear any ice jams manually</p>
-                    <p><strong>Step 4:</strong> Clean ice maker with warm water</p>
-                    <p><strong>Step 5:</strong> Wait 24 hours for ice production</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-hand-paper mr-2"></i>Stop Drafts Under Doors</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Door sweep, screws, screwdriver, measuring tape
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Measure door width accurately</p>
-                    <p><strong>Step 2:</strong> Purchase appropriate door sweep</p>
-                    <p><strong>Step 3:</strong> Position sweep to just touch floor</p>
-                    <p><strong>Step 4:</strong> Mark and drill pilot holes</p>
-                    <p><strong>Step 5:</strong> Attach sweep and test door operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-battery-three-quarters mr-2"></i>Replace Smoke Detector Battery</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> 9V battery, step ladder
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove detector from ceiling mount</p>
-                    <p><strong>Step 2:</strong> Disconnect old battery</p>
-                    <p><strong>Step 3:</strong> Connect new battery firmly</p>
-                    <p><strong>Step 4:</strong> Reinstall detector on mount</p>
-                    <p><strong>Step 5:</strong> Press test button to verify operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-green-700"><i class="fas fa-broom mr-2"></i>Clean Dryer Vent</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Vacuum, dryer vent brush, screwdriver
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Unplug dryer and pull away from wall</p>
-                    <p><strong>Step 2:</strong> Disconnect vent hose from dryer</p>
-                    <p><strong>Step 3:</strong> Clean lint from hose and wall vent</p>
-                    <p><strong>Step 4:</strong> Use brush to clean deeper into vent</p>
-                    <p><strong>Step 5:</strong> Reconnect everything and test dryer</p>
+    <!-- Dynamic Content Area -->
+    <section class="py-16 bg-gray-50" id="content-area" style="display: none;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Main Content -->
+                <div class="lg:w-2/3">
+                    <div id="fixes-container">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Sidebar with Ads -->
+                <div class="lg:w-1/3">
+                    <div class="sticky top-24 space-y-6">
+                        <div class="adsense-placeholder h-64 rounded-lg">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"></ins>
+                            Sidebar Ad (300×250)
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-lg font-bold text-gray-900 mb-3">Quick Tips</h4>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li><i class="fas fa-check text-green-500 mr-2"></i>Always turn off power before electrical work</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i>Keep your tools organized and clean</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i>Read instructions completely before starting</li>
+                                <li><i class="fas fa-check text-green-500 mr-2"></i>Have backup plans for complex repairs</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="adsense-placeholder h-64 rounded-lg">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"></ins>
+                            Sidebar Ad (300×250)
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Ad Space -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="adsense-placeholder h-20 rounded-lg">
-            Google AdSense - Mid-Content Banner (728x90)
-        </div>
-    </div>
-
-    <!-- Auto Repairs Section -->
-    <section id="auto-repairs" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex items-center mb-8">
-            <i class="fas fa-car text-red-600 text-3xl mr-4"></i>
-            <h2 class="text-3xl font-bold text-gray-900">Auto Repairs - 50 Essential Guides</h2>
-        </div>
-
-        <!-- Sidebar Ad -->
-        <div class="float-left mr-6 mb-6 w-48 no-print">
-            <div class="adsense-placeholder h-60 rounded-lg">
-                AdSense<br>Sidebar<br>(160x600)
-            </div>
-        </div>
-
-        <div class="guide-grid">
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-oil-can mr-2"></i>Change Engine Oil</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Oil filter wrench, drain pan, funnel, new oil and filter
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Warm engine, then turn off and wait 5 minutes</p>
-                    <p><strong>Step 2:</strong> Raise vehicle safely or use drive-up ramps</p>
-                    <p><strong>Step 3:</strong> Drain old oil completely into pan</p>
-                    <p><strong>Step 4:</strong> Replace oil filter and drain plug</p>
-                    <p><strong>Step 5:</strong> Add new oil and check level</p>
-                </div>
-                <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
-                    <p class="text-xs text-yellow-800"><i class="fas fa-exclamation-triangle mr-1"></i><strong>Safety:</strong> Never work under a car supported only by a jack</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-battery-full mr-2"></i>Jump Start Dead Battery</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Jumper cables, working vehicle, safety gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Position vehicles close but not touching</p>
-                    <p><strong>Step 2:</strong> Connect positive cable to dead battery positive</p>
-                    <p><strong>Step 3:</strong> Connect other positive to working battery</p>
-                    <p><strong>Step 4:</strong> Connect negative to working battery, then ground</p>
-                    <p><strong>Step 5:</strong> Start working car, then dead car</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-wheel mr-2"></i>Change Flat Tire</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Spare tire, jack, lug wrench, wheel chocks
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Park safely and engage parking brake</p>
-                    <p><strong>Step 2:</strong> Loosen lug nuts (don't remove completely)</p>
-                    <p><strong>Step 3:</strong> Jack up vehicle until tire is off ground</p>
-                    <p><strong>Step 4:</strong> Remove lug nuts and flat tire</p>
-                    <p><strong>Step 5:</strong> Install spare tire and tighten lug nuts</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-car-crash mr-2"></i>Replace Brake Pads</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New brake pads, C-clamp, wrenches, brake cleaner
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove wheel and locate brake caliper</p>
-                    <p><strong>Step 2:</strong> Remove caliper bolts carefully</p>
-                    <p><strong>Step 3:</strong> Remove old brake pads</p>
-                    <p><strong>Step 4:</strong> Compress caliper piston with C-clamp</p>
-                    <p><strong>Step 5:</strong> Install new pads and reassemble</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-filter mr-2"></i>Replace Air Filter</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New air filter, screwdriver (if needed)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate air filter box near engine</p>
-                    <p><strong>Step 2:</strong> Open air filter housing</p>
-                    <p><strong>Step 3:</strong> Remove old filter and note orientation</p>
-                    <p><strong>Step 4:</strong> Clean housing if needed</p>
-                    <p><strong>Step 5:</strong> Install new filter in same orientation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-lightbulb mr-2"></i>Replace Headlight Bulb</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New bulb, screwdriver, gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Open hood and locate headlight assembly</p>
-                    <p><strong>Step 2:</strong> Disconnect electrical connector</p>
-                    <p><strong>Step 3:</strong> Remove bulb retention clip</p>
-                    <p><strong>Step 4:</strong> Install new bulb (don't touch glass)</p>
-                    <p><strong>Step 5:</strong> Reconnect and test headlight</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-tachometer-alt mr-2"></i>Check Tire Pressure</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Tire pressure gauge, air compressor access
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check tires when cold (not driven)</p>
-                    <p><strong>Step 2:</strong> Remove valve cap and press gauge firmly</p>
-                    <p><strong>Step 3:</strong> Read pressure and compare to door placard</p>
-                    <p><strong>Step 4:</strong> Add air if pressure is low</p>
-                    <p><strong>Step 5:</strong> Recheck pressure and replace valve cap</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-shower mr-2"></i>Replace Windshield Wipers</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New wiper blades, possibly small tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Lift wiper arm away from windshield</p>
-                    <p><strong>Step 2:</strong> Press tab or button to release old blade</p>
-                    <p><strong>Step 3:</strong> Slide old blade off wiper arm</p>
-                    <p><strong>Step 4:</strong> Attach new blade until it clicks</p>
-                    <p><strong>Step 5:</strong> Lower arm and test wiper operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-thermometer-half mr-2"></i>Check Engine Coolant</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Coolant, funnel, rag
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check coolant when engine is cold</p>
-                    <p><strong>Step 2:</strong> Locate coolant reservoir tank</p>
-                    <p><strong>Step 3:</strong> Check level against min/max marks</p>
-                    <p><strong>Step 4:</strong> Add coolant if below minimum</p>
-                    <p><strong>Step 5:</strong> Check for leaks under vehicle</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-gas-pump mr-2"></i>Replace Fuel Filter</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New fuel filter, wrenches, safety glasses
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Relieve fuel system pressure</p>
-                    <p><strong>Step 2:</strong> Locate fuel filter (usually near tank)</p>
-                    <p><strong>Step 3:</strong> Disconnect fuel lines carefully</p>
-                    <p><strong>Step 4:</strong> Remove old filter, note direction</p>
-                    <p><strong>Step 5:</strong> Install new filter with correct flow direction</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-bolt mr-2"></i>Replace Spark Plugs</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New spark plugs, spark plug socket, gap gauge
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Let engine cool completely</p>
-                    <p><strong>Step 2:</strong> Remove spark plug wires one at a time</p>
-                    <p><strong>Step 3:</strong> Remove old spark plug with socket</p>
-                    <p><strong>Step 4:</strong> Gap new plug to specifications</p>
-                    <p><strong>Step 5:</strong> Install new plug hand-tight plus 1/4 turn</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-car-battery mr-2"></i>Clean Battery Terminals</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Baking soda, water, wire brush, gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off engine and remove keys</p>
-                    <p><strong>Step 2:</strong> Disconnect negative cable first</p>
-                    <p><strong>Step 3:</strong> Clean terminals with baking soda solution</p>
-                    <p><strong>Step 4:</strong> Scrub with wire brush until clean</p>
-                    <p><strong>Step 5:</strong> Reconnect positive first, then negative</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-fan mr-2"></i>Replace Cabin Air Filter</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New cabin filter, screwdriver (possibly)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate cabin air filter (usually behind glove box)</p>
-                    <p><strong>Step 2:</strong> Remove glove box or access panel</p>
-                    <p><strong>Step 3:</strong> Remove old filter, noting direction</p>
-                    <p><strong>Step 4:</strong> Clean filter housing if needed</p>
-                    <p><strong>Step 5:</strong> Install new filter in correct orientation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-wrench mr-2"></i>Adjust Side Mirrors</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> None (manual adjustment)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Adjust seat to normal driving position</p>
-                    <p><strong>Step 2:</strong> Set rearview mirror to frame rear window</p>
-                    <p><strong>Step 3:</strong> Lean left, adjust left mirror to barely see car</p>
-                    <p><strong>Step 4:</strong> Lean right, adjust right mirror similarly</p>
-                    <p><strong>Step 5:</strong> Test by watching cars move between mirrors</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-road mr-2"></i>Check Brake Fluid</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Brake fluid (DOT 3 or 4), rag
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate brake fluid reservoir (near firewall)</p>
-                    <p><strong>Step 2:</strong> Check fluid level against min/max marks</p>
-                    <p><strong>Step 3:</strong> Check fluid color (should be clear, not dark)</p>
-                    <p><strong>Step 4:</strong> Add fluid if low (don't overfill)</p>
-                    <p><strong>Step 5:</strong> Look for leaks if level drops quickly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-car-alt mr-2"></i>Wash Car Properly</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Car wash soap, microfiber cloths, hose, wax
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Rinse car to remove loose dirt</p>
-                    <p><strong>Step 2:</strong> Wash from top down with soap solution</p>
-                    <p><strong>Step 3:</strong> Use separate cloth for wheels and tires</p>
-                    <p><strong>Step 4:</strong> Rinse thoroughly starting from top</p>
-                    <p><strong>Step 5:</strong> Dry with clean microfiber towels</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-tools mr-2"></i>Replace Fuses</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Replacement fuses, fuse puller, flashlight
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off ignition and remove keys</p>
-                    <p><strong>Step 2:</strong> Locate fuse box (check owner's manual)</p>
-                    <p><strong>Step 3:</strong> Find blown fuse (broken wire visible)</p>
-                    <p><strong>Step 4:</strong> Remove with fuse puller tool</p>
-                    <p><strong>Step 5:</strong> Replace with same amperage fuse</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-power-off mr-2"></i>Test Alternator</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Multimeter, safety gloves
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Start engine and let idle</p>
-                    <p><strong>Step 2:</strong> Set multimeter to DC voltage</p>
-                    <p><strong>Step 3:</strong> Test battery voltage (should be 12.6V off)</p>
-                    <p><strong>Step 4:</strong> Test with engine running (should be 13.5-14.5V)</p>
-                    <p><strong>Step 5:</strong> Rev engine to 2000 RPM and retest</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-cog mr-2"></i>Check Transmission Fluid</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Transmission fluid, funnel, rag
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Warm engine and transmission</p>
-                    <p><strong>Step 2:</strong> Park on level ground, engine running</p>
-                    <p><strong>Step 3:</strong> Locate transmission dipstick</p>
-                    <p><strong>Step 4:</strong> Check fluid level and color</p>
-                    <p><strong>Step 5:</strong> Add fluid if needed through dipstick tube</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-compress mr-2"></i>Fix Loose Exhaust</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Exhaust clamps, jack stands, wrenches
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Safely raise vehicle on level ground</p>
-                    <p><strong>Step 2:</strong> Locate loose exhaust connection</p>
-                    <p><strong>Step 3:</strong> Clean connection surfaces</p>
-                    <p><strong>Step 4:</strong> Install new clamp or tighten existing</p>
-                    <p><strong>Step 5:</strong> Start engine and check for leaks</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-window-restore mr-2"></i>Fix Power Window</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver set, multimeter, silicone spray
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check window fuse first</p>
-                    <p><strong>Step 2:</strong> Test window switch with multimeter</p>
-                    <p><strong>Step 3:</strong> Remove door panel to access motor</p>
-                    <p><strong>Step 4:</strong> Test power to window motor</p>
-                    <p><strong>Step 5:</strong> Lubricate window tracks if working</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-key mr-2"></i>Replace Key Fob Battery</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New battery (usually CR2032), small screwdriver
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate battery compartment on fob</p>
-                    <p><strong>Step 2:</strong> Open case carefully (may require prying)</p>
-                    <p><strong>Step 3:</strong> Note battery orientation before removal</p>
-                    <p><strong>Step 4:</strong> Replace with identical battery type</p>
-                    <p><strong>Step 5:</strong> Reassemble and test fob functions</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-fire mr-2"></i>Replace PCV Valve</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New PCV valve, pliers, rag
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate PCV valve (usually in valve cover)</p>
-                    <p><strong>Step 2:</strong> Disconnect vacuum hose from valve</p>
-                    <p><strong>Step 3:</strong> Remove old PCV valve by pulling out</p>
-                    <p><strong>Step 4:</strong> Insert new valve until seated</p>
-                    <p><strong>Step 5:</strong> Reconnect vacuum hose securely</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-tint mr-2"></i>Fix Windshield Washer</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Washer fluid, thin wire, fuse puller
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check washer fluid reservoir level</p>
-                    <p><strong>Step 2:</strong> Fill reservoir if empty</p>
-                    <p><strong>Step 3:</strong> Check fuse for washer pump</p>
-                    <p><strong>Step 4:</strong> Clear nozzles with thin wire if clogged</p>
-                    <p><strong>Step 5:</strong> Test system operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-thermometer mr-2"></i>Fix Overheating Engine</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Coolant, funnel, basic tools, thermostat
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Pull over safely and turn off engine</p>
-                    <p><strong>Step 2:</strong> Wait for engine to cool completely</p>
-                    <p><strong>Step 3:</strong> Check coolant level and add if low</p>
-                    <p><strong>Step 4:</strong> Check for obvious leaks</p>
-                    <p><strong>Step 5:</strong> If problem persists, check thermostat</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-bell mr-2"></i>Replace Serpentine Belt</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New belt, socket set, belt routing diagram
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Take photo of belt routing before removal</p>
-                    <p><strong>Step 2:</strong> Locate belt tensioner pulley</p>
-                    <p><strong>Step 3:</strong> Relieve tension and remove old belt</p>
-                    <p><strong>Step 4:</strong> Route new belt according to diagram</p>
-                    <p><strong>Step 5:</strong> Release tensioner to apply proper tension</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-adjust mr-2"></i>Align Headlights</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, measuring tape, wall or garage door
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Park 25 feet from flat wall</p>
-                    <p><strong>Step 2:</strong> Turn on headlights and mark beam centers</p>
-                    <p><strong>Step 3:</strong> Locate headlight adjustment screws</p>
-                    <p><strong>Step 4:</strong> Adjust vertical and horizontal aim</p>
-                    <p><strong>Step 5:</strong> Test both low and high beams</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-door-open mr-2"></i>Fix Car Door Handle</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver set, replacement handle/cable, trim tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove interior door panel</p>
-                    <p><strong>Step 2:</strong> Locate door handle mechanism</p>
-                    <p><strong>Step 3:</strong> Check for broken cable or handle</p>
-                    <p><strong>Step 4:</strong> Replace broken components</p>
-                    <p><strong>Step 5:</strong> Test operation before reassembly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-spotify mr-2"></i>Fix Car Radio</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Fuse puller, multimeter, radio removal tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check radio fuse first</p>
-                    <p><strong>Step 2:</strong> Test power to radio with multimeter</p>
-                    <p><strong>Step 3:</strong> Check antenna connection</p>
-                    <p><strong>Step 4:</strong> Remove radio to check wiring</p>
-                    <p><strong>Step 5:</strong> Replace radio if internal fault found</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-snowflake mr-2"></i>Recharge AC System</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> R-134a refrigerant, pressure gauge, safety glasses
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate low-pressure service port</p>
-                    <p><strong>Step 2:</strong> Attach refrigerant can with gauge</p>
-                    <p><strong>Step 3:</strong> Start engine and turn AC to max cold</p>
-                    <p><strong>Step 4:</strong> Add refrigerant slowly while monitoring</p>
-                    <p><strong>Step 5:</strong> Stop when gauge shows proper pressure</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-compress-arrows-alt mr-2"></i>Replace Shock Absorbers</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New shocks, jack stands, socket set, spring compressor
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Safely raise and support vehicle</p>
-                    <p><strong>Step 2:</strong> Remove wheel to access shock</p>
-                    <p><strong>Step 3:</strong> Disconnect shock from upper and lower mounts</p>
-                    <p><strong>Step 4:</strong> Install new shock in reverse order</p>
-                    <p><strong>Step 5:</strong> Torque bolts to specification</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-parking mr-2"></i>Adjust Parking Brake</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Wrenches, jack stands, brake adjustment tool
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Locate parking brake adjustment mechanism</p>
-                    <p><strong>Step 2:</strong> Loosen lock nut on adjustment cable</p>
-                    <p><strong>Step 3:</strong> Turn adjustment nut to increase tension</p>
-                    <p><strong>Step 4:</strong> Test parking brake hold</p>
-                    <p><strong>Step 5:</strong> Tighten lock nut when adjustment correct</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-truck-pickup mr-2"></i>Fix Tailgate Latch</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screwdriver, lubricant, replacement latch parts
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove tailgate inner panel</p>
-                    <p><strong>Step 2:</strong> Locate latch mechanism</p>
-                    <p><strong>Step 3:</strong> Clean and lubricate moving parts</p>
-                    <p><strong>Step 4:</strong> Replace broken latch components</p>
-                    <p><strong>Step 5:</strong> Test latch operation thoroughly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-gas-pump mr-2"></i>Clean Fuel Injectors</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Fuel injector cleaner, funnel
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Purchase quality fuel injector cleaner</p>
-                    <p><strong>Step 2:</strong> Add cleaner to nearly empty fuel tank</p>
-                    <p><strong>Step 3:</strong> Fill tank with premium gasoline</p>
-                    <p><strong>Step 4:</strong> Drive normally until tank is 1/4 full</p>
-                    <p><strong>Step 5:</strong> Repeat process if performance issues persist</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-history mr-2"></i>Reset Check Engine Light</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> OBD-II scanner or code reader
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Connect OBD-II scanner to diagnostic port</p>
-                    <p><strong>Step 2:</strong> Turn ignition on (don't start engine)</p>
-                    <p><strong>Step 3:</strong> Read and record any error codes</p>
-                    <p><strong>Step 4:</strong> Clear codes using scanner</p>
-                    <p><strong>Step 5:</strong> Drive and verify light doesn't return</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-clipboard-check mr-2"></i>Perform Basic Tune-Up</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Various filters, spark plugs, fluids, basic tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Replace air filter and cabin filter</p>
-                    <p><strong>Step 2:</strong> Change spark plugs if due</p>
-                    <p><strong>Step 3:</strong> Check and top off all fluids</p>
-                    <p><strong>Step 4:</strong> Inspect belts and hoses</p>
-                    <p><strong>Step 5:</strong> Test battery and charging system</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-ban mr-2"></i>Fix Stuck Brake Caliper</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Brake lubricant, C-clamp, brake cleaner, tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Remove wheel and locate sticking caliper</p>
-                    <p><strong>Step 2:</strong> Remove caliper bolts carefully</p>
-                    <p><strong>Step 3:</strong> Clean caliper slides with brake cleaner</p>
-                    <p><strong>Step 4:</strong> Lubricate slides with proper brake grease</p>
-                    <p><strong>Step 5:</strong> Reinstall and test brake operation</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-satellite mr-2"></i>Fix GPS Navigation</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> None (software/settings adjustment)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check GPS antenna connection</p>
-                    <p><strong>Step 2:</strong> Update navigation system software</p>
-                    <p><strong>Step 3:</strong> Reset GPS to factory defaults</p>
-                    <p><strong>Step 4:</strong> Allow time for satellite acquisition</p>
-                    <p><strong>Step 5:</strong> Drive to open area for better signal</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-wrench mr-2"></i>Replace CV Joint</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New CV joint, jack stands, socket set, grease
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Safely raise vehicle and remove wheel</p>
-                    <p><strong>Step 2:</strong> Remove axle nut and brake caliper</p>
-                    <p><strong>Step 3:</strong> Separate ball joint and remove axle</p>
-                    <p><strong>Step 4:</strong> Replace CV joint with new unit</p>
-                    <p><strong>Step 5:</strong> Reassemble in reverse order</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-wind mr-2"></i>Fix Heater Core</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New heater core, coolant, basic tools, dash removal tools
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Drain cooling system completely</p>
-                    <p><strong>Step 2:</strong> Remove dashboard (complex procedure)</p>
-                    <p><strong>Step 3:</strong> Disconnect heater hoses from core</p>
-                    <p><strong>Step 4:</strong> Replace heater core unit</p>
-                    <p><strong>Step 5:</strong> Reassemble and refill coolant system</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-mobile-alt mr-2"></i>Fix Bluetooth Connection</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Phone/device, vehicle manual
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Delete car from phone's Bluetooth list</p>
-                    <p><strong>Step 2:</strong> Clear car's Bluetooth memory</p>
-                    <p><strong>Step 3:</strong> Put car system in pairing mode</p>
-                    <p><strong>Step 4:</strong> Search for car on phone and pair</p>
-                    <p><strong>Step 5:</strong> Test audio and phone connectivity</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-red-700"><i class="fas fa-chart-line mr-2"></i>Improve Fuel Economy</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Tire gauge, air filter, fuel system cleaner
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Keep tires properly inflated</p>
-                    <p><strong>Step 2:</strong> Replace dirty air filter</p>
-                    <p><strong>Step 3:</strong> Use fuel system cleaner periodically</p>
-                    <p><strong>Step 4:</strong> Remove excess weight from vehicle</p>
-                    <p><strong>Step 5:</strong> Drive smoothly and avoid rapid acceleration</p>
-                </div>
+    <!-- Email Subscriber Section -->
+    <section class="email-gradient text-white py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fas fa-envelope text-5xl mb-6"></i>
+            <h3 class="text-4xl font-bold mb-4">Get Exclusive DIY Secrets!</h3>
+            <p class="text-xl mb-8">Join 75,000+ DIY enthusiasts getting premium repair guides, insider tips, and exclusive video tutorials delivered weekly!</p>
+            
+            <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 max-w-2xl mx-auto">
+                <h4 class="text-2xl font-bold mb-4">🎁 FREE Welcome Package Includes:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-left">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-300 mr-3"></i>
+                        <span>25 Emergency Fix Guides</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-300 mr-3"></i>
+                        <span>Tool Buying Checklist</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-300 mr-3"></i>
+                        <span>Video Tutorial Library</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-300 mr-3"></i>
+                        <span>Weekly Expert Tips</span>
+                    </div>
+                </div>
+                
+                <form class="flex flex-col sm:flex-row gap-4" onsubmit="handleEmailSubmit(event)">
+                    <input type="email" placeholder="Enter your email address" required 
+                           class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg font-medium focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50" />
+                    <button type="submit" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition duration-300 whitespace-nowrap">
+                        <i class="fas fa-gift mr-2"></i>Get Free Access
+                    </button>
+                </form>
+                
+                <p class="text-sm mt-4 opacity-80">
+                    <i class="fas fa-lock mr-1"></i>
+                    100% Privacy Guaranteed. No spam, unsubscribe anytime.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Ad Space -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="adsense-placeholder h-20 rounded-lg">
-            Google AdSense - Auto Section Banner (728x90)
+    <!-- Mobile Ad -->
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="adsense-placeholder h-16 rounded-lg">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"></ins>
+            Mobile Banner Ad (320×100)
         </div>
     </div>
 
-    <!-- Tech Help Section -->
-    <section id="tech-help" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex items-center mb-8">
-            <i class="fas fa-laptop text-purple-600 text-3xl mr-4"></i>
-            <h2 class="text-3xl font-bold text-gray-900">Tech Help - 50 Essential Guides</h2>
-        </div>
-
-        <!-- Sidebar Ad -->
-        <div class="float-right ml-6 mb-6 w-48 no-print">
-            <div class="adsense-placeholder h-60 rounded-lg">
-                AdSense<br>Sidebar<br>(160x600)
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tools text-blue-400 text-2xl mr-3"></i>
+                        <h5 class="text-xl font-bold">DailyFixes.com</h5>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted source for professional DIY repair guides with 200+ comprehensive solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Categories</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><button onclick="showCategory('home')" class="hover:text-white transition duration-300">Home Fixes (50)</button></li>
+                        <li><button onclick="showCategory('auto')" class="hover:text-white transition duration-300">Auto Repairs (50)</button></li>
+                        <li><button onclick="showCategory('tech')" class="hover:text-white transition duration-300">Tech Help (50)</button></li>
+                        <li><button onclick="showCategory('life')" class="hover:text-white transition duration-300">Life Hacks (50)</button></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Resources</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-300">Tool Reviews</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Safety Guidelines</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Video Tutorials</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Expert Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Features</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-file-pdf mr-2"></i>PDF Downloads</li>
+                        <li><i class="fas fa-mobile-alt mr-2"></i>Mobile Friendly</li>
+                        <li><i class="fas fa-print mr-2"></i>Print Optimized</li>
+                        <li><i class="fas fa-search mr-2"></i>Easy Navigation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">© 2024 DailyFixes.com. All rights reserved. Professional DIY solutions for everyone.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="guide-grid">
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-laptop mr-2"></i>Speed Up Slow Computer</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Disk cleanup utility, antivirus software, external drive
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Run disk cleanup to remove temporary files</p>
-                    <p><strong>Step 2:</strong> Uninstall unused programs</p>
-                    <p><strong>Step 3:</strong> Disable startup programs you don't need</p>
-                    <p><strong>Step 4:</strong> Run full antivirus scan</p>
-                    <p><strong>Step 5:</strong> Add more RAM if consistently low</p>
-                </div>
-            </div>
+    <script>
+        // DIY Fix Data
+        const fixes = {
+            home: [
+                { title: "Fix a Leaky Faucet", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Screwdriver"], steps: ["Turn off water supply", "Remove faucet handle", "Replace O-ring or washer", "Reassemble faucet", "Test for leaks"] },
+                { title: "Unclog a Drain", difficulty: "Easy", time: "20 min", tools: ["Plunger", "Drain snake"], steps: ["Remove drain cover", "Use plunger first", "If needed, use drain snake", "Flush with hot water", "Replace drain cover"] },
+                { title: "Replace Light Switch", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Wire strippers", "Voltage tester"], steps: ["Turn off power at breaker", "Test with voltage tester", "Remove old switch", "Connect new switch wires", "Install and test"] },
+                { title: "Fix Running Toilet", difficulty: "Easy", time: "25 min", tools: ["Adjustable wrench"], steps: ["Check flapper seal", "Adjust chain length", "Bend float arm if needed", "Replace flapper if warped", "Test flush mechanism"] },
+                { title: "Patch Drywall Hole", difficulty: "Medium", time: "2 hours", tools: ["Drywall patch", "Putty knife", "Sandpaper"], steps: ["Clean hole edges", "Apply patch", "Spread joint compound", "Let dry and sand smooth", "Prime and paint"] },
+                { title: "Fix Squeaky Door Hinge", difficulty: "Easy", time: "10 min", tools: ["WD-40", "Cloth"], steps: ["Clean hinge with cloth", "Apply lubricant to hinge pins", "Work door back and forth", "Wipe excess lubricant", "Test door operation"] },
+                { title: "Replace Weatherstripping", difficulty: "Easy", time: "1 hour", tools: ["Measuring tape", "Utility knife"], steps: ["Remove old weatherstripping", "Clean surface thoroughly", "Measure and cut new strip", "Apply new weatherstripping", "Test door/window seal"] },
+                { title: "Fix Garbage Disposal", difficulty: "Medium", time: "30 min", tools: ["Allen wrench", "Flashlight"], steps: ["Turn off power", "Check for obstructions", "Use reset button", "Turn manually with Allen wrench", "Restore power and test"] },
+                { title: "Repair Window Screen", difficulty: "Easy", time: "45 min", tools: ["Screen material", "Spline tool"], steps: ["Remove damaged screen", "Cut new screen to size", "Install screen in frame", "Press spline into groove", "Trim excess material"] },
+                { title: "Fix Loose Cabinet Door", difficulty: "Easy", time: "20 min", tools: ["Screwdriver", "Wood screws"], steps: ["Identify loose hinges", "Tighten existing screws", "Add longer screws if needed", "Check door alignment", "Adjust as necessary"] },
+                { title: "Replace Air Filter", difficulty: "Easy", time: "15 min", tools: ["New filter"], steps: ["Locate filter compartment", "Note airflow direction", "Remove old filter", "Insert new filter correctly", "Close compartment securely"] },
+                { title: "Fix Dripping Showerhead", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Teflon tape"], steps: ["Remove showerhead", "Clean threads", "Apply new Teflon tape", "Reinstall showerhead", "Test for leaks"] },
+                { title: "Repair Cracked Tile", difficulty: "Medium", time: "1 hour", tools: ["Tile adhesive", "Grout", "Putty knife"], steps: ["Clean crack thoroughly", "Apply tile adhesive", "Press crack together", "Apply grout over repair", "Clean excess grout"] },
+                { title: "Fix Sticking Window", difficulty: "Medium", time: "45 min", tools: ["Sandpaper", "Lubricant"], steps: ["Identify stick points", "Sand problem areas lightly", "Clean window tracks", "Apply lubricant to tracks", "Test window operation"] },
+                { title: "Replace Doorbell", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "Wire nuts"], steps: ["Turn off power", "Remove old doorbell", "Connect new doorbell wires", "Mount new doorbell", "Test functionality"] },
+                { title: "Fix Loose Handrail", difficulty: "Medium", time: "30 min", tools: ["Drill", "Wood screws", "Wall anchors"], steps: ["Locate wall studs", "Remove loose screws", "Install wall anchors if needed", "Reattach with longer screws", "Test stability"] },
+                { title: "Repair Leaky Pipe Joint", difficulty: "Medium", time: "45 min", tools: ["Pipe wrench", "Teflon tape", "Joint compound"], steps: ["Turn off water supply", "Drain pipes", "Disassemble joint", "Clean threads", "Reassemble with sealant"] },
+                { title: "Fix Popped Nail in Drywall", difficulty: "Easy", time: "20 min", tools: ["Hammer", "Putty knife", "Spackle"], steps: ["Drive nail below surface", "Add screw near nail", "Apply spackle over holes", "Sand smooth when dry", "Touch up paint"] },
+                { title: "Replace Electrical Outlet", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Wire strippers", "Voltage tester"], steps: ["Turn off power at breaker", "Test outlet with voltage tester", "Remove old outlet", "Connect new outlet wires", "Install and test"] },
+                { title: "Fix Sagging Shelf", difficulty: "Easy", time: "30 min", tools: ["Level", "Wall anchors", "Screws"], steps: ["Remove items from shelf", "Check bracket mounting", "Add additional support brackets", "Use proper wall anchors", "Reinstall and test"] },
+                { title: "Repair Vinyl Flooring", difficulty: "Medium", time: "1 hour", tools: ["Utility knife", "Vinyl patch", "Adhesive"], steps: ["Cut around damaged area", "Remove damaged section", "Cut patch to fit", "Apply adhesive", "Install patch and smooth"] },
+                { title: "Fix Sliding Door Track", difficulty: "Medium", time: "45 min", tools: ["Vacuum", "Lubricant", "Screwdriver"], steps: ["Remove door from track", "Clean track thoroughly", "Check for damage", "Lubricate track", "Reinstall door and adjust"] },
+                { title: "Replace Fuse in Electrical Panel", difficulty: "Hard", time: "20 min", tools: ["Replacement fuse", "Flashlight"], steps: ["Identify blown fuse", "Turn off main power", "Remove blown fuse", "Install new fuse", "Restore power and test"] },
+                { title: "Fix Loose Toilet", difficulty: "Medium", time: "45 min", tools: ["Wrench", "Wax ring", "Toilet bolts"], steps: ["Turn off water supply", "Remove toilet", "Replace wax ring", "Install new bolts", "Reinstall toilet and test"] },
+                { title: "Repair Hole in Window Screen", difficulty: "Easy", time: "20 min", tools: ["Screen patch", "Scissors"], steps: ["Clean around hole", "Cut patch larger than hole", "Apply patch over hole", "Smooth edges down", "Trim excess material"] },
+                { title: "Fix Flickering Light", difficulty: "Medium", time: "30 min", tools: ["New bulb", "Screwdriver"], steps: ["Try new bulb first", "Check fixture connections", "Tighten loose wires", "Clean contact points", "Test light operation"] },
+                { title: "Replace Smoke Detector Battery", difficulty: "Easy", time: "10 min", tools: ["9V battery"], steps: ["Remove detector from ceiling", "Open battery compartment", "Replace old battery", "Test detector function", "Reinstall on ceiling"] },
+                { title: "Fix Dripping Outdoor Faucet", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Packing", "Screwdriver"], steps: ["Turn off water supply", "Remove packing nut", "Replace packing material", "Reassemble faucet", "Turn water back on"] },
+                { title: "Repair Loose Stair Railing", difficulty: "Medium", time: "45 min", tools: ["Drill", "Wood screws", "Wood glue"], steps: ["Identify loose connections", "Apply wood glue to joints", "Secure with screws", "Clamp if necessary", "Allow glue to cure"] },
+                { title: "Fix Condensation on Windows", difficulty: "Easy", time: "30 min", tools: ["Caulk", "Caulk gun"], steps: ["Clean window frame", "Remove old caulk", "Apply new caulk seal", "Smooth caulk line", "Allow to cure fully"] },
+                { title: "Replace Thermostat", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "Wire labels"], steps: ["Turn off power", "Label existing wires", "Remove old thermostat", "Connect new thermostat", "Program and test system"] },
+                { title: "Fix Loose Floorboard", difficulty: "Medium", time: "45 min", tools: ["Drill", "Wood screws", "Counter-sink bit"], steps: ["Locate squeaky spot", "Pre-drill screw holes", "Drive screws into subfloor", "Counter-sink screw heads", "Fill holes with wood filler"] },
+                { title: "Repair Torn Carpet", difficulty: "Medium", time: "1 hour", tools: ["Carpet patch", "Carpet knife", "Adhesive"], steps: ["Cut out damaged area", "Cut patch to match", "Apply carpet adhesive", "Press patch in place", "Trim to blend seamlessly"] },
+                { title: "Fix Leaky Washing Machine", difficulty: "Medium", time: "45 min", tools: ["Wrench", "Replacement hoses"], steps: ["Turn off water supply", "Check all connections", "Replace worn hoses", "Tighten loose fittings", "Test for leaks"] },
+                { title: "Replace Broken Tile", difficulty: "Medium", time: "2 hours", tools: ["Chisel", "Hammer", "Tile adhesive", "Grout"], steps: ["Remove broken tile", "Clean adhesive from substrate", "Apply new adhesive", "Install new tile", "Grout around tile"] },
+                { title: "Fix Stuck Garage Door", difficulty: "Hard", time: "1 hour", tools: ["Lubricant", "Wrench", "Level"], steps: ["Check track alignment", "Lubricate moving parts", "Adjust spring tension", "Test door balance", "Adjust opener settings"] },
+                { title: "Repair Leaky Roof Shingle", difficulty: "Hard", time: "2 hours", tools: ["Roofing cement", "New shingle", "Hammer"], steps: ["Locate leak source", "Remove damaged shingle", "Apply roofing cement", "Install new shingle", "Seal all edges"] },
+                { title: "Fix Faulty GFCI Outlet", difficulty: "Medium", time: "30 min", tools: ["Voltage tester", "Screwdriver"], steps: ["Test outlet with tester", "Press reset button", "Check circuit breaker", "Replace if necessary", "Test downstream outlets"] },
+                { title: "Replace Caulk Around Bathtub", difficulty: "Easy", time: "1 hour", tools: ["Caulk remover", "New caulk", "Caulk gun"], steps: ["Remove old caulk completely", "Clean surface thoroughly", "Apply primer if needed", "Apply new caulk evenly", "Smooth with finger"] },
+                { title: "Fix Squeaky Floor", difficulty: "Medium", time: "45 min", tools: ["Screws", "Drill", "Stud finder"], steps: ["Locate squeak source", "Find floor joists", "Drive screws into joists", "Counter-sink screw heads", "Test floor stability"] },
+                { title: "Repair Damaged Baseboard", difficulty: "Medium", time: "1 hour", tools: ["Saw", "Wood filler", "Sandpaper", "Paint"], steps: ["Cut out damaged section", "Measure and cut replacement", "Install new baseboard", "Fill nail holes", "Sand and paint to match"] },
+                { title: "Fix Broken Curtain Rod", difficulty: "Easy", time: "30 min", tools: ["Screwdriver", "Wall anchors", "Level"], steps: ["Remove broken rod", "Check wall anchor condition", "Install new anchors if needed", "Mount new rod brackets", "Install rod and test"] },
+                { title: "Replace Broken Window Pane", difficulty: "Hard", time: "2 hours", tools: ["Glazing compound", "Glass", "Putty knife"], steps: ["Remove broken glass carefully", "Clean frame thoroughly", "Install new glass pane", "Apply glazing compound", "Smooth and paint glazing"] },
+                { title: "Fix Loose Kitchen Faucet", difficulty: "Medium", time: "45 min", tools: ["Basin wrench", "Plumber's putty"], steps: ["Turn off water supply", "Access under sink", "Tighten mounting nuts", "Replace putty if needed", "Test faucet stability"] },
+                { title: "Repair Hole in Vinyl Siding", difficulty: "Medium", time: "1 hour", tools: ["Vinyl patch", "Utility knife", "Caulk"], steps: ["Clean around damaged area", "Cut patch to size", "Apply construction adhesive", "Install patch", "Caulk edges and paint"] },
+                { title: "Fix Wobbly Ceiling Fan", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Balancing kit"], steps: ["Turn off power", "Check mounting screws", "Tighten all connections", "Balance fan blades", "Test fan operation"] },
+                { title: "Replace Damaged Fence Board", difficulty: "Easy", time: "45 min", tools: ["Saw", "Hammer", "Nails", "Level"], steps: ["Remove damaged board", "Measure and cut replacement", "Check board alignment", "Nail board to rails", "Apply stain or paint to match"] },
+                { title: "Fix Leaky Gutter Joint", difficulty: "Medium", time: "30 min", tools: ["Gutter sealant", "Wire brush"], steps: ["Clean joint thoroughly", "Remove old sealant", "Apply new gutter sealant", "Smooth sealant joint", "Test with water"] },
+                { title: "Repair Cracked Foundation", difficulty: "Hard", time: "3 hours", tools: ["Hydraulic cement", "Wire brush", "Trowel"], steps: ["Clean crack thoroughly", "Wet crack with water", "Mix hydraulic cement", "Fill crack completely", "Smooth surface and cure"] },
+                { title: "Fix Broken Sprinkler Head", difficulty: "Easy", time: "30 min", tools: ["New sprinkler head", "Shovel"], steps: ["Turn off water supply", "Dig around broken head", "Unscrew old head", "Install new head", "Test spray pattern and coverage"] }
+            ],
+            auto: [
+                { title: "Change Engine Oil", difficulty: "Easy", time: "45 min", tools: ["Socket wrench", "Oil filter wrench", "Drain pan"], steps: ["Warm up engine", "Drain old oil", "Replace oil filter", "Add new oil", "Check oil level"] },
+                { title: "Replace Brake Pads", difficulty: "Medium", time: "2 hours", tools: ["Jack", "Lug wrench", "C-clamp"], steps: ["Lift vehicle safely", "Remove wheel", "Remove caliper", "Replace brake pads", "Reassemble and test"] },
+                { title: "Jump Start Dead Battery", difficulty: "Easy", time: "15 min", tools: ["Jumper cables"], steps: ["Position vehicles close", "Connect positive cables", "Connect negative cables", "Start working vehicle", "Start dead vehicle"] },
+                { title: "Replace Air Filter", difficulty: "Easy", time: "20 min", tools: ["New air filter"], steps: ["Locate air filter housing", "Remove housing cover", "Remove old filter", "Install new filter", "Replace housing cover"] },
+                { title: "Fix Flat Tire", difficulty: "Medium", time: "30 min", tools: ["Jack", "Lug wrench", "Spare tire"], steps: ["Secure vehicle safely", "Loosen lug nuts", "Raise vehicle", "Remove flat tire", "Install spare tire"] },
+                { title: "Replace Windshield Wipers", difficulty: "Easy", time: "15 min", tools: ["New wiper blades"], steps: ["Lift wiper arms", "Remove old blades", "Attach new blades", "Lower wiper arms", "Test wiper operation"] },
+                { title: "Check Coolant Level", difficulty: "Easy", time: "10 min", tools: ["Coolant"], steps: ["Ensure engine is cool", "Locate coolant reservoir", "Check fluid level", "Add coolant if needed", "Check for leaks"] },
+                { title: "Replace Spark Plugs", difficulty: "Medium", time: "1 hour", tools: ["Spark plug wrench", "Gap gauge"], steps: ["Remove spark plug wires", "Remove old spark plugs", "Check gap on new plugs", "Install new spark plugs", "Reconnect wires"] },
+                { title: "Fix Squeaky Brakes", difficulty: "Medium", time: "1 hour", tools: ["Brake cleaner", "Sandpaper"], steps: ["Remove wheels", "Clean brake components", "Sand brake pads lightly", "Check rotor condition", "Reassemble and test"] },
+                { title: "Replace Headlight Bulb", difficulty: "Easy", time: "20 min", tools: ["New bulb", "Screwdriver"], steps: ["Access headlight assembly", "Disconnect power connector", "Remove old bulb", "Install new bulb", "Test headlight operation"] },
+                { title: "Check Tire Pressure", difficulty: "Easy", time: "15 min", tools: ["Tire pressure gauge", "Air compressor"], steps: ["Remove valve cap", "Check pressure with gauge", "Add air if needed", "Replace valve cap", "Check spare tire too"] },
+                { title: "Replace Cabin Air Filter", difficulty: "Easy", time: "25 min", tools: ["New cabin filter"], steps: ["Locate filter housing", "Remove access panel", "Remove old filter", "Install new filter", "Replace access panel"] },
+                { title: "Fix Loose Side Mirror", difficulty: "Easy", time: "20 min", tools: ["Screwdriver", "Trim removal tools"], steps: ["Remove door panel if needed", "Access mirror mounting", "Tighten loose screws", "Check mirror adjustment", "Reassemble door panel"] },
+                { title: "Replace Car Fuses", difficulty: "Easy", time: "15 min", tools: ["Fuse puller", "Replacement fuses"], steps: ["Locate fuse box", "Identify blown fuse", "Remove with fuse puller", "Install new fuse", "Test electrical component"] },
+                { title: "Clean Battery Terminals", difficulty: "Easy", time: "20 min", tools: ["Wire brush", "Baking soda", "Water"], steps: ["Disconnect battery cables", "Clean terminals with brush", "Apply baking soda solution", "Rinse with water", "Reconnect cables"] },
+                { title: "Replace Transmission Fluid", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "Drain pan", "Funnel"], steps: ["Warm up transmission", "Drain old fluid", "Replace filter if accessible", "Add new fluid", "Check fluid level"] },
+                { title: "Fix Stuck Power Window", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Lubricant"], steps: ["Remove door panel", "Check window tracks", "Lubricate tracks", "Check motor operation", "Reassemble door panel"] },
+                { title: "Replace Radiator Hose", difficulty: "Medium", time: "45 min", tools: ["Hose clamps", "Screwdriver", "Coolant"], steps: ["Drain coolant system", "Remove old hose", "Install new hose", "Secure with clamps", "Refill coolant system"] },
+                { title: "Fix Rattling Heat Shield", difficulty: "Easy", time: "30 min", tools: ["Socket wrench", "Wire ties"], steps: ["Locate rattling shield", "Check mounting bolts", "Tighten loose bolts", "Secure with wire ties", "Test drive vehicle"] },
+                { title: "Replace Power Steering Fluid", difficulty: "Easy", time: "30 min", tools: ["Turkey baster", "New fluid", "Funnel"], steps: ["Locate reservoir", "Remove old fluid", "Add new fluid", "Start engine and turn wheel", "Check fluid level"] },
+                { title: "Fix Squeaky Belt", difficulty: "Easy", time: "20 min", tools: ["Belt dressing", "Rag"], steps: ["Locate squeaky belt", "Clean belt and pulleys", "Apply belt dressing", "Run engine to distribute", "Check belt tension"] },
+                { title: "Replace Thermostat", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Scraper", "Gasket"], steps: ["Drain coolant system", "Remove thermostat housing", "Replace thermostat", "Install new gasket", "Refill coolant system"] },
+                { title: "Fix Loose Exhaust Pipe", difficulty: "Medium", time: "45 min", tools: ["Jack", "Exhaust clamps", "Socket wrench"], steps: ["Raise vehicle safely", "Locate loose connection", "Install exhaust clamp", "Tighten all connections", "Test drive vehicle"] },
+                { title: "Replace Fuel Filter", difficulty: "Medium", time: "45 min", tools: ["Fuel line disconnect tool", "New filter"], steps: ["Relieve fuel pressure", "Disconnect fuel lines", "Remove old filter", "Install new filter", "Reconnect fuel lines"] },
+                { title: "Fix Door Lock Actuator", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "New actuator"], steps: ["Remove door panel", "Disconnect actuator", "Remove mounting screws", "Install new actuator", "Test lock operation"] },
+                { title: "Replace Serpentine Belt", difficulty: "Medium", time: "30 min", tools: ["Socket wrench", "Belt routing diagram"], steps: ["Note belt routing", "Release belt tensioner", "Remove old belt", "Install new belt", "Release tensioner"] },
+                { title: "Fix Leaky Valve Cover", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "New gasket", "RTV sealant"], steps: ["Remove valve cover", "Clean mating surfaces", "Install new gasket", "Apply sealant if needed", "Reinstall valve cover"] },
+                { title: "Replace Alternator", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Multimeter"], steps: ["Disconnect battery", "Remove serpentine belt", "Disconnect alternator wires", "Remove alternator", "Install new alternator"] },
+                { title: "Fix Trunk Latch", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Lubricant"], steps: ["Access trunk latch", "Clean latch mechanism", "Lubricate moving parts", "Adjust latch position", "Test trunk operation"] },
+                { title: "Replace Oxygen Sensor", difficulty: "Medium", time: "45 min", tools: ["O2 sensor socket", "Anti-seize compound"], steps: ["Locate oxygen sensor", "Disconnect electrical connector", "Remove old sensor", "Apply anti-seize to threads", "Install new sensor"] },
+                { title: "Fix Clogged PCV Valve", difficulty: "Easy", time: "20 min", tools: ["New PCV valve", "Pliers"], steps: ["Locate PCV valve", "Remove old valve", "Check valve operation", "Install new valve", "Connect vacuum hose"] },
+                { title: "Replace Mass Airflow Sensor", difficulty: "Medium", time: "30 min", tools: ["Screwdriver", "MAF cleaner"], steps: ["Disconnect air intake", "Remove MAF sensor", "Clean or replace sensor", "Reinstall sensor", "Reconnect air intake"] },
+                { title: "Fix Sticky Accelerator Pedal", difficulty: "Medium", time: "45 min", tools: ["Lubricant", "Screwdriver"], steps: ["Remove floor mats", "Check pedal mechanism", "Clean pivot points", "Lubricate moving parts", "Test pedal operation"] },
+                { title: "Replace Shock Absorbers", difficulty: "Hard", time: "2 hours", tools: ["Jack", "Spring compressor", "Socket wrench"], steps: ["Lift vehicle safely", "Remove wheel", "Compress spring if needed", "Remove old shock", "Install new shock"] },
+                { title: "Fix Loose Wheel Bearing", difficulty: "Hard", time: "2 hours", tools: ["Bearing puller", "Press", "New bearing"], steps: ["Remove wheel and brake", "Remove hub assembly", "Press out old bearing", "Press in new bearing", "Reassemble components"] },
+                { title: "Replace Ignition Coil", difficulty: "Medium", time: "45 min", tools: ["Socket wrench", "Dielectric grease"], steps: ["Locate faulty coil", "Disconnect electrical connector", "Remove coil mounting bolt", "Install new coil", "Apply dielectric grease"] },
+                { title: "Fix Windshield Washer Pump", difficulty: "Medium", time: "45 min", tools: ["New pump", "Hose clamps"], steps: ["Locate washer reservoir", "Disconnect electrical connector", "Remove old pump", "Install new pump", "Test washer operation"] },
+                { title: "Replace Timing Belt", difficulty: "Hard", time: "4 hours", tools: ["Timing marks", "Belt tensioner", "Socket set"], steps: ["Remove engine covers", "Set timing marks", "Remove old belt", "Install new belt", "Check timing marks"] },
+                { title: "Fix Oil Leak", difficulty: "Medium", time: "1 hour", tools: ["Jack", "Socket wrench", "New gasket"], steps: ["Identify leak source", "Clean leak area", "Remove leaking component", "Replace gasket/seal", "Reassemble and test"] },
+                { title: "Replace Starter Motor", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Jack"], steps: ["Disconnect battery", "Raise vehicle if needed", "Remove starter bolts", "Disconnect wires", "Install new starter"] },
+                { title: "Fix Rough Idle", difficulty: "Medium", time: "1 hour", tools: ["OBD scanner", "Throttle cleaner"], steps: ["Scan for error codes", "Clean throttle body", "Check vacuum leaks", "Test idle air control", "Clear error codes"] },
+                { title: "Replace CV Joint", difficulty: "Hard", time: "3 hours", tools: ["Jack", "CV joint puller", "New CV joint"], steps: ["Remove wheel and brake", "Disconnect CV joint", "Remove old joint", "Install new joint", "Reassemble drive system"] },
+                { title: "Fix Loose Muffler", difficulty: "Easy", time: "30 min", tools: ["Exhaust clamp", "Socket wrench"], steps: ["Raise vehicle safely", "Locate loose connection", "Install exhaust clamp", "Tighten connection", "Test exhaust system"] },
+                { title: "Replace Water Pump", difficulty: "Hard", time: "3 hours", tools: ["Socket set", "Gasket scraper", "Coolant"], steps: ["Drain coolant system", "Remove cooling fans", "Remove water pump", "Install new pump", "Refill coolant system"] },
+                { title: "Fix Squealing Power Steering", difficulty: "Medium", time: "30 min", tools: ["Power steering fluid", "Funnel"], steps: ["Check fluid level", "Look for leaks", "Add fluid if low", "Check belt condition", "Test steering operation"] },
+                { title: "Replace EGR Valve", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "Gasket"], steps: ["Locate EGR valve", "Disconnect vacuum lines", "Remove old valve", "Clean mounting surface", "Install new valve"] },
+                { title: "Fix Leaky Heater Core", difficulty: "Hard", time: "4 hours", tools: ["Heater core", "Coolant", "Socket set"], steps: ["Drain coolant system", "Remove dashboard components", "Remove old heater core", "Install new core", "Reassemble dashboard"] },
+                { title: "Replace Catalytic Converter", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Penetrating oil"], steps: ["Raise vehicle safely", "Apply penetrating oil", "Remove old converter", "Install new converter", "Check exhaust leaks"] },
+                { title: "Fix Faulty ABS Sensor", difficulty: "Medium", time: "45 min", tools: ["New ABS sensor", "Socket wrench"], steps: ["Locate faulty sensor", "Disconnect electrical connector", "Remove sensor bolt", "Install new sensor", "Clear ABS codes"] }
+            ],
+            tech: [
+                { title: "Fix Slow Computer Performance", difficulty: "Easy", time: "30 min", tools: ["None required"], steps: ["Run disk cleanup", "Disable startup programs", "Update operating system", "Scan for malware", "Restart computer"] },
+                { title: "Recover Deleted Files", difficulty: "Easy", time: "45 min", tools: ["File recovery software"], steps: ["Stop using the device", "Download recovery software", "Scan for deleted files", "Preview recoverable files", "Restore selected files"] },
+                { title: "Fix WiFi Connection Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Restart router and modem", "Forget and reconnect to network", "Update network drivers", "Reset network settings", "Check for interference"] },
+                { title: "Replace Phone Screen", difficulty: "Hard", time: "2 hours", tools: ["Screwdriver set", "Heat gun", "Suction cup"], steps: ["Power off device", "Remove screws", "Heat to soften adhesive", "Carefully lift screen", "Install new screen"] },
+                { title: "Fix Blue Screen of Death", difficulty: "Medium", time: "1 hour", tools: ["Boot disk"], steps: ["Note error code", "Boot in safe mode", "Run system file checker", "Update drivers", "Check hardware connections"] },
+                { title: "Speed Up Phone Performance", difficulty: "Easy", time: "25 min", tools: ["None required"], steps: ["Clear app cache", "Delete unused apps", "Restart device", "Update operating system", "Close background apps"] },
+                { title: "Fix Laptop Overheating", difficulty: "Medium", time: "45 min", tools: ["Compressed air", "Screwdriver"], steps: ["Clean air vents", "Check fan operation", "Apply thermal paste", "Remove dust buildup", "Monitor temperatures"] },
+                { title: "Recover Forgotten Password", difficulty: "Medium", time: "30 min", tools: ["Password reset disk"], steps: ["Use password hint", "Try password reset disk", "Use security questions", "Contact administrator", "Use backup codes"] },
+                { title: "Fix Printer Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check power and cables", "Clear print queue", "Update printer drivers", "Run printer troubleshooter", "Restart printer service"] },
+                { title: "Remove Virus/Malware", difficulty: "Medium", time: "1 hour", tools: ["Antivirus software"], steps: ["Boot in safe mode", "Run full system scan", "Remove detected threats", "Update antivirus definitions", "Restart normally"] },
+                { title: "Fix Charging Port Issues", difficulty: "Medium", time: "30 min", tools: ["Compressed air", "Toothpick"], steps: ["Clean charging port", "Check for lint/debris", "Try different cable", "Test with another charger", "Check for damage"] },
+                { title: "Backup Important Data", difficulty: "Easy", time: "45 min", tools: ["External drive", "Cloud storage"], steps: ["Identify important files", "Choose backup method", "Set up automatic backups", "Test backup restoration", "Schedule regular backups"] },
+                { title: "Fix Frozen Computer", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Try Ctrl+Alt+Delete", "Close unresponsive programs", "Force restart if needed", "Check for software conflicts", "Run system diagnostics"] },
+                { title: "Upgrade Computer RAM", difficulty: "Medium", time: "30 min", tools: ["Screwdriver", "Anti-static wrist strap"], steps: ["Check RAM compatibility", "Power off and unplug", "Open computer case", "Install new RAM modules", "Test system stability"] },
+                { title: "Fix Email Not Working", difficulty: "Easy", time: "25 min", tools: ["None required"], steps: ["Check internet connection", "Verify email settings", "Clear email cache", "Update email client", "Test with webmail"] },
+                { title: "Set Up Home Network", difficulty: "Medium", time: "1 hour", tools: ["Router", "Ethernet cables"], steps: ["Connect router to modem", "Configure router settings", "Set network name/password", "Connect devices", "Test internet speed"] },
+                { title: "Fix Webcam Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check privacy settings", "Update webcam drivers", "Close other camera apps", "Test in different software", "Restart computer"] },
+                { title: "Troubleshoot Game Performance", difficulty: "Medium", time: "45 min", tools: ["System monitoring software"], steps: ["Check system requirements", "Update graphics drivers", "Lower game settings", "Close background programs", "Monitor system temps"] },
+                { title: "Fix Sound/Audio Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check volume settings", "Update audio drivers", "Test different audio devices", "Run audio troubleshooter", "Restart audio services"] },
+                { title: "Secure WiFi Network", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Change default passwords", "Enable WPA3 encryption", "Hide network name", "Enable firewall", "Update router firmware"] },
+                { title: "Fix Software Won't Install", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Run as administrator", "Check system compatibility", "Disable antivirus temporarily", "Clear temp files", "Restart and retry"] },
+                { title: "Optimize SSD Performance", difficulty: "Medium", time: "30 min", tools: ["SSD management software"], steps: ["Enable TRIM support", "Update SSD firmware", "Check alignment", "Disable defragmentation", "Monitor SSD health"] },
+                { title: "Fix Bluetooth Connection", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Turn Bluetooth off/on", "Remove and re-pair device", "Update Bluetooth drivers", "Clear Bluetooth cache", "Reset network settings"] },
+                { title: "Recover Corrupted Files", difficulty: "Medium", time: "45 min", tools: ["File repair software"], steps: ["Identify file corruption", "Stop using the file", "Try built-in repair tools", "Use third-party software", "Restore from backup"] },
+                { title: "Fix Keyboard Not Working", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Check USB connection", "Try different USB port", "Update keyboard drivers", "Clean keyboard", "Test with on-screen keyboard"] },
+                { title: "Set Up Dual Monitors", difficulty: "Medium", time: "30 min", tools: ["Monitor cables"], steps: ["Connect second monitor", "Open display settings", "Choose display mode", "Adjust resolution", "Arrange monitor positions"] },
+                { title: "Fix Computer Won't Start", difficulty: "Medium", time: "45 min", tools: ["Screwdriver"], steps: ["Check power connections", "Test power supply", "Reseat RAM modules", "Check for loose cables", "Try minimal hardware"] },
+                { title: "Create System Backup", difficulty: "Easy", time: "2 hours", tools: ["External drive"], steps: ["Open backup utility", "Select backup destination", "Choose files to backup", "Start backup process", "Verify backup completion"] },
+                { title: "Fix Mouse/Trackpad Issues", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Clean mouse/trackpad", "Update drivers", "Check USB connection", "Adjust sensitivity settings", "Test with different software"] },
+                { title: "Install Operating System", difficulty: "Hard", time: "2 hours", tools: ["Installation media", "Product key"], steps: ["Create installation media", "Boot from USB/DVD", "Follow installation wizard", "Install drivers", "Restore user data"] },
+                { title: "Fix Hard Drive Errors", difficulty: "Medium", time: "1 hour", tools: ["Disk checking software"], steps: ["Run CHKDSK utility", "Scan for bad sectors", "Backup important data", "Consider drive replacement", "Monitor drive health"] },
+                { title: "Set Up Remote Desktop", difficulty: "Medium", time: "30 min", tools: ["Remote desktop software"], steps: ["Enable remote desktop", "Configure firewall rules", "Set up user accounts", "Install client software", "Test remote connection"] },
+                { title: "Fix Graphics Card Issues", difficulty: "Medium", time: "45 min", tools: ["Screwdriver"], steps: ["Update graphics drivers", "Check card seating", "Test with different monitor", "Monitor temperatures", "Check power connections"] },
+                { title: "Optimize Gaming Performance", difficulty: "Medium", time: "45 min", tools: ["System monitoring tools"], steps: ["Update graphics drivers", "Adjust game settings", "Close background programs", "Enable game mode", "Monitor system performance"] },
+                { title: "Fix Internet Browser Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Clear browser cache", "Disable extensions", "Update browser", "Reset browser settings", "Try different browser"] },
+                { title: "Set Up File Sharing", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Enable file sharing", "Create shared folders", "Set permissions", "Configure network discovery", "Test from other devices"] },
+                { title: "Fix USB Device Problems", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Try different USB port", "Update USB drivers", "Check device manager", "Restart USB services", "Test with another computer"] },
+                { title: "Troubleshoot App Crashes", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Check error logs", "Update the application", "Clear app cache/data", "Run compatibility mode", "Reinstall if necessary"] },
+                { title: "Fix Display Resolution Issues", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Right-click desktop", "Open display settings", "Adjust resolution", "Update display drivers", "Check monitor capabilities"] },
+                { title: "Set Up Automatic Updates", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Open update settings", "Configure automatic downloads", "Set active hours", "Enable recommended updates", "Schedule restart times"] },
+                { title: "Fix Microphone Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check microphone permissions", "Update audio drivers", "Adjust microphone levels", "Test in different apps", "Check physical connections"] },
+                { title: "Optimize Startup Programs", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Open task manager", "Go to startup tab", "Disable unnecessary programs", "Evaluate startup impact", "Restart to test changes"] },
+                { title: "Fix Overheating Issues", difficulty: "Medium", time: "45 min", tools: ["Compressed air", "Thermal paste"], steps: ["Clean dust from vents", "Check fan operation", "Reapply thermal paste", "Improve case airflow", "Monitor temperatures"] },
+                { title: "Set Up Password Manager", difficulty: "Easy", time: "30 min", tools: ["Password manager software"], steps: ["Choose password manager", "Create master password", "Import existing passwords", "Generate secure passwords", "Enable auto-fill"] },
+                { title: "Fix Software Compatibility", difficulty: "Medium", time: "30 min", tools: ["Compatibility tools"], steps: ["Check system requirements", "Run compatibility troubleshooter", "Use compatibility mode", "Update software", "Consider alternatives"] },
+                { title: "Create Emergency Boot Disk", difficulty: "Medium", time: "45 min", tools: ["USB drive", "Boot disk software"], steps: ["Download boot disk creator", "Create bootable media", "Include recovery tools", "Test boot functionality", "Store safely"] },
+                { title: "Fix Network Connection Drops", difficulty: "Medium", time: "30 min", tools: ["Network diagnostic tools"], steps: ["Update network drivers", "Check cable connections", "Reset network adapter", "Disable power management", "Monitor signal strength"] },
+                { title: "Optimize Virtual Memory", difficulty: "Medium", time: "20 min", tools: ["None required"], steps: ["Open system properties", "Go to performance settings", "Adjust virtual memory", "Set custom size", "Apply changes and restart"] },
+                { title: "Fix Time and Date Issues", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Open date/time settings", "Sync with internet time", "Select correct timezone", "Enable automatic updates", "Check regional settings"] }
+            ],
+            life: [
+                { title: "Remove Wine Stains", difficulty: "Easy", time: "15 min", tools: ["Club soda", "Salt", "Paper towels"], steps: ["Blot excess wine immediately", "Pour club soda on stain", "Sprinkle salt to absorb", "Let sit for 10 minutes", "Blot and rinse with cold water"] },
+                { title: "Organize Small Spaces", difficulty: "Easy", time: "2 hours", tools: ["Storage bins", "Labels", "Measuring tape"], steps: ["Empty and clean space", "Measure available area", "Group similar items", "Use vertical storage", "Label everything clearly"] },
+                { title: "Quick 5-Minute Meals", difficulty: "Easy", time: "5 min", tools: ["Microwave", "Basic ingredients"], steps: ["Keep ingredients prepped", "Use microwave efficiently", "Combine protein and carbs", "Add fresh vegetables", "Season well"] },
+                { title: "Remove Grease Stains", difficulty: "Easy", time: "20 min", tools: ["Dish soap", "Baking soda", "Old toothbrush"], steps: ["Sprinkle baking soda on stain", "Let absorb for 15 minutes", "Scrub with dish soap", "Rinse with warm water", "Repeat if necessary"] },
+                { title: "Boost WiFi Signal", difficulty: "Easy", time: "15 min", tools: ["Aluminum foil", "Router"], steps: ["Find optimal router location", "Remove obstructions", "Use aluminum foil reflector", "Update router firmware", "Change WiFi channel"] },
+                { title: "Emergency Stain Remover", difficulty: "Easy", time: "10 min", tools: ["White vinegar", "Baking soda"], steps: ["Mix equal parts vinegar and water", "Apply to stain immediately", "Sprinkle baking soda on top", "Let bubble for 5 minutes", "Blot and rinse clean"] },
+                { title: "Maximize Closet Space", difficulty: "Medium", time: "3 hours", tools: ["Hangers", "Shelf dividers", "Storage boxes"], steps: ["Remove all items", "Sort by category and season", "Use slim hangers", "Add shelf dividers", "Store off-season items up high"] },
+                { title: "Keep Bananas Fresh Longer", difficulty: "Easy", time: "5 min", tools: ["Plastic wrap"], steps: ["Separate bananas from bunch", "Wrap stems in plastic wrap", "Store at room temperature", "Keep away from other fruits", "Refrigerate when ripe"] },
+                { title: "Fix Scratched Sunglasses", difficulty: "Easy", time: "10 min", tools: ["Toothpaste", "Soft cloth"], steps: ["Clean lenses thoroughly", "Apply small amount of toothpaste", "Rub gently in circular motions", "Rinse with lukewarm water", "Dry with soft cloth"] },
+                { title: "Speed Clean Kitchen", difficulty: "Easy", time: "20 min", tools: ["All-purpose cleaner", "Microfiber cloths"], steps: ["Clear all surfaces first", "Load dishwasher/wash dishes", "Wipe down all surfaces", "Clean appliance exteriors", "Sweep and mop floor"] },
+                { title: "Untangle Jewelry", difficulty: "Easy", time: "15 min", tools: ["Baby oil", "Toothpick"], steps: ["Apply drop of baby oil", "Use toothpicks to loosen knots", "Work patiently from outside in", "Clean jewelry when done", "Store properly to prevent tangles"] },
+                { title: "Make Ice Cubes Faster", difficulty: "Easy", time: "30 min", tools: ["Hot water", "Ice trays"], steps: ["Use hot water instead of cold", "Fill trays completely", "Place in freezer immediately", "Don't overcrowd freezer", "Hot water freezes faster than cold"] },
+                { title: "Remove Permanent Marker", difficulty: "Easy", time: "10 min", tools: ["Rubbing alcohol", "Cotton balls"], steps: ["Test in inconspicuous area first", "Apply rubbing alcohol", "Dab, don't rub", "Work from outside of stain in", "Clean area when finished"] },
+                { title: "Organize Cables", difficulty: "Easy", time: "30 min", tools: ["Cable ties", "Labels", "Cable box"], steps: ["Unplug and gather all cables", "Sort by device and length", "Label each cable", "Use cable ties to bundle", "Store in designated box"] },
+                { title: "Keep Produce Fresh", difficulty: "Easy", time: "20 min", tools: ["Paper towels", "Perforated bags"], steps: ["Store herbs like flowers in water", "Wrap leafy greens in paper towels", "Keep potatoes and onions separate", "Use perforated bags for vegetables", "Store tomatoes at room temperature"] },
+                { title: "Quick Bathroom Clean", difficulty: "Easy", time: "15 min", tools: ["Bathroom cleaner", "Toilet brush", "Microfiber cloth"], steps: ["Spray all surfaces first", "Clean mirror and fixtures", "Scrub toilet bowl", "Wipe down all surfaces", "Sweep and mop floor"] },
+                { title: "Remove Pet Hair", difficulty: "Easy", time: "10 min", tools: ["Rubber gloves", "Dryer sheets"], steps: ["Put on slightly damp rubber gloves", "Run hands over fabric surfaces", "Use dryer sheets on upholstery", "Vacuum thoroughly", "Use lint roller for final touch-up"] },
+                { title: "Extend Phone Battery Life", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Lower screen brightness", "Turn off location services", "Close background apps", "Enable power saving mode", "Turn off unnecessary notifications"] },
+                { title: "Remove Soap Scum", difficulty: "Easy", time: "20 min", tools: ["White vinegar", "Dawn dish soap", "Spray bottle"], steps: ["Mix equal parts vinegar and dish soap", "Spray on soap scum", "Let sit for 15 minutes", "Scrub with soft brush", "Rinse thoroughly with water"] },
+                { title: "Speed Up Laundry", difficulty: "Easy", time: "10 min", tools: ["Dry towel", "Tennis balls"], steps: ["Add dry towel to wet load", "Use tennis balls in dryer", "Clean lint filter every load", "Don't overload machines", "Sort clothes by fabric weight"] },
+                { title: "Keep Avocados Fresh", difficulty: "Easy", time: "5 min", tools: ["Lemon juice", "Plastic wrap"], steps: ["Store unripe avocados at room temp", "Refrigerate ripe avocados", "Brush cut avocado with lemon juice", "Cover tightly with plastic wrap", "Store with onion slice to prevent browning"] },
+                { title: "Quick Shoe Deodorizer", difficulty: "Easy", time: "5 min", tools: ["Baking soda", "Coffee filters"], steps: ["Fill coffee filters with baking soda", "Tie filters closed", "Place in shoes overnight", "Remove in morning", "Shake out any excess powder"] },
+                { title: "Unstick Sticky Drawers", difficulty: "Easy", time: "15 min", tools: ["Bar soap", "Sandpaper"], steps: ["Remove drawer completely", "Sand rough spots lightly", "Rub bar soap on drawer slides", "Work drawer in and out", "Wipe away soap residue"] },
+                { title: "Keep Brown Sugar Soft", difficulty: "Easy", time: "5 min", tools: ["Slice of bread", "Airtight container"], steps: ["Place slice of bread in container", "Store brown sugar in airtight container", "Replace bread slice weekly", "For hardened sugar, add marshmallows", "Microwave briefly if very hard"] },
+                { title: "Remove Carpet Indentations", difficulty: "Easy", time: "20 min", tools: ["Ice cubes", "Vacuum"], steps: ["Place ice cube on indentation", "Let ice melt completely", "Fluff carpet with fingers", "Vacuum area thoroughly", "Repeat for stubborn indentations"] },
+                { title: "Quick Declutter Method", difficulty: "Easy", time: "30 min", tools: ["3 boxes/bags"], steps: ["Label boxes: Keep, Donate, Trash", "Set timer for 30 minutes", "Sort items quickly", "Don't overthink decisions", "Remove donate/trash items immediately"] },
+                { title: "Make Clothes Smell Fresh", difficulty: "Easy", time: "10 min", tools: ["White vinegar", "Essential oil"], steps: ["Add 1/2 cup vinegar to rinse cycle", "Add few drops essential oil", "Don't overload washing machine", "Use appropriate water temperature", "Dry completely to prevent mildew"] },
+                { title: "Fix Squeaky Floors", difficulty: "Easy", time: "15 min", tools: ["Baby powder", "Soft brush"], steps: ["Locate squeaky area", "Sprinkle baby powder on joints", "Work powder into cracks", "Walk on area to distribute", "Vacuum excess powder"] },
+                { title: "Keep Lettuce Crisp", difficulty: "Easy", time: "10 min", tools: ["Paper towels", "Airtight container"], steps: ["Wash and dry lettuce thoroughly", "Line container with paper towels", "Store lettuce in single layers", "Add fresh paper towel on top", "Seal container tightly"] },
+                { title: "Remove Water Rings", difficulty: "Easy", time: "10 min", tools: ["Mayonnaise", "Soft cloth"], steps: ["Apply small amount of mayonnaise", "Rub gently with soft cloth", "Let sit for 15 minutes", "Wipe clean with damp cloth", "Polish with dry cloth"] },
+                { title: "Speed Up Computer", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Delete temporary files", "Uninstall unused programs", "Disable startup programs", "Run disk cleanup", "Restart computer regularly"] },
+                { title: "Keep Flowers Fresh", difficulty: "Easy", time: "10 min", tools: ["Sharp knife", "Bleach"], steps: ["Cut stems at angle under water", "Add drop of bleach to water", "Change water every 2 days", "Trim stems regularly", "Remove wilted leaves immediately"] },
+                { title: "Quick Morning Routine", difficulty: "Easy", time: "15 min", tools: ["Preparation"], steps: ["Prepare everything night before", "Set multiple alarms", "Keep morning essentials together", "Have backup plans ready", "Time each activity"] },
+                { title: "Remove Crayon Marks", difficulty: "Easy", time: "10 min", tools: ["Hair dryer", "Credit card", "Dish soap"], steps: ["Heat crayon with hair dryer", "Scrape off with credit card", "Apply dish soap to residue", "Scrub gently", "Wipe clean with damp cloth"] },
+                { title: "Maximize Freezer Space", difficulty: "Easy", time: "45 min", tools: ["Freezer bags", "Labels", "Marker"], steps: ["Remove everything from freezer", "Repackage in flat freezer bags", "Label with contents and date", "Stack bags efficiently", "Keep inventory list on door"] },
+                { title: "Keep Herbs Fresh", difficulty: "Easy", time: "10 min", tools: ["Glass of water", "Plastic bag"], steps: ["Trim herb stems like flowers", "Place in glass of water", "Cover loosely with plastic bag", "Store in refrigerator", "Change water every few days"] },
+                { title: "Quick Energy Boost", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Take 10 deep breaths", "Do jumping jacks for 1 minute", "Drink cold water", "Eat protein-rich snack", "Get natural sunlight"] },
+                { title: "Remove Gum from Clothes", difficulty: "Easy", time: "20 min", tools: ["Ice cubes", "Peanut butter"], steps: ["Freeze gum with ice cubes", "Scrape off frozen gum", "Apply peanut butter to residue", "Let sit for 10 minutes", "Wash in hottest safe water"] },
+                { title: "Organize Digital Photos", difficulty: "Medium", time: "1 hour", tools: ["Computer", "External storage"], steps: ["Create folder structure by date/event", "Delete duplicates and blurry photos", "Backup to external storage", "Use descriptive file names", "Set up automatic backup"] },
+                { title: "Quick Stress Relief", difficulty: "Easy", time: "5 min", tools: ["None required"], steps: ["Practice 4-7-8 breathing", "Tense and release muscles", "Listen to calming music", "Practice gratitude", "Visualize peaceful scene"] },
+                { title: "Keep Cookies Fresh", difficulty: "Easy", time: "5 min", tools: ["Airtight container", "Slice of bread"], steps: ["Store in airtight container", "Add slice of bread to container", "Separate different types", "Don't mix crispy and soft cookies", "Replace bread slice weekly"] },
+                { title: "Quick Room Refresh", difficulty: "Easy", time: "15 min", tools: ["Air freshener", "Cleaning cloth"], steps: ["Open windows for fresh air", "Make beds and fluff pillows", "Clear surfaces quickly", "Spray air freshener", "Turn on pleasant lighting"] },
+                { title: "Remove Sticky Residue", difficulty: "Easy", time: "10 min", tools: ["Cooking oil", "Baking soda"], steps: ["Apply cooking oil to residue", "Let sit for 5 minutes", "Sprinkle baking soda on top", "Scrub gently", "Clean with dish soap"] },
+                { title: "Save Money on Groceries", difficulty: "Easy", time: "30 min", tools: ["Shopping list", "Calculator app"], steps: ["Plan meals for the week", "Check store flyers for sales", "Make detailed shopping list", "Use store loyalty programs", "Compare unit prices"] },
+                { title: "Quick Plant Care", difficulty: "Easy", time: "15 min", tools: ["Water", "Spray bottle"], steps: ["Check soil moisture first", "Water thoroughly but infrequently", "Mist leaves if needed", "Remove dead/yellow leaves", "Rotate plants weekly"] },
+                { title: "Boost Morning Energy", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Drink water immediately upon waking", "Do light stretching", "Eat protein-rich breakfast", "Get morning sunlight", "Listen to upbeat music"] },
+                { title: "Keep Bread Fresh", difficulty: "Easy", time: "5 min", tools: ["Airtight container", "Paper towel"], steps: ["Store in airtight container", "Add paper towel to absorb moisture", "Keep at room temperature", "Freeze extra loaves", "Don't refrigerate bread"] },
+                { title: "Quick Productivity Boost", difficulty: "Easy", time: "15 min", tools: ["Timer", "To-do list"], steps: ["Make prioritized to-do list", "Use 25-minute work blocks", "Eliminate distractions", "Take 5-minute breaks", "Tackle hardest task first"] }
+            ]
+        };
 
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-mobile-alt mr-2"></i>Fix Cracked Phone Screen</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Screen protector, clear nail polish, or replacement screen kit
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean screen gently with microfiber cloth</p>
-                    <p><strong>Step 2:</strong> Apply clear nail polish to small cracks (temporary)</p>
-                    <p><strong>Step 3:</strong> Install screen protector to prevent spreading</p>
-                    <p><strong>Step 4:</strong> For major cracks, consider professional repair</p>
-                    <p><strong>Step 5:</strong> Back up data before any repair attempts</p>
-                </div>
-            </div>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initially hide content area
+            document.getElementById('content-area').style.display = 'none';
+        });
 
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-wifi mr-2"></i>Fix WiFi Connection Issues</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Router access, ethernet cable, device settings
+        // Show category function
+        function showCategory(category) {
+            const contentArea = document.getElementById('content-area');
+            const fixesContainer = document.getElementById('fixes-container');
+            
+            // Update category buttons
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(category + '-btn').classList.add('active');
+            
+            // Show content area
+            contentArea.style.display = 'block';
+            contentArea.scrollIntoView({ behavior: 'smooth' });
+            
+            // Generate category title
+            const categoryTitles = {
+                home: 'Home Fixes',
+                auto: 'Auto Repairs', 
+                tech: 'Tech Help',
+                life: 'Life Hacks'
+            };
+            
+            // Build fixes HTML
+            let fixesHTML = `
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">${categoryTitles[category]} - 50 Professional Guides</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            `;
+            
+            fixes[category].forEach((fix, index) => {
+                const difficultyColors = {
+                    'Easy': 'bg-green-100 text-green-800',
+                    'Medium': 'bg-yellow-100 text-yellow-800', 
+                    'Hard': 'bg-red-100 text-red-800'
+                };
+                
+                fixesHTML += `
+                    <div class="fix-card bg-white p-6 rounded-lg shadow-md border border-gray-200" onclick="toggleFixDetail(${index}, '${category}')">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-lg font-bold text-gray-900">${fix.title}</h3>
+                            <span class="px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[fix.difficulty]}">${fix.difficulty}</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600 mb-3">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span class="mr-4">${fix.time}</span>
+                            <i class="fas fa-tools mr-2"></i>
+                            <span>${fix.tools.length} tools needed</span>
+                        </div>
+                        <div class="fix-detail" id="detail-${category}-${index}">
+                            <div class="border-t pt-4 mt-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">Tools Needed:</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-600 mb-4">
+                                    ${fix.tools.map(tool => `<li>${tool}</li>`).join('')}
+                                </ul>
+                                <h4 class="font-semibold text-gray-900 mb-2">Step-by-Step Instructions:</h4>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    ${fix.steps.map(step => `<li>${step}</li>`).join('')}
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            fixesHTML += '</div>';
+            
+            // Add mobile ad between content
+            fixesHTML += `
+                <div class="my-8">
+                    <div class="adsense-placeholder h-20 rounded-lg">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid"></ins>
+                        In-Content Mobile Ad (320×100)
+                    </div>
                 </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Restart router by unplugging for 30 seconds</p>
-                    <p><strong>Step 2:</strong> Forget and reconnect to WiFi network</p>
-                    <p><strong>Step 3:</strong> Check for interference from other devices</p>
-                    <p><strong>Step 4:</strong> Update network adapter drivers</p>
-                    <p><strong>Step 5:</strong> Reset network settings if problem persists</p>
-                </div>
-            </div>
+            `;
+            
+            fixesContainer.innerHTML = fixesHTML;
+        }
 
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-battery-empty mr-2"></i>Fix Phone Won't Charge</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Different charging cable, toothpick, compressed air
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Try different charging cable and adapter</p>
-                    <p><strong>Step 2:</strong> Clean charging port with toothpick gently</p>
-                    <p><strong>Step 3:</strong> Blow out port with compressed air</p>
-                    <p><strong>Step 4:</strong> Try wireless charging if available</p>
-                    <p><strong>Step 5:</strong> Restart phone and check battery calibration</p>
-                </div>
-            </div>
+        // Toggle fix detail
+        function toggleFixDetail(index, category) {
+            const detail = document.getElementById(`detail-${category}-${index}`);
+            detail.classList.toggle('active');
+        }
 
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-desktop mr-2"></i>Fix Computer Blue Screen</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Windows installation media, system restore access
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Note the error code displayed</p>
-                    <p><strong>Step 2:</strong> Boot into safe mode</p>
-                    <p><strong>Step 3:</strong> Run system file checker (sfc /scannow)</p>
-                    <p><strong>Step 4:</strong> Use system restore to previous working point</p>
-                    <p><strong>Step 5:</strong> Update or rollback recently changed drivers</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-volume-mute mr-2"></i>Fix No Sound on Computer</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Audio driver downloads, system settings access
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check volume mixer and mute settings</p>
-                    <p><strong>Step 2:</strong> Set correct default audio device</p>
-                    <p><strong>Step 3:</strong> Update audio drivers from manufacturer</p>
-                    <p><strong>Step 4:</strong> Run Windows audio troubleshooter</p>
-                    <p><strong>Step 5:</strong> Check physical speaker connections</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-print mr-2"></i>Fix Printer Not Printing</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Printer manual, cleaning materials, new ink/toner
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check printer is on and connected</p>
-                    <p><strong>Step 2:</strong> Clear print queue of stuck jobs</p>
-                    <p><strong>Step 3:</strong> Check ink/toner levels</p>
-                    <p><strong>Step 4:</strong> Run printer head cleaning utility</p>
-                    <p><strong>Step 5:</strong> Reinstall printer drivers if needed</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-hdd mr-2"></i>Recover Deleted Files</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> File recovery software, external storage
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Stop using device immediately</p>
-                    <p><strong>Step 2:</strong> Check recycle bin or trash folder</p>
-                    <p><strong>Step 3:</strong> Use file recovery software like Recuva</p>
-                    <p><strong>Step 4:</strong> Scan for recoverable files</p>
-                    <p><strong>Step 5:</strong> Save recovered files to different drive</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-lock mr-2"></i>Remove Malware/Virus</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Antivirus software, anti-malware tools, safe mode access
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Boot into safe mode</p>
-                    <p><strong>Step 2:</strong> Run full system antivirus scan</p>
-                    <p><strong>Step 3:</strong> Use specialized malware removal tools</p>
-                    <p><strong>Step 4:</strong> Clear browser cache and reset settings</p>
-                    <p><strong>Step 5:</strong> Update all software and operating system</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-camera mr-2"></i>Fix Laptop Camera Not Working</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Device manager access, driver updates
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check camera privacy settings</p>
-                    <p><strong>Step 2:</strong> Look for physical camera switch or button</p>
-                    <p><strong>Step 3:</strong> Update camera drivers in device manager</p>
-                    <p><strong>Step 4:</strong> Restart camera service in services</p>
-                    <p><strong>Step 5:</strong> Test camera in different applications</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-keyboard mr-2"></i>Fix Sticky Keyboard Keys</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Compressed air, cotton swabs, isopropyl alcohol
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Turn off device and unplug keyboard</p>
-                    <p><strong>Step 2:</strong> Use compressed air to blow out debris</p>
-                    <p><strong>Step 3:</strong> Clean keys with alcohol-dampened swab</p>
-                    <p><strong>Step 4:</strong> Remove keycaps if possible for deep cleaning</p>
-                    <p><strong>Step 5:</strong> Let dry completely before reassembly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-mouse mr-2"></i>Fix Mouse Not Working</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New batteries, different USB port, cleaning materials
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Try different USB port or receiver</p>
-                    <p><strong>Step 2:</strong> Replace batteries in wireless mouse</p>
-                    <p><strong>Step 3:</strong> Clean mouse sensor with cotton swab</p>
-                    <p><strong>Step 4:</strong> Update mouse drivers</p>
-                    <p><strong>Step 5:</strong> Test mouse on different surface</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-tv mr-2"></i>Fix TV Remote Not Working</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> New batteries, smartphone camera, cleaning materials
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Replace remote batteries</p>
-                    <p><strong>Step 2:</strong> Clean battery contacts with alcohol</p>
-                    <p><strong>Step 3:</strong> Test IR signal with smartphone camera</p>
-                    <p><strong>Step 4:</strong> Reset remote to factory settings</p>
-                    <p><strong>Step 5:</strong> Re-pair remote with TV if needed</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-memory mr-2"></i>Upgrade Computer RAM</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Compatible RAM modules, screwdriver, anti-static wrist strap
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Check current RAM type and maximum capacity</p>
-                    <p><strong>Step 2:</strong> Purchase compatible RAM modules</p>
-                    <p><strong>Step 3:</strong> Turn off computer and unplug power</p>
-                    <p><strong>Step 4:</strong> Install RAM in correct slots</p>
-                    <p><strong>Step 5:</strong> Boot and verify system recognizes new RAM</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-thermometer-three-quarters mr-2"></i>Fix Overheating Laptop</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Compressed air, screwdriver, thermal paste (advanced)
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Clean air vents with compressed air</p>
-                    <p><strong>Step 2:</strong> Use laptop on hard, flat surface</p>
-                    <p><strong>Step 3:</strong> Close unnecessary programs</p>
-                    <p><strong>Step 4:</strong> Adjust power settings to balanced</p>
-                    <p><strong>Step 5:</strong> Consider laptop cooling pad</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-cloud mr-2"></i>Set Up Cloud Backup</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Cloud service account, internet connection
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Choose cloud service (Google Drive, OneDrive, etc.)</p>
-                    <p><strong>Step 2:</strong> Create account and download desktop app</p>
-                    <p><strong>Step 3:</strong> Select folders to sync</p>
-                    <p><strong>Step 4:</strong> Configure automatic backup schedule</p>
-                    <p><strong>Step 5:</strong> Test restore process</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-shield-alt mr-2"></i>Secure Home WiFi Network</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Router admin access, strong password generator
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Change default router admin password</p>
-                    <p><strong>Step 2:</strong> Enable WPA3 or WPA2 encryption</p>
-                    <p><strong>Step 3:</strong> Create strong WiFi password</p>
-                    <p><strong>Step 4:</strong> Disable WPS and remote management</p>
-                    <p><strong>Step 5:</strong> Update router firmware regularly</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-mobile mr-2"></i>Fix Phone Storage Full</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Cloud storage, external storage, file manager app
-                </div>
-                <div class="text-sm space-y-2">
-                    <p><strong>Step 1:</strong> Delete unused apps and games</p>
-                    <p><strong>Step 2:</strong> Clear app caches and data</p>
-                    <p><strong>Step 3:</strong> Move photos/videos to cloud storage</p>
-                    <p><strong>Step 4:</strong> Delete old text messages and attachments</p>
-                    <p><strong>Step 5:</strong> Use storage analyzer to find large files</p>
-                </div>
-            </div>
-
-            <div class="guide-item bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                <h3 class="text-lg font-semibold mb-3 text-purple-700"><i class="fas fa-eye mr-2"></i>Fix Monitor Display Issues</h3>
-                <div class="text-sm text-gray-600 mb-3">
-                    <strong>Tools Needed:</strong> Different video cable, monitor manual
-                </div>
-                <div class="text-sm space-y
+        // Handle email subscription
+        function handleEmailSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            
+            // Simulate successful subscription
+            alert(`Thank you! Your exclusive DIY package is being sent to ${email}. Check your inbox in a few minutes!`);
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
     <script id="html_badge_script1">
         window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDi9Lz7oIjx9bT28v3rgbr31zwR7mfl3EDHlG%2FG%2Bc17G6cX6tuObaDBjM93MuSmg%2FCtL%2FJuLNH8RZJUnJvV%2FOBFPYwly%2FFWM16%2Fl%2FT%2FCUBcJ73GQHT5TUokgnKBX9Q6hxA7ltJ4yQ6K9WlDGUP2XxCYwsIbkCxMdHfld5tmWzJcKzE84QtT1yjZh70fooR9cvo7dkYLcxAiarDtvNuSk%2BL16ykobJvCzmw7rAUSKOvSwPjainXUIE66x9%2B8%2Fu4nUldVlNkXaWScZiiXVAjrbho97yPJ1%2F4%2F%2B5pX4%2FVYYa1KgMSH5rMCIcVYkMG8H10DmgTSMeimoze2cHon8z89LRrETzYTiOEBlHp0g0FdZh2To8eDoSmZOPtUbtLOemoEBl44ecfRGQ03cFeh7GJVPrtonaiaxLyZUgyxSFYxjLnirqeJ2Ki%2FGshXe73Ex944Dfkh%2BTHxQ9AA7GBr4RmhZD%2FnN1MHxSEFw9kVT2kmBOsLr4taLHxiwEvMENKeRZHvsUYzJCxH5i9mQv7ft45OWFqBM%3D";
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDmsl%2BUQxLe8Tf21choFoOum%2BBTIPB7Q1%2FjdjzDppF0ngRGBGnmW77VsvN7lr5R%2BK3hzY7iDgSS0t2INXdkRSSWRBBXU5%2FTOLLdoAw77EmSfNiAKV4PpI02TzmjQr0vw2Hc%2FYFklf4roY1%2BNKtVf1aI8Ij22JIvnuOsqrkyiVrVEii3%2Fs%2FbS8%2BBKLXpb6fcgKS6EzT3sAxkkRotOJR7Z8lDVboNAKimYZIaCp89aTjiexI0JcxVQWJDAIDGiHomxSThk9Pcmg0ZrmcwYglcGnZhZhRnFMWMGX0QCF8NJG%2BoaWO2jZhW9S49MBw4to5XS589MY6vzjtQGH8U6jboG1isFax%2BTkZ1V0PMOPVheoVklhySOpEa3rSwl2gKn7RDbJQEj1hvWm6negGNvxC7qMix2oq6D4ahmMmZqom2wynxAgRPTjoYdmlZIoOMFkad%2BtUvNK0NVga2scxJrdumVZCHMjAw0tJLPv%2BPnjVCStVm44J3BudBj%2BQUnOc63DyXzL7v%2BNCc%2FslqKg%2FwWhdFpBHXc%3D";
         window.__genspark_locale = "en-US";
-        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDi9Lz7oIjx9bT28v3rgbr31zwR7mfl3EDHlG/G+c17G6cX6tuObaDBjM93MuSmg/CtL/JuLNH8RZJUnJvV/OBFPYwly/FWM16/l/T/CUBcJ73GQHT5TUokgnKBX9Q6hxA7ltJ4yQ6K9WlDGUP2XxCYwsIbkCxMdHfld5tmWzJcKzE84QtT1yjZh70fooR9cvo7dkYLcxAiarDtvNuSk+L16ykobJvCzmw7rAUSKOvSwPjainXUIE66x9+8/u4nUldVlNkXaWScZiiXVAjrbho97yPJ1/4/+5pX4/VYYa1KgMSH5rMCIcVYkMG8H10DmgTSMeimoze2cHon8z89LRrETzYTiOEBlHp0g0FdZh2To8eDoSmZOPtUbtLOemoEBl44ecfRGQ03cFeh7GJVPrtonaiaxLyZUgyxSFYxjLnirqeJ2Ki/GshXe73Ex944Dfkh+THxQ9AA7GBr4RmhZD/nN1MHxSEFw9kVT2kmBOsLr4taLHxiwEvMENKeRZHvsUYzJCxH5i9mQv7ft45OWFqBM=";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDmsl+UQxLe8Tf21choFoOum+BTIPB7Q1/jdjzDppF0ngRGBGnmW77VsvN7lr5R+K3hzY7iDgSS0t2INXdkRSSWRBBXU5/TOLLdoAw77EmSfNiAKV4PpI02TzmjQr0vw2Hc/YFklf4roY1+NKtVf1aI8Ij22JIvnuOsqrkyiVrVEii3/s/bS8+BKLXpb6fcgKS6EzT3sAxkkRotOJR7Z8lDVboNAKimYZIaCp89aTjiexI0JcxVQWJDAIDGiHomxSThk9Pcmg0ZrmcwYglcGnZhZhRnFMWMGX0QCF8NJG+oaWO2jZhW9S49MBw4to5XS589MY6vzjtQGH8U6jboG1isFax+TkZ1V0PMOPVheoVklhySOpEa3rSwl2gKn7RDbJQEj1hvWm6negGNvxC7qMix2oq6D4ahmMmZqom2wynxAgRPTjoYdmlZIoOMFkad+tUvNK0NVga2scxJrdumVZCHMjAw0tJLPv+PnjVCStVm44J3BudBj+QUnOc63DyXzL7v+NCc/slqKg/wWhdFpBHXc=";
     </script>
     
     <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"954584cc3f62ad23","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.6.2","token":"4edd5f8ec12a48cfa682ab8261b80a79"}' crossorigin="anonymous"></script>
+    
