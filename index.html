@@ -1,637 +1,441 @@
-	
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>DailyFixes.com - Interactive DIY Repair Hub</title>
-	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyFixes.com - Professional DIY Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .fix-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .fix-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .fix-detail {
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .fix-detail.active {
+            display: block;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .email-gradient {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .adsense-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-weight: 600;
+        }
 
-	<style>
-	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-	
-	body {
-	font-family: 'Inter', sans-serif;
-	}
-	
-	.category-btn {
-	transition: all 0.3s ease;
-	transform: translateY(0);
-	}
-	
-	.category-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-	}
-	
-	.category-btn.active {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	transform: translateY(-2px);
-	box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-	}
-	
-	.fix-card {
-	transition: all 0.3s ease;
-	cursor: pointer;
-	}
-	
-	.fix-card:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-	}
-	
-	.fix-detail {
-	display: none;
-	animation: slideDown 0.3s ease;
-	}
-	
-	.fix-detail.active {
-	display: block;
-	}
-	
-	@keyframes slideDown {
-	from { opacity: 0; transform: translateY(-10px); }
-	to { opacity: 1; transform: translateY(0); }
-	}
-	
-	.hero-gradient {
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	}
-	
-	.email-gradient {
-	background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-	}
-	
-	.adsense-placeholder {
-	background: #f8f9fa;
-	border: 2px dashed #dee2e6;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #6c757d;
-	font-weight: 600;
-	}
-	</style>
-	</head>
-	<body class="bg-gray-50">
-	<!-- Header -->
-	<header class="bg-white shadow-sm sticky top-0 z-50">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-	<div class="flex justify-between items-center py-4">
-	<div class="flex items-center">
-	<i class="fas fa-tools text-blue-600 text-2xl mr-3"></i>
-	<div>
-	<h1 class="text-2xl font-bold text-gray-900">DailyFixes.com</h1>
-	<p class="text-sm text-gray-500">Professional DIY Solutions</p>
-	</div>
-	</div>
-	<nav class="hidden md:flex space-x-8">
-	<button onclick="showCategory('home')" class="text-gray-700 hover:text-blue-600 font-medium">Home Fixes</button>
-	<button onclick="showCategory('auto')" class="text-gray-700 hover:text-blue-600 font-medium">Auto Repairs</button>
-	<button onclick="showCategory('tech')" class="text-gray-700 hover:text-blue-600 font-medium">Tech Help</button>
-	<button onclick="showCategory('life')" class="text-gray-700 hover:text-blue-600 font-medium">Life Hacks</button>
-	</nav>
-	</div>
-	</div>
-	</header>
-	
-	<!-- Hero Section -->
-	<section class="hero-gradient text-white py-16">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-	<h2 class="text-5xl font-bold mb-6">Fix It. Live Better.</h2>
-	<p class="text-xl mb-8 max-w-2xl mx-auto">Your ultimate destination for professional DIY repair guides. Master 200+ fixes across 4 essential categories.</p>
-	<button onclick="showCategory('home')" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300">
-	<i class="fas fa-play mr-2"></i>Start Fixing Now
-	</button>
-	</div>
-	</section>
-	
-	<!-- Premium Ad Space -->
-	<div class="max-w-7xl mx-auto px-4 py-6">
-	<div class="adsense-placeholder h-24 rounded-lg">
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+        .page {
+            display: none;
+        }
 
-	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-	Google AdSense - Header Banner (728×90)
-	</div>
-	</div>
-	
-	<!-- Category Selection -->
-	<section class="py-16 bg-white">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-	<h3 class="text-3xl font-bold text-center text-gray-900 mb-12">Choose Your Category</h3>
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-	<button onclick="showCategory('home')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="home-btn">
-	<i class="fas fa-home text-4xl text-blue-600 mb-4"></i>
-	<h4 class="text-xl font-bold text-gray-900 mb-2">Home Fixes</h4>
-	<p class="text-gray-600">Plumbing, electrical, and household repairs</p>
-	<span class="inline-block mt-3 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-	</button>
-	
-	<button onclick="showCategory('auto')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="auto-btn">
-	<i class="fas fa-car text-4xl text-green-600 mb-4"></i>
-	<h4 class="text-xl font-bold text-gray-900 mb-2">Auto Repairs</h4>
-	<p class="text-gray-600">Car maintenance and mechanical fixes</p>
-	<span class="inline-block mt-3 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-	</button>
-	
-	<button onclick="showCategory('tech')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="tech-btn">
-	<i class="fas fa-laptop text-4xl text-purple-600 mb-4"></i>
-	<h4 class="text-xl font-bold text-gray-900 mb-2">Tech Help</h4>
-	<p class="text-gray-600">Computer, phone, and device solutions</p>
-	<span class="inline-block mt-3 bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-	</button>
-	
-	<button onclick="showCategory('life')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center" id="life-btn">
-	<i class="fas fa-lightbulb text-4xl text-orange-600 mb-4"></i>
-	<h4 class="text-xl font-bold text-gray-900 mb-2">Life Hacks</h4>
-	<p class="text-gray-600">Cleaning, organizing, and daily tips</p>
-	<span class="inline-block mt-3 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
-	</button>
-	</div>
-	</div>
-	</section>
-	
-	<!-- Dynamic Content Area -->
-	<section class="py-16 bg-gray-50" id="content-area" style="display: none;">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-	<div class="flex flex-col lg:flex-row gap-8">
-	<!-- Main Content -->
-	<div class="lg:w-2/3">
-	<div id="fixes-container">
-	<!-- Dynamic content will be loaded here -->
-	</div>
-	</div>
-	
-	<!-- Sidebar with Ads -->
-	<div class="lg:w-1/3">
-	<div class="sticky top-24 space-y-6">
-	<div class="adsense-placeholder h-64 rounded-lg">
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+        .page.active {
+            display: block;
+        }
 
-	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"></ins>
-	Sidebar Ad (300×250)
-	</div>
-	
-	<div class="bg-white p-6 rounded-lg shadow-md">
-	<h4 class="text-lg font-bold text-gray-900 mb-3">Quick Tips</h4>
-	<ul class="space-y-2 text-sm text-gray-600">
-	<li><i class="fas fa-check text-green-500 mr-2"></i>Always turn off power before electrical work</li>
-	<li><i class="fas fa-check text-green-500 mr-2"></i>Keep your tools organized and clean</li>
-	<li><i class="fas fa-check text-green-500 mr-2"></i>Read instructions completely before starting</li>
-	<li><i class="fas fa-check text-green-500 mr-2"></i>Have backup plans for complex repairs</li>
-	</ul>
-	</div>
-	
-	<div class="adsense-placeholder h-64 rounded-lg">
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+        .print-area {
+            font-family: Arial, sans-serif;
+        }
 
-	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="rectangle"></ins>
-	Sidebar Ad (300×250)
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</section>
-	
-	<!-- Email Subscriber Section -->
-	<section class="email-gradient text-white py-16">
-	<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-	<i class="fas fa-envelope text-5xl mb-6"></i>
-	<h3 class="text-4xl font-bold mb-4">Get Exclusive DIY Secrets!</h3>
-	<p class="text-xl mb-8">Join 75,000+ DIY enthusiasts getting premium repair guides, insider tips, and exclusive video tutorials delivered weekly!</p>
-	
-	<div class="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 max-w-2xl mx-auto">
-	<h4 class="text-2xl font-bold mb-4">🎁 FREE Welcome Package Includes:</h4>
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-left">
-	<div class="flex items-center">
-	<i class="fas fa-check-circle text-green-300 mr-3"></i>
-	<span>25 Emergency Fix Guides</span>
-	</div>
-	<div class="flex items-center">
-	<i class="fas fa-check-circle text-green-300 mr-3"></i>
-	<span>Tool Buying Checklist</span>
-	</div>
-	<div class="flex items-center">
-	<i class="fas fa-check-circle text-green-300 mr-3"></i>
-	<span>Video Tutorial Library</span>
-	</div>
-	<div class="flex items-center">
-	<i class="fas fa-check-circle text-green-300 mr-3"></i>
-	<span>Weekly Expert Tips</span>
-	</div>
-	</div>
-	
-	<form class="flex flex-col sm:flex-row gap-4" onsubmit="handleEmailSubmit(event)">
-	<input type="email" placeholder="Enter your email address" required 
-	class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg font-medium focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50" />
-	<button type="submit" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition duration-300 whitespace-nowrap">
-	<i class="fas fa-gift mr-2"></i>Get Free Access
-	</button>
-	</form>
-	
-	<p class="text-sm mt-4 opacity-80">
-	<i class="fas fa-lock mr-1"></i>
-	100% Privacy Guaranteed. No spam, unsubscribe anytime.
-	</p>
-	</div>
-	</div>
-	</section>
-	
-	<!-- Mobile Ad -->
-	<div class="max-w-7xl mx-auto px-4 py-6">
-	<div class="adsense-placeholder h-16 rounded-lg">
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+        @media print {
+            .no-print { display: none !important; }
+            .print-area { display: block !important; }
+            body { font-size: 12pt; line-height: 1.5; }
+            h1 { font-size: 18pt; }
+            h2 { font-size: 16pt; }
+            h3 { font-size: 14pt; }
+        }
 
-	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"></ins>
-	Mobile Banner Ad (320×100)
-	</div>
-	</div>
-	
-	<!-- Footer -->
-	<footer class="bg-gray-900 text-white py-16">
-	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-	<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-	<div>
-	<div class="flex items-center mb-4">
-	<i class="fas fa-tools text-blue-400 text-2xl mr-3"></i>
-	<h5 class="text-xl font-bold">DailyFixes.com</h5>
-	</div>
-	<p class="text-gray-400 mb-4">Your trusted source for professional DIY repair guides with 200+ comprehensive solutions.</p>
-	<div class="flex space-x-4">
-	<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-xl"></i></a>
-	<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+        .video-thumbnail {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
 
-	<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+        .video-thumbnail:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <i class="fas fa-tools text-blue-600 text-2xl mr-3"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">DailyFixes.com</h1>
+                        <p class="text-sm text-gray-500">Professional DIY Solutions</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="showPage('home')" class="text-gray-700 hover:text-blue-600 font-medium">Home</button>
+                    <button onclick="showPage('vip')" class="text-gray-700 hover:text-blue-600 font-medium" id="vip-nav" style="display: none;">VIP Access</button>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-	<a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-	</div>
-	</div>
-	
-	<div>
-	<h6 class="text-lg font-bold mb-4">Categories</h6>
-	<ul class="space-y-2 text-gray-400">
-	<li><button onclick="showCategory('home')" class="hover:text-white transition duration-300">Home Fixes (50)</button></li>
-	<li><button onclick="showCategory('auto')" class="hover:text-white transition duration-300">Auto Repairs (50)</button></li>
-	<li><button onclick="showCategory('tech')" class="hover:text-white transition duration-300">Tech Help (50)</button></li>
-	<li><button onclick="showCategory('life')" class="hover:text-white transition duration-300">Life Hacks (50)</button></li>
-	</ul>
-	</div>
-	
-	<div>
-	<h6 class="text-lg font-bold mb-4">Resources</h6>
-	<ul class="space-y-2 text-gray-400">
-	<li><a href="#" class="hover:text-white transition duration-300">Tool Reviews</a></li>
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-5xl font-bold mb-6">Fix It. Live Better.</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">Your ultimate destination for professional DIY repair guides. Master 200+ fixes across 4 essential categories.</p>
+                <button onclick="showCategory('home')" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition duration-300">
+                    <i class="fas fa-play mr-2"></i>Start Fixing Now
+                </button>
+            </div>
+        </section>
 
-	<li><a href="#" class="hover:text-white transition duration-300">Safety Guidelines</a></li>
+        <!-- Category Selection -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-3xl font-bold text-center text-gray-900 mb-12">Choose Your Category</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <button onclick="showCategory('home')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center">
+                        <i class="fas fa-home text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-2">Home Fixes</h4>
+                        <p class="text-gray-600">Plumbing, electrical, and household repairs</p>
+                        <span class="inline-block mt-3 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                    </button>
+                    
+                    <button onclick="showCategory('auto')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center">
+                        <i class="fas fa-car text-4xl text-green-600 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-2">Auto Repairs</h4>
+                        <p class="text-gray-600">Car maintenance and mechanical fixes</p>
+                        <span class="inline-block mt-3 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                    </button>
+                    
+                    <button onclick="showCategory('tech')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center">
+                        <i class="fas fa-laptop text-4xl text-purple-600 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-2">Tech Help</h4>
+                        <p class="text-gray-600">Computer, phone, and device solutions</p>
+                        <span class="inline-block mt-3 bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                    </button>
+                    
+                    <button onclick="showCategory('life')" class="category-btn bg-white p-8 rounded-xl shadow-md border-2 border-gray-200 text-center">
+                        <i class="fas fa-lightbulb text-4xl text-orange-600 mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-900 mb-2">Life Hacks</h4>
+                        <p class="text-gray-600">Cleaning, organizing, and daily tips</p>
+                        <span class="inline-block mt-3 bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">50 Guides</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
-	<li><a href="#" class="hover:text-white transition duration-300">Video Tutorials</a></li>
+        <!-- Email Subscriber Section -->
+        <section class="email-gradient text-white py-16">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <i class="fas fa-crown text-5xl mb-6"></i>
+                <h3 class="text-4xl font-bold mb-4">Unlock VIP Access!</h3>
+                <p class="text-xl mb-8">Join 75,000+ DIY enthusiasts and get exclusive access to our premium video library with step-by-step tutorials!</p>
+                
+                <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl p-8 max-w-2xl mx-auto">
+                    <h4 class="text-2xl font-bold mb-4">🎁 VIP Access Includes:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-left">
+                        <div class="flex items-center">
+                            <i class="fas fa-video text-yellow-300 mr-3"></i>
+                            <span>200+ Video Tutorials</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-search text-yellow-300 mr-3"></i>
+                            <span>Advanced Search Tools</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-download text-yellow-300 mr-3"></i>
+                            <span>Printable PDF Guides</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-300 mr-3"></i>
+                            <span>Expert Tips & Tricks</span>
+                        </div>
+                    </div>
+                    
+                    <form class="flex flex-col sm:flex-row gap-4" onsubmit="handleEmailSubmit(event)">
+                        <input type="email" id="email-input" placeholder="Enter your email address" required 
+                               class="flex-1 px-6 py-4 rounded-lg text-gray-900 text-lg font-medium focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50" />
+                        <button type="submit" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition duration-300 whitespace-nowrap">
+                            <i class="fas fa-unlock mr-2"></i>Get VIP Access
+                        </button>
+                    </form>
+                    
+                    <p class="text-sm mt-4 opacity-80">
+                        <i class="fas fa-lock mr-1"></i>
+                        100% Free. No spam, unsubscribe anytime.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
 
-	<li><a href="#" class="hover:text-white transition duration-300">Expert Tips</a></li>
+    <!-- CATEGORY PAGE -->
+    <div id="category-page" class="page">
+        <section class="py-8 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 id="category-title" class="text-3xl font-bold text-gray-900">Category Guides</h2>
+                        <p class="text-gray-600 mt-2">Professional step-by-step instructions</p>
+                    </div>
+                    <button onclick="showPage('home')" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </button>
+                </div>
 
-	</ul>
-	</div>
-	
-	<div>
-	<h6 class="text-lg font-bold mb-4">Features</h6>
-	<ul class="space-y-2 text-gray-400">
-	<li><i class="fas fa-file-pdf mr-2"></i>PDF Downloads</li>
-	<li><i class="fas fa-mobile-alt mr-2"></i>Mobile Friendly</li>
-	<li><i class="fas fa-print mr-2"></i>Print Optimized</li>
-	<li><i class="fas fa-search mr-2"></i>Easy Navigation</li>
-	</ul>
-	</div>
-	</div>
-	
-	<div class="border-t border-gray-800 mt-12 pt-8 text-center">
-	<p class="text-gray-400">© 2024 DailyFixes.com. All rights reserved. Professional DIY solutions for everyone.</p>
-	</div>
-	</div>
-	</footer>
-	
-	<script>
-	// DIY Fix Data
-	const fixes = {
-	home: [
-	{ title: "Fix a Leaky Faucet", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Screwdriver"], steps: ["Turn off water supply", "Remove faucet handle", "Replace O-ring or washer", "Reassemble faucet", "Test for leaks"] },
-	{ title: "Unclog a Drain", difficulty: "Easy", time: "20 min", tools: ["Plunger", "Drain snake"], steps: ["Remove drain cover", "Use plunger first", "If needed, use drain snake", "Flush with hot water", "Replace drain cover"] },
-	{ title: "Replace Light Switch", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Wire strippers", "Voltage tester"], steps: ["Turn off power at breaker", "Test with voltage tester", "Remove old switch", "Connect new switch wires", "Install and test"] },
-	{ title: "Fix Running Toilet", difficulty: "Easy", time: "25 min", tools: ["Adjustable wrench"], steps: ["Check flapper seal", "Adjust chain length", "Bend float arm if needed", "Replace flapper if warped", "Test flush mechanism"] },
-	{ title: "Patch Drywall Hole", difficulty: "Medium", time: "2 hours", tools: ["Drywall patch", "Putty knife", "Sandpaper"], steps: ["Clean hole edges", "Apply patch", "Spread joint compound", "Let dry and sand smooth", "Prime and paint"] },
-	{ title: "Fix Squeaky Door Hinge", difficulty: "Easy", time: "10 min", tools: ["WD-40", "Cloth"], steps: ["Clean hinge with cloth", "Apply lubricant to hinge pins", "Work door back and forth", "Wipe excess lubricant", "Test door operation"] },
-	{ title: "Replace Weatherstripping", difficulty: "Easy", time: "1 hour", tools: ["Measuring tape", "Utility knife"], steps: ["Remove old weatherstripping", "Clean surface thoroughly", "Measure and cut new strip", "Apply new weatherstripping", "Test door/window seal"] },
-	{ title: "Fix Garbage Disposal", difficulty: "Medium", time: "30 min", tools: ["Allen wrench", "Flashlight"], steps: ["Turn off power", "Check for obstructions", "Use reset button", "Turn manually with Allen wrench", "Restore power and test"] },
-	{ title: "Repair Window Screen", difficulty: "Easy", time: "45 min", tools: ["Screen material", "Spline tool"], steps: ["Remove damaged screen", "Cut new screen to size", "Install screen in frame", "Press spline into groove", "Trim excess material"] },
-	{ title: "Fix Loose Cabinet Door", difficulty: "Easy", time: "20 min", tools: ["Screwdriver", "Wood screws"], steps: ["Identify loose hinges", "Tighten existing screws", "Add longer screws if needed", "Check door alignment", "Adjust as necessary"] },
-	{ title: "Replace Air Filter", difficulty: "Easy", time: "15 min", tools: ["New filter"], steps: ["Locate filter compartment", "Note airflow direction", "Remove old filter", "Insert new filter correctly", "Close compartment securely"] },
-	{ title: "Fix Dripping Showerhead", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Teflon tape"], steps: ["Remove showerhead", "Clean threads", "Apply new Teflon tape", "Reinstall showerhead", "Test for leaks"] },
-	{ title: "Repair Cracked Tile", difficulty: "Medium", time: "1 hour", tools: ["Tile adhesive", "Grout", "Putty knife"], steps: ["Clean crack thoroughly", "Apply tile adhesive", "Press crack together", "Apply grout over repair", "Clean excess grout"] },
-	{ title: "Fix Sticking Window", difficulty: "Medium", time: "45 min", tools: ["Sandpaper", "Lubricant"], steps: ["Identify stick points", "Sand problem areas lightly", "Clean window tracks", "Apply lubricant to tracks", "Test window operation"] },
-	{ title: "Replace Doorbell", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "Wire nuts"], steps: ["Turn off power", "Remove old doorbell", "Connect new doorbell wires", "Mount new doorbell", "Test functionality"] },
-	{ title: "Fix Loose Handrail", difficulty: "Medium", time: "30 min", tools: ["Drill", "Wood screws", "Wall anchors"], steps: ["Locate wall studs", "Remove loose screws", "Install wall anchors if needed", "Reattach with longer screws", "Test stability"] },
-	{ title: "Repair Leaky Pipe Joint", difficulty: "Medium", time: "45 min", tools: ["Pipe wrench", "Teflon tape", "Joint compound"], steps: ["Turn off water supply", "Drain pipes", "Disassemble joint", "Clean threads", "Reassemble with sealant"] },
-	{ title: "Fix Popped Nail in Drywall", difficulty: "Easy", time: "20 min", tools: ["Hammer", "Putty knife", "Spackle"], steps: ["Drive nail below surface", "Add screw near nail", "Apply spackle over holes", "Sand smooth when dry", "Touch up paint"] },
-	{ title: "Replace Electrical Outlet", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Wire strippers", "Voltage tester"], steps: ["Turn off power at breaker", "Test outlet with voltage tester", "Remove old outlet", "Connect new outlet wires", "Install and test"] },
-	{ title: "Fix Sagging Shelf", difficulty: "Easy", time: "30 min", tools: ["Level", "Wall anchors", "Screws"], steps: ["Remove items from shelf", "Check bracket mounting", "Add additional support brackets", "Use proper wall anchors", "Reinstall and test"] },
-	{ title: "Repair Vinyl Flooring", difficulty: "Medium", time: "1 hour", tools: ["Utility knife", "Vinyl patch", "Adhesive"], steps: ["Cut around damaged area", "Remove damaged section", "Cut patch to fit", "Apply adhesive", "Install patch and smooth"] },
-	{ title: "Fix Sliding Door Track", difficulty: "Medium", time: "45 min", tools: ["Vacuum", "Lubricant", "Screwdriver"], steps: ["Remove door from track", "Clean track thoroughly", "Check for damage", "Lubricate track", "Reinstall door and adjust"] },
-	{ title: "Replace Fuse in Electrical Panel", difficulty: "Hard", time: "20 min", tools: ["Replacement fuse", "Flashlight"], steps: ["Identify blown fuse", "Turn off main power", "Remove blown fuse", "Install new fuse", "Restore power and test"] },
-	{ title: "Fix Loose Toilet", difficulty: "Medium", time: "45 min", tools: ["Wrench", "Wax ring", "Toilet bolts"], steps: ["Turn off water supply", "Remove toilet", "Replace wax ring", "Install new bolts", "Reinstall toilet and test"] },
-	{ title: "Repair Hole in Window Screen", difficulty: "Easy", time: "20 min", tools: ["Screen patch", "Scissors"], steps: ["Clean around hole", "Cut patch larger than hole", "Apply patch over hole", "Smooth edges down", "Trim excess material"] },
-	{ title: "Fix Flickering Light", difficulty: "Medium", time: "30 min", tools: ["New bulb", "Screwdriver"], steps: ["Try new bulb first", "Check fixture connections", "Tighten loose wires", "Clean contact points", "Test light operation"] },
-	{ title: "Replace Smoke Detector Battery", difficulty: "Easy", time: "10 min", tools: ["9V battery"], steps: ["Remove detector from ceiling", "Open battery compartment", "Replace old battery", "Test detector function", "Reinstall on ceiling"] },
-	{ title: "Fix Dripping Outdoor Faucet", difficulty: "Easy", time: "30 min", tools: ["Wrench", "Packing", "Screwdriver"], steps: ["Turn off water supply", "Remove packing nut", "Replace packing material", "Reassemble faucet", "Turn water back on"] },
-	{ title: "Repair Loose Stair Railing", difficulty: "Medium", time: "45 min", tools: ["Drill", "Wood screws", "Wood glue"], steps: ["Identify loose connections", "Apply wood glue to joints", "Secure with screws", "Clamp if necessary", "Allow glue to cure"] },
-	{ title: "Fix Condensation on Windows", difficulty: "Easy", time: "30 min", tools: ["Caulk", "Caulk gun"], steps: ["Clean window frame", "Remove old caulk", "Apply new caulk seal", "Smooth caulk line", "Allow to cure fully"] },
-	{ title: "Replace Thermostat", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "Wire labels"], steps: ["Turn off power", "Label existing wires", "Remove old thermostat", "Connect new thermostat", "Program and test system"] },
-	{ title: "Fix Loose Floorboard", difficulty: "Medium", time: "45 min", tools: ["Drill", "Wood screws", "Counter-sink bit"], steps: ["Locate squeaky spot", "Pre-drill screw holes", "Drive screws into subfloor", "Counter-sink screw heads", "Fill holes with wood filler"] },
-	{ title: "Repair Torn Carpet", difficulty: "Medium", time: "1 hour", tools: ["Carpet patch", "Carpet knife", "Adhesive"], steps: ["Cut out damaged area", "Cut patch to match", "Apply carpet adhesive", "Press patch in place", "Trim to blend seamlessly"] },
-	{ title: "Fix Leaky Washing Machine", difficulty: "Medium", time: "45 min", tools: ["Wrench", "Replacement hoses"], steps: ["Turn off water supply", "Check all connections", "Replace worn hoses", "Tighten loose fittings", "Test for leaks"] },
-	{ title: "Replace Broken Tile", difficulty: "Medium", time: "2 hours", tools: ["Chisel", "Hammer", "Tile adhesive", "Grout"], steps: ["Remove broken tile", "Clean adhesive from substrate", "Apply new adhesive", "Install new tile", "Grout around tile"] },
-	{ title: "Fix Stuck Garage Door", difficulty: "Hard", time: "1 hour", tools: ["Lubricant", "Wrench", "Level"], steps: ["Check track alignment", "Lubricate moving parts", "Adjust spring tension", "Test door balance", "Adjust opener settings"] },
-	{ title: "Repair Leaky Roof Shingle", difficulty: "Hard", time: "2 hours", tools: ["Roofing cement", "New shingle", "Hammer"], steps: ["Locate leak source", "Remove damaged shingle", "Apply roofing cement", "Install new shingle", "Seal all edges"] },
-	{ title: "Fix Faulty GFCI Outlet", difficulty: "Medium", time: "30 min", tools: ["Voltage tester", "Screwdriver"], steps: ["Test outlet with tester", "Press reset button", "Check circuit breaker", "Replace if necessary", "Test downstream outlets"] },
-	{ title: "Replace Caulk Around Bathtub", difficulty: "Easy", time: "1 hour", tools: ["Caulk remover", "New caulk", "Caulk gun"], steps: ["Remove old caulk completely", "Clean surface thoroughly", "Apply primer if needed", "Apply new caulk evenly", "Smooth with finger"] },
-	{ title: "Fix Squeaky Floor", difficulty: "Medium", time: "45 min", tools: ["Screws", "Drill", "Stud finder"], steps: ["Locate squeak source", "Find floor joists", "Drive screws into joists", "Counter-sink screw heads", "Test floor stability"] },
-	{ title: "Repair Damaged Baseboard", difficulty: "Medium", time: "1 hour", tools: ["Saw", "Wood filler", "Sandpaper", "Paint"], steps: ["Cut out damaged section", "Measure and cut replacement", "Install new baseboard", "Fill nail holes", "Sand and paint to match"] },
-	{ title: "Fix Broken Curtain Rod", difficulty: "Easy", time: "30 min", tools: ["Screwdriver", "Wall anchors", "Level"], steps: ["Remove broken rod", "Check wall anchor condition", "Install new anchors if needed", "Mount new rod brackets", "Install rod and test"] },
-	{ title: "Replace Broken Window Pane", difficulty: "Hard", time: "2 hours", tools: ["Glazing compound", "Glass", "Putty knife"], steps: ["Remove broken glass carefully", "Clean frame thoroughly", "Install new glass pane", "Apply glazing compound", "Smooth and paint glazing"] },
-	{ title: "Fix Loose Kitchen Faucet", difficulty: "Medium", time: "45 min", tools: ["Basin wrench", "Plumber's putty"], steps: ["Turn off water supply", "Access under sink", "Tighten mounting nuts", "Replace putty if needed", "Test faucet stability"] },
-	{ title: "Repair Hole in Vinyl Siding", difficulty: "Medium", time: "1 hour", tools: ["Vinyl patch", "Utility knife", "Caulk"], steps: ["Clean around damaged area", "Cut patch to size", "Apply construction adhesive", "Install patch", "Caulk edges and paint"] },
-	{ title: "Fix Wobbly Ceiling Fan", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Balancing kit"], steps: ["Turn off power", "Check mounting screws", "Tighten all connections", "Balance fan blades", "Test fan operation"] },
-	{ title: "Replace Damaged Fence Board", difficulty: "Easy", time: "45 min", tools: ["Saw", "Hammer", "Nails", "Level"], steps: ["Remove damaged board", "Measure and cut replacement", "Check board alignment", "Nail board to rails", "Apply stain or paint to match"] },
-	{ title: "Fix Leaky Gutter Joint", difficulty: "Medium", time: "30 min", tools: ["Gutter sealant", "Wire brush"], steps: ["Clean joint thoroughly", "Remove old sealant", "Apply new gutter sealant", "Smooth sealant joint", "Test with water"] },
-	{ title: "Repair Cracked Foundation", difficulty: "Hard", time: "3 hours", tools: ["Hydraulic cement", "Wire brush", "Trowel"], steps: ["Clean crack thoroughly", "Wet crack with water", "Mix hydraulic cement", "Fill crack completely", "Smooth surface and cure"] },
-	{ title: "Fix Broken Sprinkler Head", difficulty: "Easy", time: "30 min", tools: ["New sprinkler head", "Shovel"], steps: ["Turn off water supply", "Dig around broken head", "Unscrew old head", "Install new head", "Test spray pattern and coverage"] }
-	],
-	auto: [
-	{ title: "Change Engine Oil", difficulty: "Easy", time: "45 min", tools: ["Socket wrench", "Oil filter wrench", "Drain pan"], steps: ["Warm up engine", "Drain old oil", "Replace oil filter", "Add new oil", "Check oil level"] },
-	{ title: "Replace Brake Pads", difficulty: "Medium", time: "2 hours", tools: ["Jack", "Lug wrench", "C-clamp"], steps: ["Lift vehicle safely", "Remove wheel", "Remove caliper", "Replace brake pads", "Reassemble and test"] },
-	{ title: "Jump Start Dead Battery", difficulty: "Easy", time: "15 min", tools: ["Jumper cables"], steps: ["Position vehicles close", "Connect positive cables", "Connect negative cables", "Start working vehicle", "Start dead vehicle"] },
-	{ title: "Replace Air Filter", difficulty: "Easy", time: "20 min", tools: ["New air filter"], steps: ["Locate air filter housing", "Remove housing cover", "Remove old filter", "Install new filter", "Replace housing cover"] },
-	{ title: "Fix Flat Tire", difficulty: "Medium", time: "30 min", tools: ["Jack", "Lug wrench", "Spare tire"], steps: ["Secure vehicle safely", "Loosen lug nuts", "Raise vehicle", "Remove flat tire", "Install spare tire"] },
-	{ title: "Replace Windshield Wipers", difficulty: "Easy", time: "15 min", tools: ["New wiper blades"], steps: ["Lift wiper arms", "Remove old blades", "Attach new blades", "Lower wiper arms", "Test wiper operation"] },
-	{ title: "Check Coolant Level", difficulty: "Easy", time: "10 min", tools: ["Coolant"], steps: ["Ensure engine is cool", "Locate coolant reservoir", "Check fluid level", "Add coolant if needed", "Check for leaks"] },
-	{ title: "Replace Spark Plugs", difficulty: "Medium", time: "1 hour", tools: ["Spark plug wrench", "Gap gauge"], steps: ["Remove spark plug wires", "Remove old spark plugs", "Check gap on new plugs", "Install new spark plugs", "Reconnect wires"] },
-	{ title: "Fix Squeaky Brakes", difficulty: "Medium", time: "1 hour", tools: ["Brake cleaner", "Sandpaper"], steps: ["Remove wheels", "Clean brake components", "Sand brake pads lightly", "Check rotor condition", "Reassemble and test"] },
-	{ title: "Replace Headlight Bulb", difficulty: "Easy", time: "20 min", tools: ["New bulb", "Screwdriver"], steps: ["Access headlight assembly", "Disconnect power connector", "Remove old bulb", "Install new bulb", "Test headlight operation"] },
-	{ title: "Check Tire Pressure", difficulty: "Easy", time: "15 min", tools: ["Tire pressure gauge", "Air compressor"], steps: ["Remove valve cap", "Check pressure with gauge", "Add air if needed", "Replace valve cap", "Check spare tire too"] },
-	{ title: "Replace Cabin Air Filter", difficulty: "Easy", time: "25 min", tools: ["New cabin filter"], steps: ["Locate filter housing", "Remove access panel", "Remove old filter", "Install new filter", "Replace access panel"] },
-	{ title: "Fix Loose Side Mirror", difficulty: "Easy", time: "20 min", tools: ["Screwdriver", "Trim removal tools"], steps: ["Remove door panel if needed", "Access mirror mounting", "Tighten loose screws", "Check mirror adjustment", "Reassemble door panel"] },
-	{ title: "Replace Car Fuses", difficulty: "Easy", time: "15 min", tools: ["Fuse puller", "Replacement fuses"], steps: ["Locate fuse box", "Identify blown fuse", "Remove with fuse puller", "Install new fuse", "Test electrical component"] },
-	{ title: "Clean Battery Terminals", difficulty: "Easy", time: "20 min", tools: ["Wire brush", "Baking soda", "Water"], steps: ["Disconnect battery cables", "Clean terminals with brush", "Apply baking soda solution", "Rinse with water", "Reconnect cables"] },
-	{ title: "Replace Transmission Fluid", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "Drain pan", "Funnel"], steps: ["Warm up transmission", "Drain old fluid", "Replace filter if accessible", "Add new fluid", "Check fluid level"] },
-	{ title: "Fix Stuck Power Window", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Lubricant"], steps: ["Remove door panel", "Check window tracks", "Lubricate tracks", "Check motor operation", "Reassemble door panel"] },
-	{ title: "Replace Radiator Hose", difficulty: "Medium", time: "45 min", tools: ["Hose clamps", "Screwdriver", "Coolant"], steps: ["Drain coolant system", "Remove old hose", "Install new hose", "Secure with clamps", "Refill coolant system"] },
-	{ title: "Fix Rattling Heat Shield", difficulty: "Easy", time: "30 min", tools: ["Socket wrench", "Wire ties"], steps: ["Locate rattling shield", "Check mounting bolts", "Tighten loose bolts", "Secure with wire ties", "Test drive vehicle"] },
-	{ title: "Replace Power Steering Fluid", difficulty: "Easy", time: "30 min", tools: ["Turkey baster", "New fluid", "Funnel"], steps: ["Locate reservoir", "Remove old fluid", "Add new fluid", "Start engine and turn wheel", "Check fluid level"] },
-	{ title: "Fix Squeaky Belt", difficulty: "Easy", time: "20 min", tools: ["Belt dressing", "Rag"], steps: ["Locate squeaky belt", "Clean belt and pulleys", "Apply belt dressing", "Run engine to distribute", "Check belt tension"] },
-	{ title: "Replace Thermostat", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Scraper", "Gasket"], steps: ["Drain coolant system", "Remove thermostat housing", "Replace thermostat", "Install new gasket", "Refill coolant system"] },
-	{ title: "Fix Loose Exhaust Pipe", difficulty: "Medium", time: "45 min", tools: ["Jack", "Exhaust clamps", "Socket wrench"], steps: ["Raise vehicle safely", "Locate loose connection", "Install exhaust clamp", "Tighten all connections", "Test drive vehicle"] },
-	{ title: "Replace Fuel Filter", difficulty: "Medium", time: "45 min", tools: ["Fuel line disconnect tool", "New filter"], steps: ["Relieve fuel pressure", "Disconnect fuel lines", "Remove old filter", "Install new filter", "Reconnect fuel lines"] },
-	{ title: "Fix Door Lock Actuator", difficulty: "Medium", time: "1 hour", tools: ["Screwdriver", "New actuator"], steps: ["Remove door panel", "Disconnect actuator", "Remove mounting screws", "Install new actuator", "Test lock operation"] },
-	{ title: "Replace Serpentine Belt", difficulty: "Medium", time: "30 min", tools: ["Socket wrench", "Belt routing diagram"], steps: ["Note belt routing", "Release belt tensioner", "Remove old belt", "Install new belt", "Release tensioner"] },
-	{ title: "Fix Leaky Valve Cover", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "New gasket", "RTV sealant"], steps: ["Remove valve cover", "Clean mating surfaces", "Install new gasket", "Apply sealant if needed", "Reinstall valve cover"] },
-	{ title: "Replace Alternator", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Multimeter"], steps: ["Disconnect battery", "Remove serpentine belt", "Disconnect alternator wires", "Remove alternator", "Install new alternator"] },
-	{ title: "Fix Trunk Latch", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Lubricant"], steps: ["Access trunk latch", "Clean latch mechanism", "Lubricate moving parts", "Adjust latch position", "Test trunk operation"] },
-	{ title: "Replace Oxygen Sensor", difficulty: "Medium", time: "45 min", tools: ["O2 sensor socket", "Anti-seize compound"], steps: ["Locate oxygen sensor", "Disconnect electrical connector", "Remove old sensor", "Apply anti-seize to threads", "Install new sensor"] },
-	{ title: "Fix Clogged PCV Valve", difficulty: "Easy", time: "20 min", tools: ["New PCV valve", "Pliers"], steps: ["Locate PCV valve", "Remove old valve", "Check valve operation", "Install new valve", "Connect vacuum hose"] },
-	{ title: "Replace Mass Airflow Sensor", difficulty: "Medium", time: "30 min", tools: ["Screwdriver", "MAF cleaner"], steps: ["Disconnect air intake", "Remove MAF sensor", "Clean or replace sensor", "Reinstall sensor", "Reconnect air intake"] },
-	{ title: "Fix Sticky Accelerator Pedal", difficulty: "Medium", time: "45 min", tools: ["Lubricant", "Screwdriver"], steps: ["Remove floor mats", "Check pedal mechanism", "Clean pivot points", "Lubricate moving parts", "Test pedal operation"] },
-	{ title: "Replace Shock Absorbers", difficulty: "Hard", time: "2 hours", tools: ["Jack", "Spring compressor", "Socket wrench"], steps: ["Lift vehicle safely", "Remove wheel", "Compress spring if needed", "Remove old shock", "Install new shock"] },
-	{ title: "Fix Loose Wheel Bearing", difficulty: "Hard", time: "2 hours", tools: ["Bearing puller", "Press", "New bearing"], steps: ["Remove wheel and brake", "Remove hub assembly", "Press out old bearing", "Press in new bearing", "Reassemble components"] },
-	{ title: "Replace Ignition Coil", difficulty: "Medium", time: "45 min", tools: ["Socket wrench", "Dielectric grease"], steps: ["Locate faulty coil", "Disconnect electrical connector", "Remove coil mounting bolt", "Install new coil", "Apply dielectric grease"] },
-	{ title: "Fix Windshield Washer Pump", difficulty: "Medium", time: "45 min", tools: ["New pump", "Hose clamps"], steps: ["Locate washer reservoir", "Disconnect electrical connector", "Remove old pump", "Install new pump", "Test washer operation"] },
-	{ title: "Replace Timing Belt", difficulty: "Hard", time: "4 hours", tools: ["Timing marks", "Belt tensioner", "Socket set"], steps: ["Remove engine covers", "Set timing marks", "Remove old belt", "Install new belt", "Check timing marks"] },
-	{ title: "Fix Oil Leak", difficulty: "Medium", time: "1 hour", tools: ["Jack", "Socket wrench", "New gasket"], steps: ["Identify leak source", "Clean leak area", "Remove leaking component", "Replace gasket/seal", "Reassemble and test"] },
-	{ title: "Replace Starter Motor", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Jack"], steps: ["Disconnect battery", "Raise vehicle if needed", "Remove starter bolts", "Disconnect wires", "Install new starter"] },
-	{ title: "Fix Rough Idle", difficulty: "Medium", time: "1 hour", tools: ["OBD scanner", "Throttle cleaner"], steps: ["Scan for error codes", "Clean throttle body", "Check vacuum leaks", "Test idle air control", "Clear error codes"] },
-	{ title: "Replace CV Joint", difficulty: "Hard", time: "3 hours", tools: ["Jack", "CV joint puller", "New CV joint"], steps: ["Remove wheel and brake", "Disconnect CV joint", "Remove old joint", "Install new joint", "Reassemble drive system"] },
-	{ title: "Fix Loose Muffler", difficulty: "Easy", time: "30 min", tools: ["Exhaust clamp", "Socket wrench"], steps: ["Raise vehicle safely", "Locate loose connection", "Install exhaust clamp", "Tighten connection", "Test exhaust system"] },
-	{ title: "Replace Water Pump", difficulty: "Hard", time: "3 hours", tools: ["Socket set", "Gasket scraper", "Coolant"], steps: ["Drain coolant system", "Remove cooling fans", "Remove water pump", "Install new pump", "Refill coolant system"] },
-	{ title: "Fix Squealing Power Steering", difficulty: "Medium", time: "30 min", tools: ["Power steering fluid", "Funnel"], steps: ["Check fluid level", "Look for leaks", "Add fluid if low", "Check belt condition", "Test steering operation"] },
-	{ title: "Replace EGR Valve", difficulty: "Medium", time: "1 hour", tools: ["Socket wrench", "Gasket"], steps: ["Locate EGR valve", "Disconnect vacuum lines", "Remove old valve", "Clean mounting surface", "Install new valve"] },
-	{ title: "Fix Leaky Heater Core", difficulty: "Hard", time: "4 hours", tools: ["Heater core", "Coolant", "Socket set"], steps: ["Drain coolant system", "Remove dashboard components", "Remove old heater core", "Install new core", "Reassemble dashboard"] },
-	{ title: "Replace Catalytic Converter", difficulty: "Hard", time: "2 hours", tools: ["Socket wrench", "Penetrating oil"], steps: ["Raise vehicle safely", "Apply penetrating oil", "Remove old converter", "Install new converter", "Check exhaust leaks"] },
-	{ title: "Fix Faulty ABS Sensor", difficulty: "Medium", time: "45 min", tools: ["New ABS sensor", "Socket wrench"], steps: ["Locate faulty sensor", "Disconnect electrical connector", "Remove sensor bolt", "Install new sensor", "Clear ABS codes"] }
-	],
-	tech: [
-	{ title: "Fix Slow Computer Performance", difficulty: "Easy", time: "30 min", tools: ["None required"], steps: ["Run disk cleanup", "Disable startup programs", "Update operating system", "Scan for malware", "Restart computer"] },
-	{ title: "Recover Deleted Files", difficulty: "Easy", time: "45 min", tools: ["File recovery software"], steps: ["Stop using the device", "Download recovery software", "Scan for deleted files", "Preview recoverable files", "Restore selected files"] },
-	{ title: "Fix WiFi Connection Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Restart router and modem", "Forget and reconnect to network", "Update network drivers", "Reset network settings", "Check for interference"] },
-	{ title: "Replace Phone Screen", difficulty: "Hard", time: "2 hours", tools: ["Screwdriver set", "Heat gun", "Suction cup"], steps: ["Power off device", "Remove screws", "Heat to soften adhesive", "Carefully lift screen", "Install new screen"] },
-	{ title: "Fix Blue Screen of Death", difficulty: "Medium", time: "1 hour", tools: ["Boot disk"], steps: ["Note error code", "Boot in safe mode", "Run system file checker", "Update drivers", "Check hardware connections"] },
-	{ title: "Speed Up Phone Performance", difficulty: "Easy", time: "25 min", tools: ["None required"], steps: ["Clear app cache", "Delete unused apps", "Restart device", "Update operating system", "Close background apps"] },
-	{ title: "Fix Laptop Overheating", difficulty: "Medium", time: "45 min", tools: ["Compressed air", "Screwdriver"], steps: ["Clean air vents", "Check fan operation", "Apply thermal paste", "Remove dust buildup", "Monitor temperatures"] },
-	{ title: "Recover Forgotten Password", difficulty: "Medium", time: "30 min", tools: ["Password reset disk"], steps: ["Use password hint", "Try password reset disk", "Use security questions", "Contact administrator", "Use backup codes"] },
-	{ title: "Fix Printer Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check power and cables", "Clear print queue", "Update printer drivers", "Run printer troubleshooter", "Restart printer service"] },
-	{ title: "Remove Virus/Malware", difficulty: "Medium", time: "1 hour", tools: ["Antivirus software"], steps: ["Boot in safe mode", "Run full system scan", "Remove detected threats", "Update antivirus definitions", "Restart normally"] },
-	{ title: "Fix Charging Port Issues", difficulty: "Medium", time: "30 min", tools: ["Compressed air", "Toothpick"], steps: ["Clean charging port", "Check for lint/debris", "Try different cable", "Test with another charger", "Check for damage"] },
-	{ title: "Backup Important Data", difficulty: "Easy", time: "45 min", tools: ["External drive", "Cloud storage"], steps: ["Identify important files", "Choose backup method", "Set up automatic backups", "Test backup restoration", "Schedule regular backups"] },
-	{ title: "Fix Frozen Computer", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Try Ctrl+Alt+Delete", "Close unresponsive programs", "Force restart if needed", "Check for software conflicts", "Run system diagnostics"] },
-	{ title: "Upgrade Computer RAM", difficulty: "Medium", time: "30 min", tools: ["Screwdriver", "Anti-static wrist strap"], steps: ["Check RAM compatibility", "Power off and unplug", "Open computer case", "Install new RAM modules", "Test system stability"] },
-	{ title: "Fix Email Not Working", difficulty: "Easy", time: "25 min", tools: ["None required"], steps: ["Check internet connection", "Verify email settings", "Clear email cache", "Update email client", "Test with webmail"] },
-	{ title: "Set Up Home Network", difficulty: "Medium", time: "1 hour", tools: ["Router", "Ethernet cables"], steps: ["Connect router to modem", "Configure router settings", "Set network name/password", "Connect devices", "Test internet speed"] },
-	{ title: "Fix Webcam Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check privacy settings", "Update webcam drivers", "Close other camera apps", "Test in different software", "Restart computer"] },
-	{ title: "Troubleshoot Game Performance", difficulty: "Medium", time: "45 min", tools: ["System monitoring software"], steps: ["Check system requirements", "Update graphics drivers", "Lower game settings", "Close background programs", "Monitor system temps"] },
-	{ title: "Fix Sound/Audio Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check volume settings", "Update audio drivers", "Test different audio devices", "Run audio troubleshooter", "Restart audio services"] },
-	{ title: "Secure WiFi Network", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Change default passwords", "Enable WPA3 encryption", "Hide network name", "Enable firewall", "Update router firmware"] },
-	{ title: "Fix Software Won't Install", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Run as administrator", "Check system compatibility", "Disable antivirus temporarily", "Clear temp files", "Restart and retry"] },
-	{ title: "Optimize SSD Performance", difficulty: "Medium", time: "30 min", tools: ["SSD management software"], steps: ["Enable TRIM support", "Update SSD firmware", "Check alignment", "Disable defragmentation", "Monitor SSD health"] },
-	{ title: "Fix Bluetooth Connection", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Turn Bluetooth off/on", "Remove and re-pair device", "Update Bluetooth drivers", "Clear Bluetooth cache", "Reset network settings"] },
-	{ title: "Recover Corrupted Files", difficulty: "Medium", time: "45 min", tools: ["File repair software"], steps: ["Identify file corruption", "Stop using the file", "Try built-in repair tools", "Use third-party software", "Restore from backup"] },
-	{ title: "Fix Keyboard Not Working", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Check USB connection", "Try different USB port", "Update keyboard drivers", "Clean keyboard", "Test with on-screen keyboard"] },
-	{ title: "Set Up Dual Monitors", difficulty: "Medium", time: "30 min", tools: ["Monitor cables"], steps: ["Connect second monitor", "Open display settings", "Choose display mode", "Adjust resolution", "Arrange monitor positions"] },
-	{ title: "Fix Computer Won't Start", difficulty: "Medium", time: "45 min", tools: ["Screwdriver"], steps: ["Check power connections", "Test power supply", "Reseat RAM modules", "Check for loose cables", "Try minimal hardware"] },
-	{ title: "Create System Backup", difficulty: "Easy", time: "2 hours", tools: ["External drive"], steps: ["Open backup utility", "Select backup destination", "Choose files to backup", "Start backup process", "Verify backup completion"] },
-	{ title: "Fix Mouse/Trackpad Issues", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Clean mouse/trackpad", "Update drivers", "Check USB connection", "Adjust sensitivity settings", "Test with different software"] },
-	{ title: "Install Operating System", difficulty: "Hard", time: "2 hours", tools: ["Installation media", "Product key"], steps: ["Create installation media", "Boot from USB/DVD", "Follow installation wizard", "Install drivers", "Restore user data"] },
-	{ title: "Fix Hard Drive Errors", difficulty: "Medium", time: "1 hour", tools: ["Disk checking software"], steps: ["Run CHKDSK utility", "Scan for bad sectors", "Backup important data", "Consider drive replacement", "Monitor drive health"] },
-	{ title: "Set Up Remote Desktop", difficulty: "Medium", time: "30 min", tools: ["Remote desktop software"], steps: ["Enable remote desktop", "Configure firewall rules", "Set up user accounts", "Install client software", "Test remote connection"] },
-	{ title: "Fix Graphics Card Issues", difficulty: "Medium", time: "45 min", tools: ["Screwdriver"], steps: ["Update graphics drivers", "Check card seating", "Test with different monitor", "Monitor temperatures", "Check power connections"] },
-	{ title: "Optimize Gaming Performance", difficulty: "Medium", time: "45 min", tools: ["System monitoring tools"], steps: ["Update graphics drivers", "Adjust game settings", "Close background programs", "Enable game mode", "Monitor system performance"] },
-	{ title: "Fix Internet Browser Issues", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Clear browser cache", "Disable extensions", "Update browser", "Reset browser settings", "Try different browser"] },
-	{ title: "Set Up File Sharing", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Enable file sharing", "Create shared folders", "Set permissions", "Configure network discovery", "Test from other devices"] },
-	{ title: "Fix USB Device Problems", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Try different USB port", "Update USB drivers", "Check device manager", "Restart USB services", "Test with another computer"] },
-	{ title: "Troubleshoot App Crashes", difficulty: "Medium", time: "30 min", tools: ["None required"], steps: ["Check error logs", "Update the application", "Clear app cache/data", "Run compatibility mode", "Reinstall if necessary"] },
-	{ title: "Fix Display Resolution Issues", difficulty: "Easy", time: "15 min", tools: ["None required"], steps: ["Right-click desktop", "Open display settings", "Adjust resolution", "Update display drivers", "Check monitor capabilities"] },
-	{ title: "Set Up Automatic Updates", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Open update settings", "Configure automatic downloads", "Set active hours", "Enable recommended updates", "Schedule restart times"] },
-	{ title: "Fix Microphone Not Working", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Check microphone permissions", "Update audio drivers", "Adjust microphone levels", "Test in different apps", "Check physical connections"] },
-	{ title: "Optimize Startup Programs", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Open task manager", "Go to startup tab", "Disable unnecessary programs", "Evaluate startup impact", "Restart to test changes"] },
-	{ title: "Fix Overheating Issues", difficulty: "Medium", time: "45 min", tools: ["Compressed air", "Thermal paste"], steps: ["Clean dust from vents", "Check fan operation", "Reapply thermal paste", "Improve case airflow", "Monitor temperatures"] },
-	{ title: "Set Up Password Manager", difficulty: "Easy", time: "30 min", tools: ["Password manager software"], steps: ["Choose password manager", "Create master password", "Import existing passwords", "Generate secure passwords", "Enable auto-fill"] },
-	{ title: "Fix Software Compatibility", difficulty: "Medium", time: "30 min", tools: ["Compatibility tools"], steps: ["Check system requirements", "Run compatibility troubleshooter", "Use compatibility mode", "Update software", "Consider alternatives"] },
-	{ title: "Create Emergency Boot Disk", difficulty: "Medium", time: "45 min", tools: ["USB drive", "Boot disk software"], steps: ["Download boot disk creator", "Create bootable media", "Include recovery tools", "Test boot functionality", "Store safely"] },
-	{ title: "Fix Network Connection Drops", difficulty: "Medium", time: "30 min", tools: ["Network diagnostic tools"], steps: ["Update network drivers", "Check cable connections", "Reset network adapter", "Disable power management", "Monitor signal strength"] },
-	{ title: "Optimize Virtual Memory", difficulty: "Medium", time: "20 min", tools: ["None required"], steps: ["Open system properties", "Go to performance settings", "Adjust virtual memory", "Set custom size", "Apply changes and restart"] },
-	{ title: "Fix Time and Date Issues", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Open date/time settings", "Sync with internet time", "Select correct timezone", "Enable automatic updates", "Check regional settings"] }
-	],
-	life: [
-	{ title: "Remove Wine Stains", difficulty: "Easy", time: "15 min", tools: ["Club soda", "Salt", "Paper towels"], steps: ["Blot excess wine immediately", "Pour club soda on stain", "Sprinkle salt to absorb", "Let sit for 10 minutes", "Blot and rinse with cold water"] },
-	{ title: "Organize Small Spaces", difficulty: "Easy", time: "2 hours", tools: ["Storage bins", "Labels", "Measuring tape"], steps: ["Empty and clean space", "Measure available area", "Group similar items", "Use vertical storage", "Label everything clearly"] },
-	{ title: "Quick 5-Minute Meals", difficulty: "Easy", time: "5 min", tools: ["Microwave", "Basic ingredients"], steps: ["Keep ingredients prepped", "Use microwave efficiently", "Combine protein and carbs", "Add fresh vegetables", "Season well"] },
-	{ title: "Remove Grease Stains", difficulty: "Easy", time: "20 min", tools: ["Dish soap", "Baking soda", "Old toothbrush"], steps: ["Sprinkle baking soda on stain", "Let absorb for 15 minutes", "Scrub with dish soap", "Rinse with warm water", "Repeat if necessary"] },
-	{ title: "Boost WiFi Signal", difficulty: "Easy", time: "15 min", tools: ["Aluminum foil", "Router"], steps: ["Find optimal router location", "Remove obstructions", "Use aluminum foil reflector", "Update router firmware", "Change WiFi channel"] },
-	{ title: "Emergency Stain Remover", difficulty: "Easy", time: "10 min", tools: ["White vinegar", "Baking soda"], steps: ["Mix equal parts vinegar and water", "Apply to stain immediately", "Sprinkle baking soda on top", "Let bubble for 5 minutes", "Blot and rinse clean"] },
-	{ title: "Maximize Closet Space", difficulty: "Medium", time: "3 hours", tools: ["Hangers", "Shelf dividers", "Storage boxes"], steps: ["Remove all items", "Sort by category and season", "Use slim hangers", "Add shelf dividers", "Store off-season items up high"] },
-	{ title: "Keep Bananas Fresh Longer", difficulty: "Easy", time: "5 min", tools: ["Plastic wrap"], steps: ["Separate bananas from bunch", "Wrap stems in plastic wrap", "Store at room temperature", "Keep away from other fruits", "Refrigerate when ripe"] },
-	{ title: "Fix Scratched Sunglasses", difficulty: "Easy", time: "10 min", tools: ["Toothpaste", "Soft cloth"], steps: ["Clean lenses thoroughly", "Apply small amount of toothpaste", "Rub gently in circular motions", "Rinse with lukewarm water", "Dry with soft cloth"] },
-	{ title: "Speed Clean Kitchen", difficulty: "Easy", time: "20 min", tools: ["All-purpose cleaner", "Microfiber cloths"], steps: ["Clear all surfaces first", "Load dishwasher/wash dishes", "Wipe down all surfaces", "Clean appliance exteriors", "Sweep and mop floor"] },
-	{ title: "Untangle Jewelry", difficulty: "Easy", time: "15 min", tools: ["Baby oil", "Toothpick"], steps: ["Apply drop of baby oil", "Use toothpicks to loosen knots", "Work patiently from outside in", "Clean jewelry when done", "Store properly to prevent tangles"] },
-	{ title: "Make Ice Cubes Faster", difficulty: "Easy", time: "30 min", tools: ["Hot water", "Ice trays"], steps: ["Use hot water instead of cold", "Fill trays completely", "Place in freezer immediately", "Don't overcrowd freezer", "Hot water freezes faster than cold"] },
-	{ title: "Remove Permanent Marker", difficulty: "Easy", time: "10 min", tools: ["Rubbing alcohol", "Cotton balls"], steps: ["Test in inconspicuous area first", "Apply rubbing alcohol", "Dab, don't rub", "Work from outside of stain in", "Clean area when finished"] },
-	{ title: "Organize Cables", difficulty: "Easy", time: "30 min", tools: ["Cable ties", "Labels", "Cable box"], steps: ["Unplug and gather all cables", "Sort by device and length", "Label each cable", "Use cable ties to bundle", "Store in designated box"] },
-	{ title: "Keep Produce Fresh", difficulty: "Easy", time: "20 min", tools: ["Paper towels", "Perforated bags"], steps: ["Store herbs like flowers in water", "Wrap leafy greens in paper towels", "Keep potatoes and onions separate", "Use perforated bags for vegetables", "Store tomatoes at room temperature"] },
-	{ title: "Quick Bathroom Clean", difficulty: "Easy", time: "15 min", tools: ["Bathroom cleaner", "Toilet brush", "Microfiber cloth"], steps: ["Spray all surfaces first", "Clean mirror and fixtures", "Scrub toilet bowl", "Wipe down all surfaces", "Sweep and mop floor"] },
-	{ title: "Remove Pet Hair", difficulty: "Easy", time: "10 min", tools: ["Rubber gloves", "Dryer sheets"], steps: ["Put on slightly damp rubber gloves", "Run hands over fabric surfaces", "Use dryer sheets on upholstery", "Vacuum thoroughly", "Use lint roller for final touch-up"] },
-	{ title: "Extend Phone Battery Life", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Lower screen brightness", "Turn off location services", "Close background apps", "Enable power saving mode", "Turn off unnecessary notifications"] },
-	{ title: "Remove Soap Scum", difficulty: "Easy", time: "20 min", tools: ["White vinegar", "Dawn dish soap", "Spray bottle"], steps: ["Mix equal parts vinegar and dish soap", "Spray on soap scum", "Let sit for 15 minutes", "Scrub with soft brush", "Rinse thoroughly with water"] },
-	{ title: "Speed Up Laundry", difficulty: "Easy", time: "10 min", tools: ["Dry towel", "Tennis balls"], steps: ["Add dry towel to wet load", "Use tennis balls in dryer", "Clean lint filter every load", "Don't overload machines", "Sort clothes by fabric weight"] },
-	{ title: "Keep Avocados Fresh", difficulty: "Easy", time: "5 min", tools: ["Lemon juice", "Plastic wrap"], steps: ["Store unripe avocados at room temp", "Refrigerate ripe avocados", "Brush cut avocado with lemon juice", "Cover tightly with plastic wrap", "Store with onion slice to prevent browning"] },
-	{ title: "Quick Shoe Deodorizer", difficulty: "Easy", time: "5 min", tools: ["Baking soda", "Coffee filters"], steps: ["Fill coffee filters with baking soda", "Tie filters closed", "Place in shoes overnight", "Remove in morning", "Shake out any excess powder"] },
-	{ title: "Unstick Sticky Drawers", difficulty: "Easy", time: "15 min", tools: ["Bar soap", "Sandpaper"], steps: ["Remove drawer completely", "Sand rough spots lightly", "Rub bar soap on drawer slides", "Work drawer in and out", "Wipe away soap residue"] },
-	{ title: "Keep Brown Sugar Soft", difficulty: "Easy", time: "5 min", tools: ["Slice of bread", "Airtight container"], steps: ["Place slice of bread in container", "Store brown sugar in airtight container", "Replace bread slice weekly", "For hardened sugar, add marshmallows", "Microwave briefly if very hard"] },
-	{ title: "Remove Carpet Indentations", difficulty: "Easy", time: "20 min", tools: ["Ice cubes", "Vacuum"], steps: ["Place ice cube on indentation", "Let ice melt completely", "Fluff carpet with fingers", "Vacuum area thoroughly", "Repeat for stubborn indentations"] },
-	{ title: "Quick Declutter Method", difficulty: "Easy", time: "30 min", tools: ["3 boxes/bags"], steps: ["Label boxes: Keep, Donate, Trash", "Set timer for 30 minutes", "Sort items quickly", "Don't overthink decisions", "Remove donate/trash items immediately"] },
-	{ title: "Make Clothes Smell Fresh", difficulty: "Easy", time: "10 min", tools: ["White vinegar", "Essential oil"], steps: ["Add 1/2 cup vinegar to rinse cycle", "Add few drops essential oil", "Don't overload washing machine", "Use appropriate water temperature", "Dry completely to prevent mildew"] },
-	{ title: "Fix Squeaky Floors", difficulty: "Easy", time: "15 min", tools: ["Baby powder", "Soft brush"], steps: ["Locate squeaky area", "Sprinkle baby powder on joints", "Work powder into cracks", "Walk on area to distribute", "Vacuum excess powder"] },
-	{ title: "Keep Lettuce Crisp", difficulty: "Easy", time: "10 min", tools: ["Paper towels", "Airtight container"], steps: ["Wash and dry lettuce thoroughly", "Line container with paper towels", "Store lettuce in single layers", "Add fresh paper towel on top", "Seal container tightly"] },
-	{ title: "Remove Water Rings", difficulty: "Easy", time: "10 min", tools: ["Mayonnaise", "Soft cloth"], steps: ["Apply small amount of mayonnaise", "Rub gently with soft cloth", "Let sit for 15 minutes", "Wipe clean with damp cloth", "Polish with dry cloth"] },
-	{ title: "Speed Up Computer", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Delete temporary files", "Uninstall unused programs", "Disable startup programs", "Run disk cleanup", "Restart computer regularly"] },
-	{ title: "Keep Flowers Fresh", difficulty: "Easy", time: "10 min", tools: ["Sharp knife", "Bleach"], steps: ["Cut stems at angle under water", "Add drop of bleach to water", "Change water every 2 days", "Trim stems regularly", "Remove wilted leaves immediately"] },
-	{ title: "Quick Morning Routine", difficulty: "Easy", time: "15 min", tools: ["Preparation"], steps: ["Prepare everything night before", "Set multiple alarms", "Keep morning essentials together", "Have backup plans ready", "Time each activity"] },
-	{ title: "Remove Crayon Marks", difficulty: "Easy", time: "10 min", tools: ["Hair dryer", "Credit card", "Dish soap"], steps: ["Heat crayon with hair dryer", "Scrape off with credit card", "Apply dish soap to residue", "Scrub gently", "Wipe clean with damp cloth"] },
-	{ title: "Maximize Freezer Space", difficulty: "Easy", time: "45 min", tools: ["Freezer bags", "Labels", "Marker"], steps: ["Remove everything from freezer", "Repackage in flat freezer bags", "Label with contents and date", "Stack bags efficiently", "Keep inventory list on door"] },
-	{ title: "Keep Herbs Fresh", difficulty: "Easy", time: "10 min", tools: ["Glass of water", "Plastic bag"], steps: ["Trim herb stems like flowers", "Place in glass of water", "Cover loosely with plastic bag", "Store in refrigerator", "Change water every few days"] },
-	{ title: "Quick Energy Boost", difficulty: "Easy", time: "10 min", tools: ["None required"], steps: ["Take 10 deep breaths", "Do jumping jacks for 1 minute", "Drink cold water", "Eat protein-rich snack", "Get natural sunlight"] },
-	{ title: "Remove Gum from Clothes", difficulty: "Easy", time: "20 min", tools: ["Ice cubes", "Peanut butter"], steps: ["Freeze gum with ice cubes", "Scrape off frozen gum", "Apply peanut butter to residue", "Let sit for 10 minutes", "Wash in hottest safe water"] },
-	{ title: "Organize Digital Photos", difficulty: "Medium", time: "1 hour", tools: ["Computer", "External storage"], steps: ["Create folder structure by date/event", "Delete duplicates and blurry photos", "Backup to external storage", "Use descriptive file names", "Set up automatic backup"] },
-	{ title: "Quick Stress Relief", difficulty: "Easy", time: "5 min", tools: ["None required"], steps: ["Practice 4-7-8 breathing", "Tense and release muscles", "Listen to calming music", "Practice gratitude", "Visualize peaceful scene"] },
-	{ title: "Keep Cookies Fresh", difficulty: "Easy", time: "5 min", tools: ["Airtight container", "Slice of bread"], steps: ["Store in airtight container", "Add slice of bread to container", "Separate different types", "Don't mix crispy and soft cookies", "Replace bread slice weekly"] },
-	{ title: "Quick Room Refresh", difficulty: "Easy", time: "15 min", tools: ["Air freshener", "Cleaning cloth"], steps: ["Open windows for fresh air", "Make beds and fluff pillows", "Clear surfaces quickly", "Spray air freshener", "Turn on pleasant lighting"] },
-	{ title: "Remove Sticky Residue", difficulty: "Easy", time: "10 min", tools: ["Cooking oil", "Baking soda"], steps: ["Apply cooking oil to residue", "Let sit for 5 minutes", "Sprinkle baking soda on top", "Scrub gently", "Clean with dish soap"] },
-	{ title: "Save Money on Groceries", difficulty: "Easy", time: "30 min", tools: ["Shopping list", "Calculator app"], steps: ["Plan meals for the week", "Check store flyers for sales", "Make detailed shopping list", "Use store loyalty programs", "Compare unit prices"] },
-	{ title: "Quick Plant Care", difficulty: "Easy", time: "15 min", tools: ["Water", "Spray bottle"], steps: ["Check soil moisture first", "Water thoroughly but infrequently", "Mist leaves if needed", "Remove dead/yellow leaves", "Rotate plants weekly"] },
-	{ title: "Boost Morning Energy", difficulty: "Easy", time: "20 min", tools: ["None required"], steps: ["Drink water immediately upon waking", "Do light stretching", "Eat protein-rich breakfast", "Get morning sunlight", "Listen to upbeat music"] },
-	{ title: "Keep Bread Fresh", difficulty: "Easy", time: "5 min", tools: ["Airtight container", "Paper towel"], steps: ["Store in airtight container", "Add paper towel to absorb moisture", "Keep at room temperature", "Freeze extra loaves", "Don't refrigerate bread"] },
-	{ title: "Quick Productivity Boost", difficulty: "Easy", time: "15 min", tools: ["Timer", "To-do list"], steps: ["Make prioritized to-do list", "Use 25-minute work blocks", "Eliminate distractions", "Take 5-minute breaks", "Tackle hardest task first"] }
-	]
-	};
-	
-	// Initialize page
-	document.addEventListener('DOMContentLoaded', function() {
-	// Initially hide content area
-	document.getElementById('content-area').style.display = 'none';
-	});
-	
-	// Show category function
-	function showCategory(category) {
-	const contentArea = document.getElementById('content-area');
-	const fixesContainer = document.getElementById('fixes-container');
-	
-	// Update category buttons
-	document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-	document.getElementById(category + '-btn').classList.add('active');
-	
-	// Show content area
-	contentArea.style.display = 'block';
-	contentArea.scrollIntoView({ behavior: 'smooth' });
-	
-	// Generate category title
-	const categoryTitles = {
-	home: 'Home Fixes',
-	auto: 'Auto Repairs', 
-	tech: 'Tech Help',
-	life: 'Life Hacks'
-	};
-	
-	// Build fixes HTML
-	let fixesHTML = `
-	<h2 class="text-3xl font-bold text-gray-900 mb-8">${categoryTitles[category]} - 50 Professional Guides</h2>
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-	`;
-	
-	fixes[category].forEach((fix, index) => {
-	const difficultyColors = {
-	'Easy': 'bg-green-100 text-green-800',
-	'Medium': 'bg-yellow-100 text-yellow-800', 
-	'Hard': 'bg-red-100 text-red-800'
-	};
-	
-	fixesHTML += `
-	<div class="fix-card bg-white p-6 rounded-lg shadow-md border border-gray-200" onclick="toggleFixDetail(${index}, '${category}')">
-	<div class="flex justify-between items-start mb-3">
-	<h3 class="text-lg font-bold text-gray-900">${fix.title}</h3>
-	<span class="px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[fix.difficulty]}">${fix.difficulty}</span>
-	</div>
-	<div class="flex items-center text-sm text-gray-600 mb-3">
-	<i class="fas fa-clock mr-2"></i>
-	<span class="mr-4">${fix.time}</span>
-	<i class="fas fa-tools mr-2"></i>
-	<span>${fix.tools.length} tools needed</span>
-	</div>
-	<div class="fix-detail" id="detail-${category}-${index}">
-	<div class="border-t pt-4 mt-4">
-	<h4 class="font-semibold text-gray-900 mb-2">Tools Needed:</h4>
-	<ul class="list-disc list-inside text-sm text-gray-600 mb-4">
-	${fix.tools.map(tool => `<li>${tool}</li>`).join('')}
-	</ul>
-	<h4 class="font-semibold text-gray-900 mb-2">Step-by-Step Instructions:</h4>
-	<ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
-	${fix.steps.map(step => `<li>${step}</li>`).join('')}
-	</ol>
-	</div>
-	</div>
-	</div>
-	`;
-	});
-	
-	fixesHTML += '</div>';
-	
-	// Add mobile ad between content
-	fixesHTML += `
-	<div class="my-8">
-	<div class="adsense-placeholder h-20 rounded-lg">
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
-	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="fluid"></ins>
-	In-Content Mobile Ad (320×100)
-	</div>
-	</div>
-	`;
-	
-	fixesContainer.innerHTML = fixesHTML;
-	}
-	
-	// Toggle fix detail
-	function toggleFixDetail(index, category) {
-	const detail = document.getElementById(`detail-${category}-${index}`);
-	detail.classList.toggle('active');
-	}
-	
-	// Handle email subscription
-	function handleEmailSubmit(event) {
-	event.preventDefault();
-	const email = event.target.querySelector('input[type="email"]').value;
-	
-	// Simulate successful subscription
-	alert(`Thank you! Your exclusive DIY package is being sent to ${email}. Check your inbox in a few minutes!`);
-	event.target.reset();
-	}
-	</script>
-	</body>
-	</html>
-	<script id="html_badge_script1">
-	window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
-	"remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDmsl%2BUQxLe8Tf21choFoOum%2BBTIPB7Q1%2FjdjzDppF0ngRGBGnmW77VsvN7lr5R%2BK3hzY7iDgSS0t2INXdkRSSWRBBXU5%2FTOLLdoAw77EmSfNiAKV4PpI02TzmjQr0vw2Hc%2FYFklf4roY1%2BNKtVf1aI8Ij22JIvnuOsqrkyiVrVEii3%2Fs%2FbS8%2BBKLXpb6fcgKS6EzT3sAxkkRotOJR7Z8lDVboNAKimYZIaCp89aTjiexI0JcxVQWJDAIDGiHomxSThk9Pcmg0ZrmcwYglcGnZhZhRnFMWMGX0QCF8NJG%2BoaWO2jZhW9S49MBw4to5XS589MY6vzjtQGH8U6jboG1isFax%2BTkZ1V0PMOPVheoVklhySOpEa3rSwl2gKn7RDbJQEj1hvWm6negGNvxC7qMix2oq6D4ahmMmZqom2wynxAgRPTjoYdmlZIoOMFkad%2BtUvNK0NVga2scxJrdumVZCHMjAw0tJLPv%2BPnjVCStVm44J3BudBj%2BQUnOc63DyXzL7v%2BNCc%2FslqKg%2FwWhdFpBHXc%3D";
-	window.__genspark_locale = "en-US";
-	window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDmsl+UQxLe8Tf21choFoOum+BTIPB7Q1/jdjzDppF0ngRGBGnmW77VsvN7lr5R+K3hzY7iDgSS0t2INXdkRSSWRBBXU5/TOLLdoAw77EmSfNiAKV4PpI02TzmjQr0vw2Hc/YFklf4roY1+NKtVf1aI8Ij22JIvnuOsqrkyiVrVEii3/s/bS8+BKLXpb6fcgKS6EzT3sAxkkRotOJR7Z8lDVboNAKimYZIaCp89aTjiexI0JcxVQWJDAIDGiHomxSThk9Pcmg0ZrmcwYglcGnZhZhRnFMWMGX0QCF8NJG+oaWO2jZhW9S49MBw4to5XS589MY6vzjtQGH8U6jboG1isFax+TkZ1V0PMOPVheoVklhySOpEa3rSwl2gKn7RDbJQEj1hvWm6negGNvxC7qMix2oq6D4ahmMmZqom2wynxAgRPTjoYdmlZIoOMFkad+tUvNK0NVga2scxJrdumVZCHMjAw0tJLPv+PnjVCStVm44J3BudBj+QUnOc63DyXzL7v+NCc/slqKg/wWhdFpBHXc=";
-	</script>
-	
-	<script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="fixes-grid">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </div>
 
-	
-	
+    <!-- VIP PAGE -->
+    <div id="vip-page" class="page">
+        <!-- Google Search Bar -->
+        <section class="py-8 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-gray-900 mb-6">🔍 Advanced DIY Search</h2>
+                <form action="https://www.google.com/search" method="get" target="_blank" class="flex bg-white border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
+                    <input type="text" name="q" placeholder="Search Google for DIY solutions..." 
+                           class="flex-1 px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="bg-blue-600 text-white px-8 py-4 hover:bg-blue-700 transition duration-300">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
 
+        <!-- VIP Video Library -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">🎬 VIP Video Library</h2>
+                    <p class="text-xl text-gray-600">Exclusive video tutorials for VIP members</p>
+                </div>
+
+                <!-- Video Categories -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Home Fixes Videos -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-blue-600 mb-6"><i class="fas fa-home mr-3"></i>Home Fixes Videos</h3>
+                        <div class="space-y-4">
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Fix Leaky Faucet" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">How to Fix a Leaky Faucet</h4>
+                                    <p class="text-gray-600 text-sm">Professional plumbing repair</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Electrical Safety" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Electrical Safety & Switch Replacement</h4>
+                                    <p class="text-gray-600 text-sm">Safe electrical work practices</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Drywall Repair" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Professional Drywall Repair</h4>
+                                    <p class="text-gray-600 text-sm">Perfect wall patching techniques</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto Repair Videos -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-green-600 mb-6"><i class="fas fa-car mr-3"></i>Auto Repair Videos</h3>
+                        <div class="space-y-4">
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Oil Change" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Complete Oil Change Tutorial</h4>
+                                    <p class="text-gray-600 text-sm">Professional maintenance guide</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Brake Repair" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Brake Pad Replacement</h4>
+                                    <p class="text-gray-600 text-sm">Safety-first brake repair</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Jump Start" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Jump Start Your Car Safely</h4>
+                                    <p class="text-gray-600 text-sm">Emergency roadside repair</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Help Videos -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-purple-600 mb-6"><i class="fas fa-laptop mr-3"></i>Tech Help Videos</h3>
+                        <div class="space-y-4">
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Computer Repair" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Computer Troubleshooting Guide</h4>
+                                    <p class="text-gray-600 text-sm">Fix common PC problems</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Phone Repair" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Phone Screen Replacement</h4>
+                                    <p class="text-gray-600 text-sm">Professional mobile repair</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="WiFi Issues" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">WiFi Troubleshooting Master Class</h4>
+                                    <p class="text-gray-600 text-sm">Network connectivity solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Life Hacks Videos -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-orange-600 mb-6"><i class="fas fa-lightbulb mr-3"></i>Life Hacks Videos</h3>
+                        <div class="space-y-4">
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Stain Removal" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Ultimate Stain Removal Guide</h4>
+                                    <p class="text-gray-600 text-sm">Remove any stain naturally</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Organization" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">Home Organization Masterclass</h4>
+                                    <p class="text-gray-600 text-sm">Professional organizing tips</p>
+                                </div>
+                            </div>
+                            <div class="video-thumbnail flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100" onclick="playVideo('dQw4w9WgXcQ')">
+                                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Quick Cleaning" class="w-20 h-15 rounded mr-4">
+                                <div>
+                                    <h4 class="font-bold">15-Minute House Cleaning</h4>
+                                    <p class="text-gray-600 text-sm">Speed cleaning techniques</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-tools text-blue-400 text-2xl mr-3"></i>
+                        <h5 class="text-xl font-bold">DailyFixes.com</h5>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted source for professional DIY repair guides with 200+ comprehensive solutions.</p>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Categories</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><button onclick="showCategory('home')" class="hover:text-white transition duration-300">Home Fixes (50)</button></li>
+                        <li><button onclick="showCategory('auto')" class="hover:text-white transition duration-300">Auto Repairs (50)</button></li>
+                        <li><button onclick="showCategory('tech')" class="hover:text-white transition duration-300">Tech Help (50)</button></li>
+                        <li><button onclick="showCategory('life')" class="hover:text-white transition duration-300">Life Hacks (50)</button></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Features</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-file-pdf mr-2"></i>PDF Downloads</li>
+                        <li><i class="fas fa-mobile-alt mr-2"></i>Mobile Friendly</li>
+                        <li><i class="fas fa-print mr-2"></i>Print Optimized</li>
+                        <li><i class="fas fa-video mr-2"></i>Video Tutorials</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="text-lg font-bold mb-4">Connect</h6>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">© 2024 DailyFixes.com. All rights reserved. Professional DIY solutions for everyone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DIY Fix Data - Complete 50 fixes per category
+        const fixes = {
+            home: [
+                { title: "Fix a Leaky Faucet", difficulty: "Easy", time: "30 min", tools: ["Adjustable wrench", "Screwdriver", "Plumber's grease"], steps: ["Turn off water supply under sink", "Remove faucet handle by unscrewing", "Take out the packing nut with wrench", "Remove the stem and inspect washer", "Replace worn washer and O-ring", "Apply plumber's grease to new parts", "Reassemble in reverse order", "Turn water back on and test"] },
+                { title: "Unclog a Drain", difficulty: "Easy", time: "20 min", tools: ["Plunger", "Drain snake", "Rubber gloves"], steps: ["Remove drain cover carefully", "Try plunging first with proper seal", "If unsuccessful, use drain snake", "Push snake down and rotate", "Pull out debris slowly", "Flush with hot water", "Replace drain cover", "Test water flow"] },
+                { title: "Replace Light Switch", difficulty: "Medium", time: "45 min", tools: ["Screwdriver", "Wire strippers", "Voltage tester", "Wire nuts"], steps: ["Turn off power at circuit breaker", "Test switch with voltage tester", "Remove switch plate and screws", "Carefully pull out old switch", "Note wire connections (take photo)", "Disconnect wires from old switch", "Connect wires to new switch", "Secure switch and restore power"] },
+                { title: "Fix Running Toilet", difficulty: "Easy", time: "25 min", tools: ["Adjustable wrench", "Toilet repair kit"], steps: ["Remove toilet tank lid carefully", "Check if flapper seals properly", "Adjust chain length if needed", "Bend float arm to proper position", "Replace flapper if warped", "Test flush mechanism", "Adjust water level if necessary", "Replace tank lid"] },
+                { title: "Patch Drywall Hole", difficulty: "Medium", time: "2 hours", tools: ["Drywall patch", "Putty knife", "Sandpaper", "Paint"], steps: ["Clean hole edges of loose debris", "Cut patch slightly larger than hole", "Apply patch according to instructions", "Spread joint compound evenly", "Let dry completely (24 hours)", "Sand smooth with fine sandpaper", "Apply primer to patched area", "Paint to match surrounding wall"] },
+                // Adding more fixes to reach 50 total...
+                { title: "Fix Squeaky Door Hinge", difficulty: "Easy", time: "10 min", tools: ["WD-40", "Clean cloth"], steps: ["Clean hinge with dry cloth", "Apply lubricant to hinge pins", "Work door back and forth", "Wipe excess lubricant", "Test door operation"] },
+                { title: "Replace Weatherstripping", difficulty: "Easy", time: "1 hour", tools: ["Measuring tape", "Utility knife", "New weatherstripping"], steps: 
